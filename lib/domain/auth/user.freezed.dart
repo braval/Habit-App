@@ -12,14 +12,9 @@ T _$identity<T>(T value) => value;
 class _$UserTearOff {
   const _$UserTearOff();
 
-  _User call(
-      {@required UniqueId id,
-      @required Name firstName,
-      @required Name lastName}) {
+  _User call({@required UniqueId id}) {
     return _User(
       id: id,
-      firstName: firstName,
-      lastName: lastName,
     );
   }
 }
@@ -29,8 +24,6 @@ const $User = _$UserTearOff();
 
 mixin _$User {
   UniqueId get id;
-  Name get firstName;
-  Name get lastName;
 
   $UserCopyWith<User> get copyWith;
 }
@@ -38,7 +31,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({UniqueId id, Name firstName, Name lastName});
+  $Res call({UniqueId id});
 }
 
 class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
@@ -51,13 +44,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object id = freezed,
-    Object firstName = freezed,
-    Object lastName = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
-      firstName: firstName == freezed ? _value.firstName : firstName as Name,
-      lastName: lastName == freezed ? _value.lastName : lastName as Name,
     ));
   }
 }
@@ -66,7 +55,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) then) =
       __$UserCopyWithImpl<$Res>;
   @override
-  $Res call({UniqueId id, Name firstName, Name lastName});
+  $Res call({UniqueId id});
 }
 
 class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
@@ -80,34 +69,22 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object id = freezed,
-    Object firstName = freezed,
-    Object lastName = freezed,
   }) {
     return _then(_User(
       id: id == freezed ? _value.id : id as UniqueId,
-      firstName: firstName == freezed ? _value.firstName : firstName as Name,
-      lastName: lastName == freezed ? _value.lastName : lastName as Name,
     ));
   }
 }
 
 class _$_User implements _User {
-  const _$_User(
-      {@required this.id, @required this.firstName, @required this.lastName})
-      : assert(id != null),
-        assert(firstName != null),
-        assert(lastName != null);
+  const _$_User({@required this.id}) : assert(id != null);
 
   @override
   final UniqueId id;
-  @override
-  final Name firstName;
-  @override
-  final Name lastName;
 
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName)';
+    return 'User(id: $id)';
   }
 
   @override
@@ -115,21 +92,12 @@ class _$_User implements _User {
     return identical(this, other) ||
         (other is _User &&
             (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.firstName, firstName) ||
-                const DeepCollectionEquality()
-                    .equals(other.firstName, firstName)) &&
-            (identical(other.lastName, lastName) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastName, lastName)));
+                const DeepCollectionEquality().equals(other.id, id)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(firstName) ^
-      const DeepCollectionEquality().hash(lastName);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
 
   @override
   _$UserCopyWith<_User> get copyWith =>
@@ -137,17 +105,10 @@ class _$_User implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User(
-      {@required UniqueId id,
-      @required Name firstName,
-      @required Name lastName}) = _$_User;
+  const factory _User({@required UniqueId id}) = _$_User;
 
   @override
   UniqueId get id;
-  @override
-  Name get firstName;
-  @override
-  Name get lastName;
   @override
   _$UserCopyWith<_User> get copyWith;
 }

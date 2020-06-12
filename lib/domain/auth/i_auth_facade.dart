@@ -11,8 +11,6 @@ abstract class IAuthFacade {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
     @required EmailAddress emailAddress,
     @required Password password,
-    @required Name firstName,
-    @required Name lastName,
   });
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({
     @required EmailAddress emailAddress,
