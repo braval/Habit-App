@@ -5,6 +5,8 @@ import 'package:habits/domain/auth/auth_failure.dart';
 import 'package:habits/domain/auth/i_auth_facade.dart';
 import 'package:habits/domain/auth/value_objects.dart';
 import 'package:habits/domain/core/value_objects.dart';
+import 'package:habits/domain/database/i_database_facade.dart';
+import 'package:habits/domain/database/user.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,8 +22,9 @@ part 'sign_up_form_bloc.freezed.dart';
 @injectable
 class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
   final IAuthFacade _authFacade;
+  final IDatabaseFacade _databaseFacade;
 
-  SignUpFormBloc(this._authFacade);
+  SignUpFormBloc(this._authFacade, this._databaseFacade);
 
   @override
   SignUpFormState get initialState => SignUpFormState.initial();
@@ -90,6 +93,18 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
         emailAddress: state.emailAddress,
         password: state.password,
       );
+
+      if (failureOrSuccess.isRight()) {
+        UniqueId uid;
+        final userOption = await _authFacade.getSignedInUser();
+        userOption.fold(() => null, (a) => {uid = a.id});
+        final User user = User(
+          id: uid,
+          firstName: state.firstName,
+          lastName: state.lastName,
+        );
+        final databaseFailure = _databaseFacade.addUser(user: user);
+      }
     }
 
     yield state.copyWith(

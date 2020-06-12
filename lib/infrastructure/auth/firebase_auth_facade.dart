@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:habits/domain/auth/auth_failure.dart';
+import 'package:habits/domain/auth/auth_user.dart';
 import 'package:habits/domain/auth/i_auth_facade.dart';
-import 'package:habits/domain/auth/user.dart';
 import 'package:habits/domain/auth/value_objects.dart';
-import 'package:habits/domain/core/value_objects.dart';
 import 'package:injectable/injectable.dart';
 import './firebase_user_mapper.dart';
 
@@ -16,7 +14,6 @@ import './firebase_user_mapper.dart';
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final databaseRefernce = Firestore.instance;
 
   FirebaseAuthFacade(
     this._firebaseAuth,
@@ -24,7 +21,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   );
 
   @override
-  Future<Option<User>> getSignedInUser() => _firebaseAuth
+  Future<Option<AuthUser>> getSignedInUser() => _firebaseAuth
       .currentUser()
       .then((firebaseUser) => optionOf(firebaseUser?.toDomain()));
 
