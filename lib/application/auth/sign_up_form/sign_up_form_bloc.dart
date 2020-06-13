@@ -5,8 +5,8 @@ import 'package:habits/domain/auth/auth_failure.dart';
 import 'package:habits/domain/auth/i_auth_facade.dart';
 import 'package:habits/domain/auth/value_objects.dart';
 import 'package:habits/domain/core/value_objects.dart';
-import 'package:habits/domain/database/i_database_facade.dart';
-import 'package:habits/domain/database/user.dart';
+import 'package:habits/domain/user/i_user_repository.dart';
+import 'package:habits/domain/user/user.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,9 +22,9 @@ part 'sign_up_form_bloc.freezed.dart';
 @injectable
 class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
   final IAuthFacade _authFacade;
-  final IDatabaseFacade _databaseFacade;
+  final IUserRepository _userRepository;
 
-  SignUpFormBloc(this._authFacade, this._databaseFacade);
+  SignUpFormBloc(this._authFacade, this._userRepository);
 
   @override
   SignUpFormState get initialState => SignUpFormState.initial();
@@ -103,7 +103,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
           firstName: state.firstName,
           lastName: state.lastName,
         );
-        _databaseFacade.addUser(user: user);
+        _userRepository.addUser(user: user);
         // TODO: Return failure here in case it fails.
       }
     }

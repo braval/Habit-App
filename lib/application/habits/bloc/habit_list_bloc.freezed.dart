@@ -513,8 +513,8 @@ class _$HabitListStateTearOff {
     return const Initial();
   }
 
-  Fetching fetching() {
-    return const Fetching();
+  Busy busy() {
+    return const Busy();
   }
 
   Fetched fetched(User user) {
@@ -535,14 +535,14 @@ mixin _$HabitListState {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
-    @required Result fetching(),
+    @required Result busy(),
     @required Result fetched(User user),
     @required Result error(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
-    Result fetching(),
+    Result busy(),
     Result fetched(User user),
     Result error(),
     @required Result orElse(),
@@ -550,14 +550,14 @@ mixin _$HabitListState {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
-    @required Result fetching(Fetching value),
+    @required Result busy(Busy value),
     @required Result fetched(Fetched value),
     @required Result error(Error value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
-    Result fetching(Fetching value),
+    Result busy(Busy value),
     Result fetched(Fetched value),
     Result error(Error value),
     @required Result orElse(),
@@ -613,12 +613,12 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
-    @required Result fetching(),
+    @required Result busy(),
     @required Result fetched(User user),
     @required Result error(),
   }) {
     assert(initial != null);
-    assert(fetching != null);
+    assert(busy != null);
     assert(fetched != null);
     assert(error != null);
     return initial();
@@ -628,7 +628,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
-    Result fetching(),
+    Result busy(),
     Result fetched(User user),
     Result error(),
     @required Result orElse(),
@@ -644,12 +644,12 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
-    @required Result fetching(Fetching value),
+    @required Result busy(Busy value),
     @required Result fetched(Fetched value),
     @required Result error(Error value),
   }) {
     assert(initial != null);
-    assert(fetching != null);
+    assert(busy != null);
     assert(fetched != null);
     assert(error != null);
     return initial(this);
@@ -659,7 +659,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
-    Result fetching(Fetching value),
+    Result busy(Busy value),
     Result fetched(Fetched value),
     Result error(Error value),
     @required Result orElse(),
@@ -676,31 +676,31 @@ abstract class Initial implements HabitListState {
   const factory Initial() = _$Initial;
 }
 
-abstract class $FetchingCopyWith<$Res> {
-  factory $FetchingCopyWith(Fetching value, $Res Function(Fetching) then) =
-      _$FetchingCopyWithImpl<$Res>;
+abstract class $BusyCopyWith<$Res> {
+  factory $BusyCopyWith(Busy value, $Res Function(Busy) then) =
+      _$BusyCopyWithImpl<$Res>;
 }
 
-class _$FetchingCopyWithImpl<$Res> extends _$HabitListStateCopyWithImpl<$Res>
-    implements $FetchingCopyWith<$Res> {
-  _$FetchingCopyWithImpl(Fetching _value, $Res Function(Fetching) _then)
-      : super(_value, (v) => _then(v as Fetching));
+class _$BusyCopyWithImpl<$Res> extends _$HabitListStateCopyWithImpl<$Res>
+    implements $BusyCopyWith<$Res> {
+  _$BusyCopyWithImpl(Busy _value, $Res Function(Busy) _then)
+      : super(_value, (v) => _then(v as Busy));
 
   @override
-  Fetching get _value => super._value as Fetching;
+  Busy get _value => super._value as Busy;
 }
 
-class _$Fetching implements Fetching {
-  const _$Fetching();
+class _$Busy implements Busy {
+  const _$Busy();
 
   @override
   String toString() {
-    return 'HabitListState.fetching()';
+    return 'HabitListState.busy()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Fetching);
+    return identical(this, other) || (other is Busy);
   }
 
   @override
@@ -710,29 +710,29 @@ class _$Fetching implements Fetching {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
-    @required Result fetching(),
+    @required Result busy(),
     @required Result fetched(User user),
     @required Result error(),
   }) {
     assert(initial != null);
-    assert(fetching != null);
+    assert(busy != null);
     assert(fetched != null);
     assert(error != null);
-    return fetching();
+    return busy();
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
-    Result fetching(),
+    Result busy(),
     Result fetched(User user),
     Result error(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (fetching != null) {
-      return fetching();
+    if (busy != null) {
+      return busy();
     }
     return orElse();
   }
@@ -741,36 +741,36 @@ class _$Fetching implements Fetching {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
-    @required Result fetching(Fetching value),
+    @required Result busy(Busy value),
     @required Result fetched(Fetched value),
     @required Result error(Error value),
   }) {
     assert(initial != null);
-    assert(fetching != null);
+    assert(busy != null);
     assert(fetched != null);
     assert(error != null);
-    return fetching(this);
+    return busy(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
-    Result fetching(Fetching value),
+    Result busy(Busy value),
     Result fetched(Fetched value),
     Result error(Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (fetching != null) {
-      return fetching(this);
+    if (busy != null) {
+      return busy(this);
     }
     return orElse();
   }
 }
 
-abstract class Fetching implements HabitListState {
-  const factory Fetching() = _$Fetching;
+abstract class Busy implements HabitListState {
+  const factory Busy() = _$Busy;
 }
 
 abstract class $FetchedCopyWith<$Res> {
@@ -840,12 +840,12 @@ class _$Fetched implements Fetched {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
-    @required Result fetching(),
+    @required Result busy(),
     @required Result fetched(User user),
     @required Result error(),
   }) {
     assert(initial != null);
-    assert(fetching != null);
+    assert(busy != null);
     assert(fetched != null);
     assert(error != null);
     return fetched(user);
@@ -855,7 +855,7 @@ class _$Fetched implements Fetched {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
-    Result fetching(),
+    Result busy(),
     Result fetched(User user),
     Result error(),
     @required Result orElse(),
@@ -871,12 +871,12 @@ class _$Fetched implements Fetched {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
-    @required Result fetching(Fetching value),
+    @required Result busy(Busy value),
     @required Result fetched(Fetched value),
     @required Result error(Error value),
   }) {
     assert(initial != null);
-    assert(fetching != null);
+    assert(busy != null);
     assert(fetched != null);
     assert(error != null);
     return fetched(this);
@@ -886,7 +886,7 @@ class _$Fetched implements Fetched {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
-    Result fetching(Fetching value),
+    Result busy(Busy value),
     Result fetched(Fetched value),
     Result error(Error value),
     @required Result orElse(),
@@ -940,12 +940,12 @@ class _$Error implements Error {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
-    @required Result fetching(),
+    @required Result busy(),
     @required Result fetched(User user),
     @required Result error(),
   }) {
     assert(initial != null);
-    assert(fetching != null);
+    assert(busy != null);
     assert(fetched != null);
     assert(error != null);
     return error();
@@ -955,7 +955,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
-    Result fetching(),
+    Result busy(),
     Result fetched(User user),
     Result error(),
     @required Result orElse(),
@@ -971,12 +971,12 @@ class _$Error implements Error {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
-    @required Result fetching(Fetching value),
+    @required Result busy(Busy value),
     @required Result fetched(Fetched value),
     @required Result error(Error value),
   }) {
     assert(initial != null);
-    assert(fetching != null);
+    assert(busy != null);
     assert(fetched != null);
     assert(error != null);
     return error(this);
@@ -986,7 +986,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
-    Result fetching(Fetching value),
+    Result busy(Busy value),
     Result fetched(Fetched value),
     Result error(Error value),
     @required Result orElse(),

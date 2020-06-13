@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
 
-part of 'database_failure.dart';
+part of 'user_failure.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -9,8 +9,8 @@ part of 'database_failure.dart';
 
 T _$identity<T>(T value) => value;
 
-class _$DatabaseFailureTearOff {
-  const _$DatabaseFailureTearOff();
+class _$UserFailureTearOff {
+  const _$UserFailureTearOff();
 
   ServerError serverError() {
     return const ServerError();
@@ -18,23 +18,22 @@ class _$DatabaseFailureTearOff {
 }
 
 // ignore: unused_element
-const $DatabaseFailure = _$DatabaseFailureTearOff();
+const $UserFailure = _$UserFailureTearOff();
 
-mixin _$DatabaseFailure {}
+mixin _$UserFailure {}
 
-abstract class $DatabaseFailureCopyWith<$Res> {
-  factory $DatabaseFailureCopyWith(
-          DatabaseFailure value, $Res Function(DatabaseFailure) then) =
-      _$DatabaseFailureCopyWithImpl<$Res>;
+abstract class $UserFailureCopyWith<$Res> {
+  factory $UserFailureCopyWith(
+          UserFailure value, $Res Function(UserFailure) then) =
+      _$UserFailureCopyWithImpl<$Res>;
 }
 
-class _$DatabaseFailureCopyWithImpl<$Res>
-    implements $DatabaseFailureCopyWith<$Res> {
-  _$DatabaseFailureCopyWithImpl(this._value, this._then);
+class _$UserFailureCopyWithImpl<$Res> implements $UserFailureCopyWith<$Res> {
+  _$UserFailureCopyWithImpl(this._value, this._then);
 
-  final DatabaseFailure _value;
+  final UserFailure _value;
   // ignore: unused_field
-  final $Res Function(DatabaseFailure) _then;
+  final $Res Function(UserFailure) _then;
 }
 
 abstract class $ServerErrorCopyWith<$Res> {
@@ -43,8 +42,7 @@ abstract class $ServerErrorCopyWith<$Res> {
       _$ServerErrorCopyWithImpl<$Res>;
 }
 
-class _$ServerErrorCopyWithImpl<$Res>
-    extends _$DatabaseFailureCopyWithImpl<$Res>
+class _$ServerErrorCopyWithImpl<$Res> extends _$UserFailureCopyWithImpl<$Res>
     implements $ServerErrorCopyWith<$Res> {
   _$ServerErrorCopyWithImpl(
       ServerError _value, $Res Function(ServerError) _then)
@@ -59,7 +57,7 @@ class _$ServerError implements ServerError {
 
   @override
   String toString() {
-    return 'DatabaseFailure.serverError()';
+    return 'UserFailure.serverError()';
   }
 
   @override
@@ -71,6 +69,6 @@ class _$ServerError implements ServerError {
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class ServerError implements DatabaseFailure {
+abstract class ServerError implements UserFailure {
   const factory ServerError() = _$ServerError;
 }

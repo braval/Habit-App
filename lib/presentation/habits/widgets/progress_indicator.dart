@@ -93,7 +93,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
                 initial: () {
                   nextView = CircularProgressBar();
                 },
-                fetching: () {
+                busy: () {
                   nextView = CircularProgressBar();
                 },
                 fetched: (user) {
@@ -117,7 +117,9 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
                     ],
                   );
                 },
-                error: () {},
+                error: () {
+                  //TODO: Handle this
+                },
               );
               return nextView;
             },
