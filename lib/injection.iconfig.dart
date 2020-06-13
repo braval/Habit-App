@@ -32,8 +32,7 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(
       () => SignUpFormBloc(g<IAuthFacade>(), g<IDatabaseFacade>()));
-  g.registerFactory<AuthBloc>(
-      () => AuthBloc(g<IAuthFacade>(), g<IDatabaseFacade>()));
+  g.registerFactory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
   g.registerFactory<HabitListBloc>(
       () => HabitListBloc(g<IAuthFacade>(), g<IDatabaseFacade>()));
 }

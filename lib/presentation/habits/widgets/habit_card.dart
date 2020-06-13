@@ -37,7 +37,6 @@ class _HabitCardState extends State<HabitCard> {
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.4),
                   blurRadius: 1,
-                  offset: Offset(0, 0), // changes position of shadow
                 ),
               ],
               color: Colors.grey[300],
@@ -49,7 +48,7 @@ class _HabitCardState extends State<HabitCard> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.15,
-                  child: Icon(
+                  child: const Icon(
                     Icons.edit,
                     color: Colors.black45,
                   ),
@@ -64,7 +63,7 @@ class _HabitCardState extends State<HabitCard> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.15,
-                  child: Icon(
+                  child: const Icon(
                     Icons.delete,
                     color: Colors.black45,
                   ),
@@ -123,7 +122,7 @@ class _HabitCardState extends State<HabitCard> {
                         children: [
                           Row(
                             children: [
-                              CircleAvatar(
+                              const CircleAvatar(
                                 backgroundColor: kYellow,
                                 child: Icon(
                                   Icons.healing,
@@ -194,7 +193,7 @@ class _HabitCardState extends State<HabitCard> {
             if (count == widget.dailyCount) return;
             count++;
             final updated =
-                ((progress + 1 / widget.dailyCount).clamp(0.0, 1.0) * 100);
+                (progress + 1 / widget.dailyCount).clamp(0.0, 1.0) * 100;
             setState(
               () {
                 if (count == widget.dailyCount) {

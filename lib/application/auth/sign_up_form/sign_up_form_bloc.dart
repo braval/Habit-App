@@ -103,7 +103,8 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
           firstName: state.firstName,
           lastName: state.lastName,
         );
-        final databaseFailure = _databaseFacade.addUser(user: user);
+        _databaseFacade.addUser(user: user);
+        // TODO: Return failure here in case it fails.
       }
     }
 
