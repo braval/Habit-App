@@ -517,8 +517,10 @@ class _$HabitListStateTearOff {
     return const Fetching();
   }
 
-  Fetched fetched() {
-    return const Fetched();
+  Fetched fetched(User user) {
+    return Fetched(
+      user,
+    );
   }
 
   Error error() {
@@ -534,14 +536,14 @@ mixin _$HabitListState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result fetching(),
-    @required Result fetched(),
+    @required Result fetched(User user),
     @required Result error(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result fetching(),
-    Result fetched(),
+    Result fetched(User user),
     Result error(),
     @required Result orElse(),
   });
@@ -612,7 +614,7 @@ class _$Initial implements Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result fetching(),
-    @required Result fetched(),
+    @required Result fetched(User user),
     @required Result error(),
   }) {
     assert(initial != null);
@@ -627,7 +629,7 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result fetching(),
-    Result fetched(),
+    Result fetched(User user),
     Result error(),
     @required Result orElse(),
   }) {
@@ -709,7 +711,7 @@ class _$Fetching implements Fetching {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result fetching(),
-    @required Result fetched(),
+    @required Result fetched(User user),
     @required Result error(),
   }) {
     assert(initial != null);
@@ -724,7 +726,7 @@ class _$Fetching implements Fetching {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result fetching(),
-    Result fetched(),
+    Result fetched(User user),
     Result error(),
     @required Result orElse(),
   }) {
@@ -774,6 +776,9 @@ abstract class Fetching implements HabitListState {
 abstract class $FetchedCopyWith<$Res> {
   factory $FetchedCopyWith(Fetched value, $Res Function(Fetched) then) =
       _$FetchedCopyWithImpl<$Res>;
+  $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 class _$FetchedCopyWithImpl<$Res> extends _$HabitListStateCopyWithImpl<$Res>
@@ -783,37 +788,67 @@ class _$FetchedCopyWithImpl<$Res> extends _$HabitListStateCopyWithImpl<$Res>
 
   @override
   Fetched get _value => super._value as Fetched;
+
+  @override
+  $Res call({
+    Object user = freezed,
+  }) {
+    return _then(Fetched(
+      user == freezed ? _value.user : user as User,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    if (_value.user == null) {
+      return null;
+    }
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 class _$Fetched implements Fetched {
-  const _$Fetched();
+  const _$Fetched(this.user) : assert(user != null);
+
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'HabitListState.fetched()';
+    return 'HabitListState.fetched(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Fetched);
+    return identical(this, other) ||
+        (other is Fetched &&
+            (identical(other.user, user) ||
+                const DeepCollectionEquality().equals(other.user, user)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
+
+  @override
+  $FetchedCopyWith<Fetched> get copyWith =>
+      _$FetchedCopyWithImpl<Fetched>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result fetching(),
-    @required Result fetched(),
+    @required Result fetched(User user),
     @required Result error(),
   }) {
     assert(initial != null);
     assert(fetching != null);
     assert(fetched != null);
     assert(error != null);
-    return fetched();
+    return fetched(user);
   }
 
   @override
@@ -821,13 +856,13 @@ class _$Fetched implements Fetched {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result fetching(),
-    Result fetched(),
+    Result fetched(User user),
     Result error(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (fetched != null) {
-      return fetched();
+      return fetched(user);
     }
     return orElse();
   }
@@ -865,7 +900,10 @@ class _$Fetched implements Fetched {
 }
 
 abstract class Fetched implements HabitListState {
-  const factory Fetched() = _$Fetched;
+  const factory Fetched(User user) = _$Fetched;
+
+  User get user;
+  $FetchedCopyWith<Fetched> get copyWith;
 }
 
 abstract class $ErrorCopyWith<$Res> {
@@ -903,7 +941,7 @@ class _$Error implements Error {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result fetching(),
-    @required Result fetched(),
+    @required Result fetched(User user),
     @required Result error(),
   }) {
     assert(initial != null);
@@ -918,7 +956,7 @@ class _$Error implements Error {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result fetching(),
-    Result fetched(),
+    Result fetched(User user),
     Result error(),
     @required Result orElse(),
   }) {

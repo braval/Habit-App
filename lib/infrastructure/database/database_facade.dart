@@ -38,11 +38,7 @@ class DatabaseFacade implements IDatabaseFacade {
           .get();
 
       return right(
-        User(
-          firstName: Name('Test'),
-          lastName: Name('lasttest'),
-          id: id,
-        ),
+        User.fromDocument(id, userInfo),
       );
     } on PlatformException catch (_) {
       return left(const DatabaseFailure.serverError());

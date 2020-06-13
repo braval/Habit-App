@@ -44,7 +44,10 @@ class HabitListBloc extends Bloc<HabitListEvent, HabitListState> {
           (user) => uid = user.id,
         );
         final currentUser = await _databaseFacade.getCurrentUser(uid);
-        yield const HabitListState.fetched();
+        yield currentUser.fold(
+          (l) => const HabitListState.error(),
+          (r) => HabitListState.fetched(r),
+        );
       },
     );
   }
