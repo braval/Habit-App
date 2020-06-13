@@ -91,12 +91,13 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   }
 }
 
-class _$_User implements _User {
+class _$_User extends _User {
   const _$_User(
       {@required this.id, @required this.firstName, @required this.lastName})
       : assert(id != null),
         assert(firstName != null),
-        assert(lastName != null);
+        assert(lastName != null),
+        super._();
 
   @override
   final UniqueId id;
@@ -136,7 +137,8 @@ class _$_User implements _User {
       __$UserCopyWithImpl<_User>(this, _$identity);
 }
 
-abstract class _User implements User {
+abstract class _User extends User {
+  const _User._() : super._();
   const factory _User(
       {@required UniqueId id,
       @required Name firstName,

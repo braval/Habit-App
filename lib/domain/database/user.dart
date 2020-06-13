@@ -14,7 +14,7 @@ abstract class User implements _$User {
     @required Name lastName,
   }) = _User;
 
-  static User fromDocument(UniqueId id, DocumentSnapshot document) {
+  factory User.fromDocument(UniqueId id, DocumentSnapshot document) {
     if (document == null || document.data == null) return null;
     return User(
       id: id,
