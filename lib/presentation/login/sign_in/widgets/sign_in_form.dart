@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/auth/sign_in_form/sign_in_form_bloc.dart';
-import 'package:habits/presentation/login/sign_up/sign_up_page.dart';
 import 'package:habits/presentation/login/widgets/form_widget_helper.dart';
 import 'package:habits/routes/router.gr.dart';
 import '../../../constants.dart' as constants;

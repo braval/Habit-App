@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
+import 'package:habits/domain/core/value_objects.dart';
 import 'package:habits/domain/database/database_failure.dart';
 import 'package:habits/domain/database/i_database_facade.dart';
 import 'package:habits/domain/database/user.dart';
@@ -23,6 +24,26 @@ class DatabaseFacade implements IDatabaseFacade {
         'last_name': user.lastName.getOrCrash(),
       });
       return right(unit);
+    } on PlatformException catch (_) {
+      return left(const DatabaseFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, User>> getCurrentUser(UniqueId id) async {
+    try {
+      final userInfo = await _databaseReference
+          .collection("users")
+          .document(id.getOrCrash())
+          .get();
+
+      return right(
+        User(
+          firstName: Name('Test'),
+          lastName: Name('lasttest'),
+          id: id,
+        ),
+      );
     } on PlatformException catch (_) {
       return left(const DatabaseFailure.serverError());
     }

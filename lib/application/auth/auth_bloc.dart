@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:habits/domain/auth/i_auth_facade.dart';
+import 'package:habits/domain/database/i_database_facade.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
@@ -14,8 +15,9 @@ part 'auth_bloc.freezed.dart';
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _authFacade;
+  final IDatabaseFacade _databaseFacade;
 
-  AuthBloc(this._authFacade);
+  AuthBloc(this._authFacade, this._databaseFacade);
 
   @override
   AuthState get initialState => const AuthState.initial();

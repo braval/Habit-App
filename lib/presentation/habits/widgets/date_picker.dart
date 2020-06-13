@@ -14,16 +14,13 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 360.0),
-      child: DatePicker(
-        DateTime.now().add(const Duration(days: -6)),
-        controller: _controller,
-        initialSelectedDate: DateTime.now(),
-        daysCount: 7,
-        selectionColor: kYellow,
-        onDateChange: widget.onChanged,
-      ),
+    return DatePicker(
+      DateTime.now().add(const Duration(days: -3)),
+      controller: _controller,
+      initialSelectedDate: DateTime.now(),
+      daysCount: 7,
+      selectionColor: kYellow,
+      onDateChange: widget.onChanged,
     );
   }
 }

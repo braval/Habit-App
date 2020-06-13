@@ -1,5 +1,8 @@
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habits/application/habits/bloc/habit_list_bloc.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/core/header_widget.dart';
 
@@ -88,7 +91,12 @@ class _HabitsPageState extends State<HabitsPage> {
                     right: 25.0,
                     child: CustomProgressIndicator(),
                   ),
-                  CustomDatePicker(onDateChange),
+                  Positioned(
+                    top: 350.0,
+                    left: 25.0,
+                    right: 25.0,
+                    child: CustomDatePicker(onDateChange),
+                  ),
                   Theme(
                     data: ThemeData(
                       canvasColor: Colors.transparent,
@@ -96,7 +104,26 @@ class _HabitsPageState extends State<HabitsPage> {
                     ),
                     child: Container(
                       padding: EdgeInsets.fromLTRB(0, 450, 0, 0),
-                      child: _buildHabitList(),
+                      child: BlocConsumer<HabitListBloc, HabitListState>(
+                        listener: (context, state) {
+                          state.when(
+                            initial: () {},
+                            fetching: () {},
+                            fetched: () {},
+                            error: () {
+                              FlushbarHelper.createError(
+                                message: 'Server error',
+                              ).show(context);
+                            },
+                          );
+                        },
+                        builder: (context, state) {
+                          if (state is Fetched) {
+                            return _buildHabits();
+                          }
+                          return _buildCircularProgressIndicator();
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -108,7 +135,13 @@ class _HabitsPageState extends State<HabitsPage> {
     );
   }
 
-  Widget _buildHabitList() {
+  Widget _buildCircularProgressIndicator() {
+    return Center(
+      child: const CircularProgressIndicator(),
+    );
+  }
+
+  Widget _buildHabits() {
     return Column(
       children: habits,
     );
