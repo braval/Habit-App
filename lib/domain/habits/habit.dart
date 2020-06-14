@@ -15,7 +15,8 @@ abstract class HabitItem implements _$HabitItem {
     @required HabitName name,
     @required HabitCategoryName category,
     @required bool done,
-    @required int count,
+    @required int totalCount,
+    @required int currentCount,
   }) = _HabitItem;
 
   factory HabitItem.empty() => HabitItem(
@@ -23,7 +24,8 @@ abstract class HabitItem implements _$HabitItem {
         category: HabitCategoryName(''),
         name: HabitName(''),
         done: false,
-        count: 1,
+        totalCount: 1,
+        currentCount: 0,
       );
 
   Option<ValueFailure<dynamic>> get failureOption {

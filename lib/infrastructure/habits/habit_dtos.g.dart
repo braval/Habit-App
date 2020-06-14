@@ -12,7 +12,8 @@ _$_HabitItemDto _$_$_HabitItemDtoFromJson(Map<String, dynamic> json) {
     name: json['name'] as String,
     category: json['category'] as String,
     done: json['done'] as bool,
-    count: json['count'] as int,
+    currentCount: json['currentCount'] as int,
+    totalCount: json['totalCount'] as int,
   );
 }
 
@@ -22,5 +23,6 @@ Map<String, dynamic> _$_$_HabitItemDtoToJson(_$_HabitItemDto instance) =>
       'name': instance.name,
       'category': instance.category,
       'done': instance.done,
-      'count': instance.count,
+      'currentCount': instance.currentCount,
+      'totalCount': instance.totalCount,
     };

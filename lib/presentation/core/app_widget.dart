@@ -18,7 +18,8 @@ class AppWidget extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<HabitListBloc>()
-            ..add(const HabitListEvent.populateUserInfo()),
+            ..add(const HabitListEvent.populateUserInfo())
+            ..add(HabitListEvent.newDateSelected(DateTime.now())),
         ),
       ],
       child: MaterialApp(

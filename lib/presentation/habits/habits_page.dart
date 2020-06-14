@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/habits/bloc/habit_list_bloc.dart';
+import 'package:habits/domain/core/value_objects.dart';
+import 'package:habits/domain/habits/habit.dart';
+import 'package:habits/domain/habits/value_objects.dart';
 import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/core/header_widget.dart';
@@ -21,12 +24,6 @@ class HabitsPage extends StatefulWidget {
 
 class _HabitsPageState extends State<HabitsPage> {
   DateTime _selectedValue = DateTime.now();
-
-  List<HabitCard> habits = [
-    HabitCard('Meditation', UniqueKey(), 3),
-    HabitCard('Running', UniqueKey(), 6),
-    HabitCard('Gym', UniqueKey(), 1),
-  ];
 
   @override
   void initState() {
@@ -109,7 +106,7 @@ class _HabitsPageState extends State<HabitsPage> {
                           state.when(
                             initial: () {},
                             busy: () {},
-                            fetched: (User user) {},
+                            userFetched: (User user) {},
                             error: () {
                               FlushbarHelper.createError(
                                 message: 'Server error',
@@ -118,8 +115,8 @@ class _HabitsPageState extends State<HabitsPage> {
                           );
                         },
                         builder: (context, state) {
-                          if (state is Fetched) {
-                            return _buildHabits();
+                          if (state is UserFetched) {
+                            return BuildHabitList();
                           }
                           return CircularProgressBar();
                         },
@@ -134,10 +131,51 @@ class _HabitsPageState extends State<HabitsPage> {
       ),
     );
   }
+}
 
-  Widget _buildHabits() {
-    return Column(
-      children: habits,
+class BuildHabitList extends StatefulWidget {
+  @override
+  _BuildHabitListState createState() => _BuildHabitListState();
+}
+
+class _BuildHabitListState extends State<BuildHabitList> {
+  Widget nextView;
+
+  List<HabitCard> habits = [
+    HabitCard(
+      habit: HabitItem(
+        id: UniqueId(),
+        name: HabitName('Meditation'),
+        category: HabitCategoryName('Health'),
+        totalCount: 2,
+        currentCount: 1,
+        done: false,
+      ),
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HabitListBloc, HabitListState>(
+      builder: (context, state) {
+        state.when(
+          initial: () {
+            nextView = CircularProgressBar();
+          },
+          busy: () {
+            nextView = CircularProgressBar();
+          },
+          userFetched: (user) {
+            nextView = Column(
+              children: habits,
+            );
+          },
+          error: () {
+            //TODO: Handle this
+          },
+        );
+        return nextView;
+      },
     );
   }
 }

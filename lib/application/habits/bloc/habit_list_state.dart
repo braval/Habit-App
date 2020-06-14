@@ -4,6 +4,6 @@ part of 'habit_list_bloc.dart';
 abstract class HabitListState with _$HabitListState {
   const factory HabitListState.initial() = Initial;
   const factory HabitListState.busy() = Busy;
-  const factory HabitListState.fetched(User user) = Fetched;
+  const factory HabitListState.userFetched(User user) = UserFetched;
   const factory HabitListState.error() = Error;
 }

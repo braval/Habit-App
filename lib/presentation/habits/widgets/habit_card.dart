@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/constants.dart';
 import 'package:intl/intl.dart';
@@ -8,11 +9,9 @@ import 'package:expandable/expandable.dart';
 import 'package:circular_check_box/circular_check_box.dart';
 
 class HabitCard extends StatefulWidget {
-  final String name;
-  final Key uniqueKey;
-  final int dailyCount;
+  final HabitItem habit;
 
-  const HabitCard(this.name, this.uniqueKey, this.dailyCount);
+  const HabitCard({this.habit});
 
   @override
   _HabitCardState createState() => _HabitCardState();
@@ -21,7 +20,6 @@ class HabitCard extends StatefulWidget {
 class _HabitCardState extends State<HabitCard> {
   bool isSelected = false;
   double progress = 0;
-  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +133,7 @@ class _HabitCardState extends State<HabitCard> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      widget.name,
+                                      widget.habit.name.getOrCrash(),
                                       style: const TextStyle(
                                         fontFamily: 'Montserrat',
                                         color: Colors.black,
@@ -143,8 +141,8 @@ class _HabitCardState extends State<HabitCard> {
                                         fontSize: 18.0,
                                       ),
                                     ),
-                                    const Text(
-                                      'Health',
+                                    Text(
+                                      widget.habit.category.getOrCrash(),
                                       textAlign: TextAlign.start,
                                       style: kHabitSubtitleTextStyle,
                                     ),
@@ -161,7 +159,7 @@ class _HabitCardState extends State<HabitCard> {
                                 child: _buildProgressIndicator(),
                               ),
                               Text(
-                                '$count/${widget.dailyCount}',
+                                '${widget.habit.currentCount}/${widget.habit.totalCount}',
                                 style: kHabitSubtitleTextStyle,
                               ),
                             ],
@@ -190,13 +188,13 @@ class _HabitCardState extends State<HabitCard> {
       onTap: () {
         setState(
           () {
-            if (count == widget.dailyCount) return;
-            count++;
+            if (widget.habit.currentCount == widget.habit.totalCount) return;
+            // widget.habit.currentCount++;
             final updated =
-                (progress + 1 / widget.dailyCount).clamp(0.0, 1.0) * 100;
+                (progress + 1 / widget.habit.totalCount).clamp(0.0, 1.0) * 100;
             setState(
               () {
-                if (count == widget.dailyCount) {
+                if (widget.habit.currentCount == widget.habit.totalCount) {
                   progress = 1.0;
                 } else {
                   progress = updated.round() / 100;

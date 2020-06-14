@@ -16,7 +16,8 @@ abstract class HabitItemDto implements _$HabitItemDto {
     @required String name,
     @required String category,
     @required bool done,
-    @required int count,
+    @required int currentCount,
+    @required int totalCount,
   }) = _HabitItemDto;
 
   factory HabitItemDto.fromDomain(HabitItem habitItem) {
@@ -24,7 +25,8 @@ abstract class HabitItemDto implements _$HabitItemDto {
       uniqueId: habitItem.id.getOrCrash(),
       name: habitItem.name.getOrCrash(),
       category: habitItem.category.getOrCrash(),
-      count: habitItem.count,
+      currentCount: habitItem.currentCount,
+      totalCount: habitItem.totalCount,
       done: habitItem.done,
     );
   }
@@ -34,7 +36,8 @@ abstract class HabitItemDto implements _$HabitItemDto {
       id: UniqueId.fromUniqueString(uniqueId),
       category: HabitCategoryName(category),
       done: done,
-      count: count,
+      currentCount: currentCount,
+      totalCount: totalCount,
       name: HabitName(name),
     );
   }

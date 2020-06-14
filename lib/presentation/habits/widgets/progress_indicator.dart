@@ -96,7 +96,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
                 busy: () {
                   nextView = CircularProgressBar();
                 },
-                fetched: (user) {
+                userFetched: (user) {
                   final name = user.firstName.getOrCrash();
                   nextView = Column(
                     mainAxisAlignment: MainAxisAlignment.center,

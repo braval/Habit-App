@@ -17,13 +17,15 @@ class _$HabitItemTearOff {
       @required HabitName name,
       @required HabitCategoryName category,
       @required bool done,
-      @required int count}) {
+      @required int totalCount,
+      @required int currentCount}) {
     return _HabitItem(
       id: id,
       name: name,
       category: category,
       done: done,
-      count: count,
+      totalCount: totalCount,
+      currentCount: currentCount,
     );
   }
 }
@@ -36,7 +38,8 @@ mixin _$HabitItem {
   HabitName get name;
   HabitCategoryName get category;
   bool get done;
-  int get count;
+  int get totalCount;
+  int get currentCount;
 
   $HabitItemCopyWith<HabitItem> get copyWith;
 }
@@ -49,7 +52,8 @@ abstract class $HabitItemCopyWith<$Res> {
       HabitName name,
       HabitCategoryName category,
       bool done,
-      int count});
+      int totalCount,
+      int currentCount});
 }
 
 class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
@@ -65,7 +69,8 @@ class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
     Object name = freezed,
     Object category = freezed,
     Object done = freezed,
-    Object count = freezed,
+    Object totalCount = freezed,
+    Object currentCount = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
@@ -73,7 +78,9 @@ class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
       category:
           category == freezed ? _value.category : category as HabitCategoryName,
       done: done == freezed ? _value.done : done as bool,
-      count: count == freezed ? _value.count : count as int,
+      totalCount: totalCount == freezed ? _value.totalCount : totalCount as int,
+      currentCount:
+          currentCount == freezed ? _value.currentCount : currentCount as int,
     ));
   }
 }
@@ -88,7 +95,8 @@ abstract class _$HabitItemCopyWith<$Res> implements $HabitItemCopyWith<$Res> {
       HabitName name,
       HabitCategoryName category,
       bool done,
-      int count});
+      int totalCount,
+      int currentCount});
 }
 
 class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
@@ -105,7 +113,8 @@ class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
     Object name = freezed,
     Object category = freezed,
     Object done = freezed,
-    Object count = freezed,
+    Object totalCount = freezed,
+    Object currentCount = freezed,
   }) {
     return _then(_HabitItem(
       id: id == freezed ? _value.id : id as UniqueId,
@@ -113,7 +122,9 @@ class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
       category:
           category == freezed ? _value.category : category as HabitCategoryName,
       done: done == freezed ? _value.done : done as bool,
-      count: count == freezed ? _value.count : count as int,
+      totalCount: totalCount == freezed ? _value.totalCount : totalCount as int,
+      currentCount:
+          currentCount == freezed ? _value.currentCount : currentCount as int,
     ));
   }
 }
@@ -124,12 +135,14 @@ class _$_HabitItem extends _HabitItem {
       @required this.name,
       @required this.category,
       @required this.done,
-      @required this.count})
+      @required this.totalCount,
+      @required this.currentCount})
       : assert(id != null),
         assert(name != null),
         assert(category != null),
         assert(done != null),
-        assert(count != null),
+        assert(totalCount != null),
+        assert(currentCount != null),
         super._();
 
   @override
@@ -141,11 +154,13 @@ class _$_HabitItem extends _HabitItem {
   @override
   final bool done;
   @override
-  final int count;
+  final int totalCount;
+  @override
+  final int currentCount;
 
   @override
   String toString() {
-    return 'HabitItem(id: $id, name: $name, category: $category, done: $done, count: $count)';
+    return 'HabitItem(id: $id, name: $name, category: $category, done: $done, totalCount: $totalCount, currentCount: $currentCount)';
   }
 
   @override
@@ -161,8 +176,12 @@ class _$_HabitItem extends _HabitItem {
                     .equals(other.category, category)) &&
             (identical(other.done, done) ||
                 const DeepCollectionEquality().equals(other.done, done)) &&
-            (identical(other.count, count) ||
-                const DeepCollectionEquality().equals(other.count, count)));
+            (identical(other.totalCount, totalCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.totalCount, totalCount)) &&
+            (identical(other.currentCount, currentCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentCount, currentCount)));
   }
 
   @override
@@ -172,7 +191,8 @@ class _$_HabitItem extends _HabitItem {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(done) ^
-      const DeepCollectionEquality().hash(count);
+      const DeepCollectionEquality().hash(totalCount) ^
+      const DeepCollectionEquality().hash(currentCount);
 
   @override
   _$HabitItemCopyWith<_HabitItem> get copyWith =>
@@ -186,7 +206,8 @@ abstract class _HabitItem extends HabitItem {
       @required HabitName name,
       @required HabitCategoryName category,
       @required bool done,
-      @required int count}) = _$_HabitItem;
+      @required int totalCount,
+      @required int currentCount}) = _$_HabitItem;
 
   @override
   UniqueId get id;
@@ -197,7 +218,9 @@ abstract class _HabitItem extends HabitItem {
   @override
   bool get done;
   @override
-  int get count;
+  int get totalCount;
+  @override
+  int get currentCount;
   @override
   _$HabitItemCopyWith<_HabitItem> get copyWith;
 }
