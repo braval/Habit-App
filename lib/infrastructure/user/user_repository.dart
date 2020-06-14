@@ -17,7 +17,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Either<UserFailure, Unit>> addUser({User user}) async {
     try {
-      UserDto userDto = UserDto.fromDomain(user);
+      final UserDto userDto = UserDto.fromDomain(user);
 
       await _databaseReference
           .collection("users")

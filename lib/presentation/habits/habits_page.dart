@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/habits/bloc/habit_list_bloc.dart';
+import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/core/header_widget.dart';
+import 'package:habits/presentation/habits/add_habit_page.dart';
 import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
 
 import 'widgets/date_picker.dart';
@@ -60,9 +62,7 @@ class _HabitsPageState extends State<HabitsPage> {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: Container(
-                    //TODO: add sheet
-                    ),
+                child: AddTaskScreen(),
               ),
             ),
             backgroundColor: Colors.white,
@@ -106,16 +106,16 @@ class _HabitsPageState extends State<HabitsPage> {
                       padding: const EdgeInsets.fromLTRB(0, 450, 0, 0),
                       child: BlocConsumer<HabitListBloc, HabitListState>(
                         listener: (context, state) {
-                          // state.when(
-                          //   initial: () {},
-                          //   fetching: () {},
-                          //   fetched: (User user) {},
-                          //   error: () {
-                          //     FlushbarHelper.createError(
-                          //       message: 'Server error',
-                          //     ).show(context);
-                          //   },
-                          // );
+                          state.when(
+                            initial: () {},
+                            busy: () {},
+                            fetched: (User user) {},
+                            error: () {
+                              FlushbarHelper.createError(
+                                message: 'Server error',
+                              ).show(context);
+                            },
+                          );
                         },
                         builder: (context, state) {
                           if (state is Fetched) {
