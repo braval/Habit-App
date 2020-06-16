@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/user/user_info_bloc.dart';
+import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/constants.dart';
 import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
@@ -14,8 +15,6 @@ class CustomProgressIndicator extends StatefulWidget {
 }
 
 class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
-  Widget nextView;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,49 +86,55 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
               ],
             ),
           ),
-          BlocBuilder<UserInfoBloc, UserInfoState>(
-            builder: (context, state) {
-              state.map(
-                initial: (_) {
-                  nextView = CircularProgressBar();
-                },
-                busy: (_) {
-                  nextView = CircularProgressBar();
-                },
-                userFetched: (UserFetched userFetched) {
-                  nextView = _buildProgressIndicator(
-                      userFetched.user.firstName.getOrCrash());
-                },
-                error: (userOption) {
-                  // TODO: Handle error state.
-                },
-              );
-              return nextView;
-            },
-          ),
+          _buildProgressIndicator(),
         ],
       ),
     );
   }
+}
 
-  Widget _buildProgressIndicator(String name) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          '$name, you have completed 2 tasks for today',
-          style: kHabitSubtitleTextStyle,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        LinearPercentIndicator(
-          width: 100.0,
-          lineHeight: 8.0,
-          percent: 0.8,
-          progressColor: Colors.green,
-        ),
-      ],
-    );
-  }
+Widget _buildProgressIndicator() {
+  return BlocBuilder<UserInfoBloc, UserInfoState>(
+    builder: (context, state) {
+      var busy = false;
+      User user;
+      state.map(
+        initial: (_) {
+          busy = true;
+        },
+        busy: (_) {
+          busy = true;
+        },
+        userFetched: (UserFetched userFetched) {
+          user = userFetched.user;
+          busy = false;
+        },
+        error: (userOption) {
+          // TODO: Handle error state.
+          busy = true;
+        },
+      );
+
+      return busy
+          ? CircularProgressBar()
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '${user.firstName.getOrCrash()}, you have completed 2 tasks for today',
+                  style: kHabitSubtitleTextStyle,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                LinearPercentIndicator(
+                  width: 100.0,
+                  lineHeight: 8.0,
+                  percent: 0.8,
+                  progressColor: Colors.green,
+                ),
+              ],
+            );
+    },
+  );
 }

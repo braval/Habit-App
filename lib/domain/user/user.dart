@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:habits/domain/core/failures.dart';
@@ -27,13 +26,4 @@ abstract class User implements _$User {
         .andThen(lastName.value)
         .fold((f) => some(f), (r) => none());
   }
-
-  // factory User.fromDocument(UniqueId id, DocumentSnapshot document) {
-  //   if (document == null || document.data == null) return null;
-  //   return User(
-  //     id: id,
-  //     firstName: Name(document.data['first_name'].toString()),
-  //     lastName: Name(document.data['last_name'].toString()),
-  //   );
-  // }
 }

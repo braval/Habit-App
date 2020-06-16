@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/domain/core/value_objects.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/habits/value_objects.dart';
+import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/core/header_widget.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
-import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
 
 import 'widgets/date_picker.dart';
 import 'widgets/habit_card.dart';
@@ -21,6 +20,7 @@ class HabitsPage extends StatefulWidget {
 
 class _HabitsPageState extends State<HabitsPage> {
   DateTime _selectedValue = DateTime.now();
+  User user;
 
   @override
   void initState() {
@@ -56,7 +56,7 @@ class _HabitsPageState extends State<HabitsPage> {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(),
+                child: AddTaskScreen(user: user),
               ),
             ),
             backgroundColor: Colors.white,
@@ -99,17 +99,6 @@ class _HabitsPageState extends State<HabitsPage> {
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(0, 450, 0, 0),
                       child: BuildHabitList(),
-                      // child: BlocConsumer<HabitListBloc, HabitListState>(
-                      //   listener: (context, state) {
-                      //     state.habitFailureOrSuccessOption.fold(() => null, (either) => either.fold((l) => null, (r) => null))
-                      //   },
-                      //   builder: (context, state) {
-                      //     // TODO: handle error state.
-                      //     return state.isSubmitting
-                      //         ? CircularProgressBar()
-                      //         : BuildHabitList();
-                      //   },
-                      // ),
                     ),
                   ),
                 ],
