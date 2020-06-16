@@ -81,7 +81,7 @@ class SignInForm extends StatelessWidget {
                 ),
               ),
               FlatButton(
-                color: const Color(constants.COLOR_PRIMARY),
+                color: constants.kDarkPurple,
                 shape: kLoginButtonShape,
                 onPressed: () {
                   WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
@@ -96,7 +96,7 @@ class SignInForm extends StatelessWidget {
                 ),
               ),
               FlatButton(
-                color: const Color(constants.COLOR_PRIMARY),
+                color: constants.kDarkPurple,
                 shape: kLoginButtonShape,
                 onPressed: () {
                   WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();

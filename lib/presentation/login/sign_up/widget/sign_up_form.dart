@@ -122,7 +122,6 @@ class SignUpForm extends StatelessWidget {
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) =>
                           FocusScope.of(context).nextFocus(),
-                      cursorColor: const Color(constants.COLOR_PRIMARY),
                       decoration: customFormDecoration('Password'),
                       onChanged: (value) => context
                           .bloc<SignUpFormBloc>()
@@ -146,7 +145,6 @@ class SignUpForm extends StatelessWidget {
                     child: TextFormField(
                       textInputAction: TextInputAction.done,
                       obscureText: true,
-                      cursorColor: const Color(constants.COLOR_PRIMARY),
                       decoration: customFormDecoration('Confirm Password'),
                       onChanged: (value) => context
                           .bloc<SignUpFormBloc>()
@@ -167,7 +165,7 @@ class SignUpForm extends StatelessWidget {
                     ),
                   ),
                   FlatButton(
-                    color: const Color(constants.COLOR_PRIMARY),
+                    color: constants.kDarkPurple,
                     shape: kLoginButtonShape,
                     onPressed: () {
                       WidgetsBinding.instance.focusManager.primaryFocus

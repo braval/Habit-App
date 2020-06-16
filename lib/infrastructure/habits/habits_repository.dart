@@ -37,7 +37,7 @@ class HabitsRepository implements IHabitsRepository {
   }
 
   @override
-  Stream<Either<HabitFailure, List<DailyHabits>>> watchAll() {
+  Stream<Either<HabitFailure, List<DailyHabits>>> watchAll(DateTime dateTime) {
     // TODO: implement watchAll
     throw UnimplementedError();
   }

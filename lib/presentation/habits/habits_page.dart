@@ -1,12 +1,9 @@
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:habits/application/habits/bloc/habit_list_bloc.dart';
 import 'package:habits/domain/core/value_objects.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/habits/value_objects.dart';
-import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/core/header_widget.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
@@ -101,26 +98,18 @@ class _HabitsPageState extends State<HabitsPage> {
                     ),
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(0, 450, 0, 0),
-                      child: BlocConsumer<HabitListBloc, HabitListState>(
-                        listener: (context, state) {
-                          state.when(
-                            initial: () {},
-                            busy: () {},
-                            userFetched: (User user) {},
-                            error: () {
-                              FlushbarHelper.createError(
-                                message: 'Server error',
-                              ).show(context);
-                            },
-                          );
-                        },
-                        builder: (context, state) {
-                          if (state is UserFetched) {
-                            return BuildHabitList();
-                          }
-                          return CircularProgressBar();
-                        },
-                      ),
+                      child: BuildHabitList(),
+                      // child: BlocConsumer<HabitListBloc, HabitListState>(
+                      //   listener: (context, state) {
+                      //     state.habitFailureOrSuccessOption.fold(() => null, (either) => either.fold((l) => null, (r) => null))
+                      //   },
+                      //   builder: (context, state) {
+                      //     // TODO: handle error state.
+                      //     return state.isSubmitting
+                      //         ? CircularProgressBar()
+                      //         : BuildHabitList();
+                      //   },
+                      // ),
                     ),
                   ),
                 ],
@@ -156,26 +145,29 @@ class _BuildHabitListState extends State<BuildHabitList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HabitListBloc, HabitListState>(
-      builder: (context, state) {
-        state.when(
-          initial: () {
-            nextView = CircularProgressBar();
-          },
-          busy: () {
-            nextView = CircularProgressBar();
-          },
-          userFetched: (user) {
-            nextView = Column(
-              children: habits,
-            );
-          },
-          error: () {
-            //TODO: Handle this
-          },
-        );
-        return nextView;
-      },
+    return Column(
+      children: habits,
     );
+    // return BlocBuilder<HabitListBloc, HabitListState>(
+    //   builder: (context, state) {
+    //     return state.when(
+    //       initial: () {
+    //         nextView = CircularProgressBar();
+    //       },
+    //       busy: () {
+    //         nextView = CircularProgressBar();
+    //       },
+    //       userFetched: (user) {
+    //         nextView = Column(
+    //           children: habits,
+    //         );
+    //       },
+    //       error: () {
+    //         //TODO: Handle this
+    //       },
+    //     );
+    //     return nextView;
+    //   },
+    // );
   }
 }

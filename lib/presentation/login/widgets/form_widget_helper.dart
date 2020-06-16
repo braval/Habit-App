@@ -7,9 +7,8 @@ InputDecoration customFormDecoration(String field) {
     fillColor: Colors.white,
     hintText: field,
     focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25.0),
-        borderSide: const BorderSide(
-            color: Color(constants.COLOR_PRIMARY), width: 2.0)),
+      borderRadius: BorderRadius.circular(25.0),
+    ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25.0),
     ),
@@ -33,7 +32,7 @@ const TextStyle kFormButtonUnderlinedTextStyle = TextStyle(
 
 ShapeBorder kLoginButtonShape = RoundedRectangleBorder(
   side: const BorderSide(
-    color: Color(constants.COLOR_PRIMARY),
+    color: constants.kPink,
   ),
   borderRadius: BorderRadius.circular(50),
 );

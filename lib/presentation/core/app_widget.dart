@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/auth/auth_bloc.dart';
-import 'package:habits/application/habits/bloc/habit_list_bloc.dart';
+import 'package:habits/application/user/user_info_bloc.dart';
 import 'package:habits/routes/router.gr.dart';
 
 import '../../injection.dart';
@@ -17,9 +17,8 @@ class AppWidget extends StatelessWidget {
               getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
         ),
         BlocProvider(
-          create: (context) => getIt<HabitListBloc>()
-            ..add(const HabitListEvent.populateUserInfo())
-            ..add(HabitListEvent.newDateSelected(DateTime.now())),
+          create: (context) => getIt<UserInfoBloc>()
+            ..add(const UserInfoEvent.populateUserInfo()),
         ),
       ],
       child: MaterialApp(

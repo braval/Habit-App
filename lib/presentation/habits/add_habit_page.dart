@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:habits/domain/habits/value_objects.dart';
+import 'package:habits/presentation/constants.dart' as constants;
+import 'package:habits/presentation/habits/widgets/categories.dart';
+import 'package:habits/presentation/login/widgets/form_widget_helper.dart';
 
 class AddTaskScreen extends StatelessWidget {
   final myController = TextEditingController();
@@ -11,66 +15,107 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
+      decoration: const BoxDecoration(
+        color: constants.kBackground,
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40.0), topRight: Radius.circular(40.0)),
+          topLeft: Radius.circular(40.0),
+          topRight: Radius.circular(40.0),
+        ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(35.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+      child: SafeArea(
+        child: Stack(
           children: [
-            const Text(
-              'Task Name',
-              style: TextStyle(
-                color: Colors.black54,
-                fontWeight: FontWeight.w500,
-                fontSize: 18.0,
+            Container(
+              decoration: const BoxDecoration(
+                color: constants.kDarkPurple,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40.0),
+                  topRight: Radius.circular(40.0),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 16.0,
-                bottom: 16.0,
-              ),
-              child: TextFormField(
-                controller: myController,
-                decoration: InputDecoration(
-                  hintText: 'What\'s on your mind?',
-                  filled: true,
-                  fillColor: Colors.grey[100],
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    borderSide: BorderSide(color: Colors.grey),
+              height: 65.0,
+              child: const Center(
+                child: Text(
+                  'Create New Habit',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
             ),
-            RawMaterialButton(
-              splashColor: Colors.cyan,
-              onPressed: () {},
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40.0),
-              ),
-              fillColor: Colors.cyan,
-              child: Container(
-                height: 50.0,
-                width: double.infinity,
-                child: const Center(
-                  child: Text(
-                    'Add Task',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+            Form(
+              // autovalidate: state.showErrorMessages,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 75.0, left: 20.0, right: 20.0, bottom: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Name',
+                      style: constants.kTitleStyle,
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, bottom: 30.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          focusColor: Colors.red,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 16),
+                          filled: true,
+                          fillColor: Colors.grey[100],
+                        ),
+                        autocorrect: false,
+                        // onChanged: (value) => context
+                        //     .bloc<SignInFormBloc>()
+                        //     .add(SignInFormEvent.emailChanged(value)),
+                        // validator: (_) => context
+                        //     .bloc<SignInFormBloc>()
+                        //     .state
+                        //     .emailAddress
+                        //     .value
+                        //     .fold(
+                        //       (f) => f.maybeMap(
+                        //         invalidEmail: (_) => 'Invalid Email',
+                        //         orElse: () => null,
+                        //       ),
+                        //       (_) => null,
+                        //     ),
+                      ),
+                    ),
+                    const Text(
+                      'Category',
+                      style: constants.kTitleStyle,
+                    ),
+                    const CategoryList(
+                      categoryList: HabitCategoryName.predefinedCategories,
+                    ),
+                    Center(
+                      child: FlatButton(
+                        color: constants.kDarkPurple,
+                        shape: kLoginButtonShape,
+                        onPressed: () {
+                          // WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+                          // context.bloc<SignInFormBloc>().add(
+                          //       const SignInFormEvent.signInWithEmailAndPasswordPressed(),
+                          //     );
+                        },
+                        child: const Text(
+                          'Add Habit',
+                          style: kFormButtonTextStyle,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

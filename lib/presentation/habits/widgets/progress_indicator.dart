@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:habits/application/habits/bloc/habit_list_bloc.dart';
+import 'package:habits/application/user/user_info_bloc.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/constants.dart';
 import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
@@ -87,38 +87,21 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
               ],
             ),
           ),
-          BlocBuilder<HabitListBloc, HabitListState>(
+          BlocBuilder<UserInfoBloc, UserInfoState>(
             builder: (context, state) {
-              state.when(
-                initial: () {
+              state.map(
+                initial: (_) {
                   nextView = CircularProgressBar();
                 },
-                busy: () {
+                busy: (_) {
                   nextView = CircularProgressBar();
                 },
-                userFetched: (user) {
-                  final name = user.firstName.getOrCrash();
-                  nextView = Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '$name, you have completed 2 tasks for today',
-                        style: kHabitSubtitleTextStyle,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      LinearPercentIndicator(
-                        width: 100.0,
-                        lineHeight: 8.0,
-                        percent: 0.8,
-                        progressColor: Colors.green,
-                      ),
-                    ],
-                  );
+                userFetched: (UserFetched userFetched) {
+                  nextView = _buildProgressIndicator(
+                      userFetched.user.firstName.getOrCrash());
                 },
-                error: () {
-                  //TODO: Handle this
+                error: (userOption) {
+                  // TODO: Handle error state.
                 },
               );
               return nextView;
@@ -126,6 +109,27 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildProgressIndicator(String name) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '$name, you have completed 2 tasks for today',
+          style: kHabitSubtitleTextStyle,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        LinearPercentIndicator(
+          width: 100.0,
+          lineHeight: 8.0,
+          percent: 0.8,
+          progressColor: Colors.green,
+        ),
+      ],
     );
   }
 }
