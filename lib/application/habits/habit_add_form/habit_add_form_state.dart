@@ -6,11 +6,13 @@ abstract class HabitAddFormState with _$HabitAddFormState {
     @required HabitName habitName,
     @required HabitCategoryName habitCategoryName,
     @required bool isSubmitting,
+    @required bool showErrorMessages,
   }) = _HabitAddFormState;
 
   factory HabitAddFormState.initial() => HabitAddFormState(
         habitName: HabitName(''),
         habitCategoryName: HabitCategoryName(''),
         isSubmitting: false,
+        showErrorMessages: false,
       );
 }

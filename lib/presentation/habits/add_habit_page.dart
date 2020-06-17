@@ -16,14 +16,16 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          getIt<HabitAddFormBloc>()..add(HabitAddFormEvent.initialize(user)),
-      child: BuildAddTaskScreen(),
+      create: (BuildContext context) => getIt<HabitAddFormBloc>(),
+      child: BuildAddTaskScreen(user: user),
     );
   }
 }
 
 class BuildAddTaskScreen extends StatefulWidget {
+  final User user;
+
+  const BuildAddTaskScreen({Key key, this.user}) : super(key: key);
   @override
   _BuildAddTaskScreenState createState() => _BuildAddTaskScreenState();
 }
@@ -31,114 +33,143 @@ class BuildAddTaskScreen extends StatefulWidget {
 class _BuildAddTaskScreenState extends State<BuildAddTaskScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: constants.kBackground,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40.0),
-          topRight: Radius.circular(40.0),
+    return BlocListener<HabitAddFormBloc, HabitAddFormState>(
+      listener: (context, state) {},
+      child: Container(
+        decoration: const BoxDecoration(
+          color: constants.kBackground,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40.0),
+            topRight: Radius.circular(40.0),
+          ),
         ),
-      ),
-      child: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                color: constants.kDarkPurple,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),
+        child: SafeArea(
+          child: Stack(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  color: constants.kDarkPurple,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.0),
+                    topRight: Radius.circular(40.0),
+                  ),
                 ),
-              ),
-              height: 65.0,
-              child: const Center(
-                child: Text(
-                  'Create New Habit',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    color: Colors.white,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w400,
+                height: 65.0,
+                child: const Center(
+                  child: Text(
+                    'Create New Habit',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: Colors.white,
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Form(
-              // autovalidate: state.showErrorMessages,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 75.0, left: 20.0, right: 20.0, bottom: 20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Name',
-                      style: constants.kTitleStyle,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, bottom: 30.0),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          focusColor: Colors.red,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 16),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                        ),
-                        autocorrect: false,
-                        // onChanged: (value) => context
-                        //     .bloc<SignInFormBloc>()
-                        //     .add(SignInFormEvent.emailChanged(value)),
-                        // validator: (_) => context
-                        //     .bloc<SignInFormBloc>()
-                        //     .state
-                        //     .emailAddress
-                        //     .value
-                        //     .fold(
-                        //       (f) => f.maybeMap(
-                        //         invalidEmail: (_) => 'Invalid Email',
-                        //         orElse: () => null,
-                        //       ),
-                        //       (_) => null,
-                        //     ),
-                      ),
-                    ),
-                    const Text(
-                      'Category',
-                      style: constants.kTitleStyle,
-                    ),
-                    const CategoryList(
-                      categoryList: HabitCategoryName.predefinedCategories,
-                    ),
-                    Center(
-                      child: FlatButton(
-                        color: constants.kDarkPurple,
-                        shape: kLoginButtonShape,
-                        onPressed: () {
-                          // WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
-                          // context.bloc<SignInFormBloc>().add(
-                          //       const SignInFormEvent.signInWithEmailAndPasswordPressed(),
-                          //     );
-                        },
-                        child: const Text(
-                          'Add Habit',
-                          style: kFormButtonTextStyle,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+              BuildHabitForm(user: widget.user),
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class BuildHabitForm extends StatefulWidget {
+  final User user;
+
+  const BuildHabitForm({Key key, this.user}) : super(key: key);
+  @override
+  _BuildHabitFormState createState() => _BuildHabitFormState();
+}
+
+class _BuildHabitFormState extends State<BuildHabitForm> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HabitAddFormBloc, HabitAddFormState>(
+      builder: (context, state) {
+        return Form(
+          autovalidate: state.showErrorMessages,
+          child: Padding(
+            padding: const EdgeInsets.only(
+                top: 75.0, left: 20.0, right: 20.0, bottom: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Name',
+                  style: constants.kTitleStyle,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 30.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      focusColor: Colors.red,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 16),
+                      filled: true,
+                      fillColor: Colors.grey[100],
+                    ),
+                    autocorrect: false,
+                    onChanged: (value) => context
+                        .bloc<HabitAddFormBloc>()
+                        .add(HabitAddFormEvent.habitNameChanged(value)),
+                    validator: (_) => context
+                        .bloc<HabitAddFormBloc>()
+                        .state
+                        .habitName
+                        .value
+                        .fold(
+                          (f) => f.maybeMap(
+                            invalidName: (_) => 'Invalid Habit Name',
+                            nameTooLong: (_) => 'Name too long',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
+                  ),
+                ),
+                const Text(
+                  'Category',
+                  style: constants.kTitleStyle,
+                ),
+                CategoryList(
+                  categoryList: HabitCategoryName.predefinedCategories,
+                  onSelected: (String value) {
+                    context.bloc<HabitAddFormBloc>().add(
+                          HabitAddFormEvent.categorySelectedChanged(value),
+                        );
+                  },
+                ),
+                Center(
+                  child: FlatButton(
+                    color: constants.kDarkPurple,
+                    shape: kLoginButtonShape,
+                    onPressed: () {
+                      // WidgetsBinding.instance.focusManager.primaryFocus
+                      //     ?.unfocus();
+                      context
+                          .bloc<HabitAddFormBloc>()
+                          .add(HabitAddFormEvent.addHabit(widget.user));
+                    },
+                    child: const Text(
+                      'Add Habit',
+                      style: kFormButtonTextStyle,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

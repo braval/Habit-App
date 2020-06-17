@@ -23,29 +23,22 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
     HabitAddFormEvent event,
   ) async* {
     yield* event.map(
-      initialize: (e) async* {
-        currentUser = e.user;
-        print("In initialize");
-        print(currentUser.firstName);
+      habitNameChanged: (e) async* {
+        yield state.copyWith(
+          habitName: HabitName(e.habitNameStr),
+        );
       },
-      habitNameChanged: (e) async* {},
-      categorySelectedChanged: (e) async* {},
-      addHabit: (e) async* {},
+      categorySelectedChanged: (e) async* {
+        yield state.copyWith(
+          habitCategoryName: HabitCategoryName(e.habitCategoryNameStr),
+        );
+      },
+      addHabit: (e) async* {
+        yield state.copyWith(
+          isSubmitting: false,
+          showErrorMessages: true,
+        );
+      },
     );
   }
 }
-
-// BlocBuilder<UserInfoBloc, UserInfoState>(
-//             builder: (context, state) {
-//               state.map(
-//                 initial: (_) {},
-//                 busy: (_) {},
-//                 userFetched: (UserFetched userFetched) {
-//                   user = userFetched.user;
-//                 },
-//                 error: (userOption) {
-//                   // TODO: Handle error state.
-//                 },
-//               );
-
-//               return
