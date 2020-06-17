@@ -28,8 +28,11 @@ class HabitCategoryName extends ValueObject<String> {
     "Health",
     "Social",
     "Fitness",
-    "Spirituality",
     "Mindfulness",
+    "Night Time Routine",
+    "Chores",
+    "Other",
+    "Reading",
   ];
 
   factory HabitCategoryName(String input) {

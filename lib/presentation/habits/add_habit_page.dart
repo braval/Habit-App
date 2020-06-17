@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/habits/habit_add_form/habit_add_form_bloc.dart';
@@ -16,7 +17,8 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => getIt<HabitAddFormBloc>(),
+      create: (BuildContext context) => getIt<HabitAddFormBloc>()
+        ..add(HabitAddFormEvent.initializeUser(user)),
       child: BuildAddTaskScreen(user: user),
     );
   }
@@ -87,7 +89,20 @@ class BuildHabitForm extends StatefulWidget {
 class _BuildHabitFormState extends State<BuildHabitForm> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HabitAddFormBloc, HabitAddFormState>(
+    return BlocConsumer<HabitAddFormBloc, HabitAddFormState>(
+      listener: (context, state) {
+        state.habitFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              FlushbarHelper.createError(
+                message: "Unexpected Failure",
+              ).show(context);
+            },
+            (_) => Navigator.pop(context),
+          ),
+        );
+      },
       builder: (context, state) {
         return Form(
           autovalidate: state.showErrorMessages,
@@ -153,8 +168,6 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
                     color: constants.kDarkPurple,
                     shape: kLoginButtonShape,
                     onPressed: () {
-                      // WidgetsBinding.instance.focusManager.primaryFocus
-                      //     ?.unfocus();
                       context
                           .bloc<HabitAddFormBloc>()
                           .add(HabitAddFormEvent.addHabit(widget.user));

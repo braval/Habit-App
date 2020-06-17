@@ -1,7 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:habits/domain/core/value_objects.dart';
+import 'package:habits/domain/habits/habit.dart';
+import 'package:habits/domain/habits/habit_failure.dart';
+import 'package:habits/domain/habits/i_habits_repository.dart';
 import 'package:habits/domain/habits/value_objects.dart';
 import 'package:habits/domain/user/user.dart';
 import 'package:injectable/injectable.dart';
@@ -14,7 +19,10 @@ part 'habit_add_form_bloc.freezed.dart';
 
 @injectable
 class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
+  final IHabitsRepository _habitsRepository;
   User currentUser;
+
+  HabitAddFormBloc(this._habitsRepository);
   @override
   HabitAddFormState get initialState => HabitAddFormState.initial();
 
@@ -26,18 +34,48 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
       habitNameChanged: (e) async* {
         yield state.copyWith(
           habitName: HabitName(e.habitNameStr),
+          habitFailureOrSuccessOption: none(),
         );
       },
       categorySelectedChanged: (e) async* {
         yield state.copyWith(
           habitCategoryName: HabitCategoryName(e.habitCategoryNameStr),
+          habitFailureOrSuccessOption: none(),
         );
       },
       addHabit: (e) async* {
+        Either<HabitFailure, Unit> failureOrSuccess;
+
+        final isHabitNameValid = state.habitName.isValid();
+        final isHabitCategoryValid = state.habitCategoryName.isValid();
+
+        if (isHabitCategoryValid && isHabitNameValid) {
+          yield state.copyWith(
+            isSubmitting: true,
+            showErrorMessages: false,
+          );
+
+          failureOrSuccess = await _habitsRepository.add(
+            currentUser,
+            HabitItem(
+              id: UniqueId(),
+              name: state.habitName,
+              category: state.habitCategoryName,
+              done: false,
+              totalCount: 1,
+              currentCount: 0,
+            ),
+          );
+        }
+
         yield state.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
+          habitFailureOrSuccessOption: optionOf(failureOrSuccess),
         );
+      },
+      initializeUser: (InitializeUser value) async* {
+        currentUser = value.user;
       },
     );
   }
