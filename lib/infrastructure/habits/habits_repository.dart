@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:habits/domain/habits/habit_failure.dart';
 import 'package:habits/domain/habits/habit.dart';
-import 'package:habits/domain/habits/daily_habits.dart';
 import 'package:dartz/dartz.dart';
 import 'package:habits/domain/habits/i_habits_repository.dart';
 import 'package:habits/domain/user/user.dart';
@@ -13,6 +14,8 @@ import 'package:intl/intl.dart';
 @LazySingleton(as: IHabitsRepository)
 class HabitsRepository implements IHabitsRepository {
   final Firestore _databaseReference;
+  final StreamController<List<HabitItem>> _postsController =
+      StreamController<List<HabitItem>>.broadcast();
 
   HabitsRepository(this._databaseReference);
 
@@ -60,9 +63,28 @@ class HabitsRepository implements IHabitsRepository {
   }
 
   @override
-  Stream<Either<HabitFailure, List<DailyHabits>>> watchAll(
+  Stream<Either<HabitFailure, List<HabitItem>>> watchAll(
       User user, DateTime dateTime) {
-    // TODO: implement watchAll
-    throw UnimplementedError();
+    final date = DateFormat("yyyy-MM-dd").format(dateTime);
+    final habitsCollection = _databaseReference
+        .collection("users")
+        .document(user.id.getOrCrash())
+        .collection("dailyHabits")
+        .document(date)
+        .collection("habits");
+
+    return habitsCollection.snapshots().map(
+      (snapshot) {
+        if (snapshot.documents.isNotEmpty) {
+          return right(
+            snapshot.documents
+                .map((doc) => HabitItemDto.fromJson(doc.data).toDomain())
+                .toList(),
+          );
+        } else {
+          return left(const HabitFailure.unexpected());
+        }
+      },
+    );
   }
 }

@@ -44,12 +44,13 @@ class Router extends RouterBase {
           settings: settings,
         );
       case Routes.habitsPage:
-        if (hasInvalidArgs<HabitsPageArguments>(args, isRequired: true)) {
+        if (hasInvalidArgs<HabitsPageArguments>(args)) {
           return misTypedArgsRoute<HabitsPageArguments>(args);
         }
-        final typedArgs = args as HabitsPageArguments;
+        final typedArgs = args as HabitsPageArguments ?? HabitsPageArguments();
         return MaterialPageRoute<dynamic>(
-          builder: (context) => HabitsPage(user: typedArgs.user),
+          builder: (context) =>
+              HabitsPage(key: typedArgs.key, user: typedArgs.user),
           settings: settings,
         );
       case Routes.signInPage:
@@ -74,8 +75,9 @@ class Router extends RouterBase {
 
 //HabitsPage arguments holder class
 class HabitsPageArguments {
+  final Key key;
   final User user;
-  HabitsPageArguments({@required this.user});
+  HabitsPageArguments({this.key, this.user});
 }
 
 // *************************************************************************
@@ -86,11 +88,12 @@ extension RouterNavigationHelperMethods on ExtendedNavigatorState {
   Future pushSplashPage() => pushNamed(Routes.splashPage);
 
   Future pushHabitsPage({
-    @required User user,
+    Key key,
+    User user,
   }) =>
       pushNamed(
         Routes.habitsPage,
-        arguments: HabitsPageArguments(user: user),
+        arguments: HabitsPageArguments(key: key, user: user),
       );
 
   Future pushSignInPage() => pushNamed(Routes.signInPage);

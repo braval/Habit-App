@@ -1,47 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:habits/domain/core/value_objects.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/habits/value_objects.dart';
 import 'package:habits/domain/user/user.dart';
+import 'package:habits/injection.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/core/header_widget.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
+import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
 
 import 'widgets/date_picker.dart';
 import 'widgets/habit_card.dart';
 import 'widgets/popup_menu.dart';
 import 'widgets/progress_indicator.dart';
 
-class HabitsPage extends StatefulWidget {
+class HabitsPage extends StatelessWidget {
   final User user;
 
-  const HabitsPage({@required this.user});
-
-  @override
-  _HabitsPageState createState() => _HabitsPageState();
-}
-
-class _HabitsPageState extends State<HabitsPage> {
-  DateTime _selectedValue = DateTime.now();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  const HabitsPage({Key key, this.user}) : super(key: key);
 
   void onDateChange(date) {
-    // New date selected
-    setState(
-      () {
-        _selectedValue = date as DateTime;
-        print(date);
-      },
-    );
+    print(date);
   }
 
   @override
   Widget build(BuildContext context) {
+    getIt<HabitWatcherBloc>()
+      ..add(HabitWatcherEvent.initializeUser(user))
+      ..add(HabitWatcherEvent.watchAll(DateTime.now()));
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: kBackground,
@@ -59,7 +48,7 @@ class _HabitsPageState extends State<HabitsPage> {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(user: widget.user),
+                child: AddTaskScreen(user: user),
               ),
             ),
             backgroundColor: Colors.white,
@@ -86,7 +75,7 @@ class _HabitsPageState extends State<HabitsPage> {
                     top: 250.0,
                     left: 25.0,
                     right: 25.0,
-                    child: CustomProgressIndicator(user: widget.user),
+                    child: CustomProgressIndicator(user: user),
                   ),
                   Positioned(
                     top: 350.0,
@@ -113,6 +102,13 @@ class _HabitsPageState extends State<HabitsPage> {
     );
   }
 }
+// @override
+// void didChangeDependencies() {
+//   super.didChangeDependencies();
+//   getIt<HabitWatcherBloc>()
+//     ..add(HabitWatcherEvent.initializeUser(widget.user))
+//     ..add(HabitWatcherEvent.watchAll(DateTime.now()));
+// }
 
 class BuildHabitList extends StatefulWidget {
   @override
@@ -120,13 +116,11 @@ class BuildHabitList extends StatefulWidget {
 }
 
 class _BuildHabitListState extends State<BuildHabitList> {
-  Widget nextView;
-
-  List<HabitCard> habits = [
+  final List<HabitCard> habits = [
     HabitCard(
       habit: HabitItem(
         id: UniqueId(),
-        name: HabitName('Meditation'),
+        name: HabitName('Gym'),
         category: HabitCategoryName('Health'),
         totalCount: 2,
         currentCount: 1,
@@ -137,29 +131,34 @@ class _BuildHabitListState extends State<BuildHabitList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: habits,
+    Widget nextView;
+
+    return BlocBuilder<HabitWatcherBloc, HabitWatcherState>(
+      builder: (context, state) {
+        state.map(
+          initial: (_) {
+            print("initial");
+            nextView = CircularProgressBar();
+          },
+          loadInProgress: (_) {
+            print("loadInProgress");
+
+            nextView = CircularProgressBar();
+          },
+          loadSuccess: (e) {
+            print(e.habits);
+            print("loadSuccess");
+
+            nextView = CircularProgressBar();
+          },
+          loadFailure: (_) {
+            print("loadFailure");
+
+            nextView = CircularProgressBar();
+          },
+        );
+        return nextView;
+      },
     );
-    // return BlocBuilder<HabitListBloc, HabitListState>(
-    //   builder: (context, state) {
-    //     return state.when(
-    //       initial: () {
-    //         nextView = CircularProgressBar();
-    //       },
-    //       busy: () {
-    //         nextView = CircularProgressBar();
-    //       },
-    //       userFetched: (user) {
-    //         nextView = Column(
-    //           children: habits,
-    //         );
-    //       },
-    //       error: () {
-    //         //TODO: Handle this
-    //       },
-    //     );
-    //     return nextView;
-    //   },
-    // );
   }
 }

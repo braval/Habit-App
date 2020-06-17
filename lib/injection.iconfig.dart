@@ -18,6 +18,7 @@ import 'package:habits/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:habits/application/auth/sign_up_form/sign_up_form_bloc.dart';
 import 'package:habits/application/auth/auth_bloc.dart';
 import 'package:habits/application/habits/habit_add_form/habit_add_form_bloc.dart';
+import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
@@ -40,6 +41,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => AuthBloc(g<IAuthFacade>(), g<IUserRepository>()));
   g.registerFactory<HabitAddFormBloc>(
       () => HabitAddFormBloc(g<IHabitsRepository>()));
+  g.registerFactory<HabitWatcherBloc>(
+      () => HabitWatcherBloc(g<IHabitsRepository>()));
 }
 
 class _$FirebaseInjectableModule extends FirebaseInjectableModule {}
