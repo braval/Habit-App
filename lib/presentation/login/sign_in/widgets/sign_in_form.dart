@@ -29,7 +29,7 @@ class SignInForm extends StatelessWidget {
             },
             (_) {
               ExtendedNavigator.of(context)
-                  .pushReplacementNamed(Routes.habitsPage);
+                  .pushReplacementNamed(Routes.splashPage);
             },
           ),
         );

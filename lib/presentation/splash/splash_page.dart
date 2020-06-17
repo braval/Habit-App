@@ -4,26 +4,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/auth/auth_bloc.dart';
 import 'package:habits/routes/router.gr.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         state.map(
           initial: (_) {},
-          authenticated: (_) => ExtendedNavigator.of(context)
-              .pushReplacementNamed(Routes.habitsPage),
+          authenticated: (user) {
+            ExtendedNavigator.of(context).pushHabitsPage(user: user.user);
+          },
           unauthenticated: (_) {
             ExtendedNavigator.of(context)
                 .pushReplacementNamed(Routes.signInPage);
           },
         );
       },
-      child: const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
+      builder: (context, state) {
+        context.bloc<AuthBloc>().add(const AuthEvent.authCheckRequested());
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }

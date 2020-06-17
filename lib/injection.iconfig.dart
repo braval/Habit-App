@@ -17,7 +17,6 @@ import 'package:habits/infrastructure/user/user_repository.dart';
 import 'package:habits/domain/user/i_user_repository.dart';
 import 'package:habits/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:habits/application/auth/sign_up_form/sign_up_form_bloc.dart';
-import 'package:habits/application/user/user_info_bloc.dart';
 import 'package:habits/application/auth/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -38,9 +37,8 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(
       () => SignUpFormBloc(g<IAuthFacade>(), g<IUserRepository>()));
-  g.registerFactory<UserInfoBloc>(
-      () => UserInfoBloc(g<IAuthFacade>(), g<IUserRepository>()));
-  g.registerFactory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
+  g.registerFactory<AuthBloc>(
+      () => AuthBloc(g<IAuthFacade>(), g<IUserRepository>()));
 }
 
 class _$FirebaseInjectableModule extends FirebaseInjectableModule {}

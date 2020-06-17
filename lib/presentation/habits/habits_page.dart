@@ -14,13 +14,16 @@ import 'widgets/popup_menu.dart';
 import 'widgets/progress_indicator.dart';
 
 class HabitsPage extends StatefulWidget {
+  final User user;
+
+  const HabitsPage({@required this.user});
+
   @override
   _HabitsPageState createState() => _HabitsPageState();
 }
 
 class _HabitsPageState extends State<HabitsPage> {
   DateTime _selectedValue = DateTime.now();
-  User user;
 
   @override
   void initState() {
@@ -56,7 +59,7 @@ class _HabitsPageState extends State<HabitsPage> {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(user: user),
+                child: AddTaskScreen(user: widget.user),
               ),
             ),
             backgroundColor: Colors.white,
@@ -83,7 +86,7 @@ class _HabitsPageState extends State<HabitsPage> {
                     top: 250.0,
                     left: 25.0,
                     right: 25.0,
-                    child: CustomProgressIndicator(),
+                    child: CustomProgressIndicator(user: widget.user),
                   ),
                   Positioned(
                     top: 350.0,
