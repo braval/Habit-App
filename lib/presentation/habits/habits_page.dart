@@ -82,19 +82,13 @@ class _HabitsPageState extends State<HabitsPage> {
                         right: 25.0,
                         child: CustomProgressIndicator(user: widget.user),
                       ),
-                      Positioned(
-                        top: 350.0,
-                        left: 25.0,
-                        right: 25.0,
-                        child: CustomDatePicker(onDateChange),
-                      ),
                       Theme(
                         data: ThemeData(
                           canvasColor: Colors.transparent,
                           cardColor: Colors.transparent,
                         ),
                         child: Container(
-                          padding: const EdgeInsets.fromLTRB(0, 450, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 350, 0, 0),
                           child: state.when(
                             initial: () {
                               context.bloc<HabitWatcherBloc>().add(

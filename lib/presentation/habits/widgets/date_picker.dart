@@ -18,7 +18,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       DateTime.now().add(const Duration(days: -3)),
       controller: _controller,
       initialSelectedDate: DateTime.now(),
-      daysCount: 7,
+      daysCount: 4,
       selectionColor: kYellow,
       onDateChange: widget.onChanged,
     );
