@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/constants.dart';
@@ -94,23 +96,34 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
   }
 
   Widget _buildProgressIndicator() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          '${widget.user.firstName.getOrCrash()}, you have completed 2 tasks for today',
-          style: kHabitSubtitleTextStyle,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        LinearPercentIndicator(
-          width: 100.0,
-          lineHeight: 8.0,
-          percent: 0.8,
-          progressColor: Colors.green,
-        ),
-      ],
+    int totalHabits;
+    return BlocBuilder<HabitWatcherBloc, HabitWatcherState>(
+      builder: (context, state) {
+        state.when(
+          initial: () => totalHabits = 0,
+          loadInProgress: () => null,
+          loadSuccess: (habits) => totalHabits = habits.length,
+          loadFailure: (_) => null,
+        );
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '${widget.user.firstName.getOrCrash()}, you have completed 2 tasks for today',
+              style: kHabitSubtitleTextStyle,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            LinearPercentIndicator(
+              width: 100.0,
+              lineHeight: 8.0,
+              percent: 0.8,
+              progressColor: Colors.green,
+            ),
+          ],
+        );
+      },
     );
   }
 }
