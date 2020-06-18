@@ -17,6 +17,7 @@ import 'package:habits/domain/user/i_user_repository.dart';
 import 'package:habits/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:habits/application/auth/sign_up_form/sign_up_form_bloc.dart';
 import 'package:habits/application/auth/auth_bloc.dart';
+import 'package:habits/application/habits/habit_actor/habit_actor_bloc.dart';
 import 'package:habits/application/habits/habit_add_form/habit_add_form_bloc.dart';
 import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -39,6 +40,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => SignUpFormBloc(g<IAuthFacade>(), g<IUserRepository>()));
   g.registerFactory<AuthBloc>(
       () => AuthBloc(g<IAuthFacade>(), g<IUserRepository>()));
+  g.registerFactory<HabitActorBloc>(
+      () => HabitActorBloc(g<IHabitsRepository>()));
   g.registerFactory<HabitAddFormBloc>(
       () => HabitAddFormBloc(g<IHabitsRepository>()));
   g.registerFactory<HabitWatcherBloc>(
