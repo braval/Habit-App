@@ -83,3 +83,10 @@ Either<ValueFailure<String>, String> validateHabitName(
     return right(input);
   }
 }
+
+Either<ValueFailure<String>, String> validateHabitCategoryName(String input) {
+  if (input.isEmpty) {
+    return left(ValueFailure.invalidName(failedValue: input));
+  }
+  return right(input);
+}

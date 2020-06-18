@@ -12,7 +12,7 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  String selectedChoice = "Sport";
+  String selectedChoice;
 
   List<Widget> _buildChoiceList() {
     final List<Widget> choices = [];

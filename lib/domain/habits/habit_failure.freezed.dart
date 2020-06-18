@@ -15,12 +15,39 @@ class _$HabitFailureTearOff {
   _Unexpected unexpected() {
     return const _Unexpected();
   }
+
+  _NoCategorySelected noCategorySelected() {
+    return const _NoCategorySelected();
+  }
 }
 
 // ignore: unused_element
 const $HabitFailure = _$HabitFailureTearOff();
 
-mixin _$HabitFailure {}
+mixin _$HabitFailure {
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unexpected(),
+    @required Result noCategorySelected(),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unexpected(),
+    Result noCategorySelected(),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unexpected(_Unexpected value),
+    @required Result noCategorySelected(_NoCategorySelected value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unexpected(_Unexpected value),
+    Result noCategorySelected(_NoCategorySelected value),
+    @required Result orElse(),
+  });
+}
 
 abstract class $HabitFailureCopyWith<$Res> {
   factory $HabitFailureCopyWith(
@@ -67,8 +94,146 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unexpected(),
+    @required Result noCategorySelected(),
+  }) {
+    assert(unexpected != null);
+    assert(noCategorySelected != null);
+    return unexpected();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unexpected(),
+    Result noCategorySelected(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (unexpected != null) {
+      return unexpected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unexpected(_Unexpected value),
+    @required Result noCategorySelected(_NoCategorySelected value),
+  }) {
+    assert(unexpected != null);
+    assert(noCategorySelected != null);
+    return unexpected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unexpected(_Unexpected value),
+    Result noCategorySelected(_NoCategorySelected value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (unexpected != null) {
+      return unexpected(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class _Unexpected implements HabitFailure {
   const factory _Unexpected() = _$_Unexpected;
+}
+
+abstract class _$NoCategorySelectedCopyWith<$Res> {
+  factory _$NoCategorySelectedCopyWith(
+          _NoCategorySelected value, $Res Function(_NoCategorySelected) then) =
+      __$NoCategorySelectedCopyWithImpl<$Res>;
+}
+
+class __$NoCategorySelectedCopyWithImpl<$Res>
+    extends _$HabitFailureCopyWithImpl<$Res>
+    implements _$NoCategorySelectedCopyWith<$Res> {
+  __$NoCategorySelectedCopyWithImpl(
+      _NoCategorySelected _value, $Res Function(_NoCategorySelected) _then)
+      : super(_value, (v) => _then(v as _NoCategorySelected));
+
+  @override
+  _NoCategorySelected get _value => super._value as _NoCategorySelected;
+}
+
+class _$_NoCategorySelected implements _NoCategorySelected {
+  const _$_NoCategorySelected();
+
+  @override
+  String toString() {
+    return 'HabitFailure.noCategorySelected()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _NoCategorySelected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unexpected(),
+    @required Result noCategorySelected(),
+  }) {
+    assert(unexpected != null);
+    assert(noCategorySelected != null);
+    return noCategorySelected();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unexpected(),
+    Result noCategorySelected(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (noCategorySelected != null) {
+      return noCategorySelected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unexpected(_Unexpected value),
+    @required Result noCategorySelected(_NoCategorySelected value),
+  }) {
+    assert(unexpected != null);
+    assert(noCategorySelected != null);
+    return noCategorySelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unexpected(_Unexpected value),
+    Result noCategorySelected(_NoCategorySelected value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (noCategorySelected != null) {
+      return noCategorySelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NoCategorySelected implements HabitFailure {
+  const factory _NoCategorySelected() = _$_NoCategorySelected;
 }

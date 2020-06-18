@@ -93,7 +93,10 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
           (either) => either.fold(
             (failure) {
               FlushbarHelper.createError(
-                message: "Unexpected Failure",
+                message: failure.map(
+                  unexpected: (_) => "Unexpected Failure",
+                  noCategorySelected: (_) => "Please select a category",
+                ),
               ).show(context);
             },
             (_) => Navigator.pop(context),

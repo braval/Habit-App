@@ -66,6 +66,8 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
               currentCount: 0,
             ),
           );
+        } else {
+          failureOrSuccess = left(const HabitFailure.noCategorySelected());
         }
 
         yield state.copyWith(

@@ -38,7 +38,7 @@ class HabitCategoryName extends ValueObject<String> {
   factory HabitCategoryName(String input) {
     assert(input != null);
     return HabitCategoryName._(
-      right(input),
+      validateHabitCategoryName(input),
     );
   }
 

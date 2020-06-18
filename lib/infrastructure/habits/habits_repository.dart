@@ -32,7 +32,7 @@ class HabitsRepository implements IHabitsRepository {
           .collection("dailyHabits")
           .document(today)
           .collection("habits")
-          .document()
+          .document(habitItem.id.getOrCrash())
           .setData(habitItemDto.toJson());
 
       return right(unit);
