@@ -35,43 +35,40 @@ class BuildAddTaskScreen extends StatefulWidget {
 class _BuildAddTaskScreenState extends State<BuildAddTaskScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<HabitAddFormBloc, HabitAddFormState>(
-      listener: (context, state) {},
-      child: Container(
-        decoration: const BoxDecoration(
-          color: constants.kBackground,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40.0),
-            topRight: Radius.circular(40.0),
-          ),
+    return Container(
+      decoration: const BoxDecoration(
+        color: constants.kBackground,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40.0),
+          topRight: Radius.circular(40.0),
         ),
-        child: SafeArea(
-          child: Stack(
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  color: constants.kDarkPurple,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0),
-                  ),
+      ),
+      child: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                color: constants.kDarkPurple,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40.0),
+                  topRight: Radius.circular(40.0),
                 ),
-                height: 65.0,
-                child: const Center(
-                  child: Text(
-                    'Create New Habit',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w400,
-                    ),
+              ),
+              height: 65.0,
+              child: const Center(
+                child: Text(
+                  'Create New Habit',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
-              BuildHabitForm(user: widget.user),
-            ],
-          ),
+            ),
+            BuildHabitForm(user: widget.user),
+          ],
         ),
       ),
     );

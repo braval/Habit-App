@@ -32,29 +32,22 @@ class HabitWatcherBloc extends Bloc<HabitWatcherEvent, HabitWatcherState> {
   ) async* {
     yield* event.map(
       initializeUser: (InitializeUser value) async* {
-        print(" initializeUser");
-
         currentUser = value.user;
       },
       watchAll: (e) async* {
-        print("WatchAll");
         yield const HabitWatcherState.loadInProgress();
         _habitsRepository.watchAll(currentUser, e.date).listen(
             (failureOrHabits) =>
                 add(HabitWatcherEvent.notesReceived(failureOrHabits)));
-        print("Done watchall");
       },
       watchAllCompleted: (e) async* {},
       notesReceived: (e) async* {
-        print(" notesReceived");
-
-        e.failureOrHabits.fold((l) => print(l), (r) => print(r));
-
         yield e.failureOrHabits.fold(
           (f) => HabitWatcherState.loadFailure(f),
-          (habits) => HabitWatcherState.loadSuccess(habits),
+          (habits) {
+            return HabitWatcherState.loadSuccess(habits);
+          },
         );
-        print(" notes recevied done");
       },
     );
   }

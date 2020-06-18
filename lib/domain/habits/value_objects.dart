@@ -7,7 +7,7 @@ class HabitName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  static const maxLength = 15;
+  static const maxLength = 35;
 
   factory HabitName(String input) {
     assert(input != null);

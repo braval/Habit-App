@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/auth/auth_bloc.dart';
+import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
+import 'package:habits/injection.dart';
 import 'package:habits/routes/router.gr.dart';
 
 class SplashPage extends StatefulWidget {
@@ -17,7 +19,10 @@ class _SplashPageState extends State<SplashPage> {
         state.map(
           initial: (_) {},
           authenticated: (user) {
-            ExtendedNavigator.of(context).pushHabitsPage(user: user.user);
+            ExtendedNavigator.of(context).pushReplacementNamed(
+              Routes.habitsPage,
+              arguments: HabitsPageArguments(user: user.user),
+            );
           },
           unauthenticated: (_) {
             ExtendedNavigator.of(context)
