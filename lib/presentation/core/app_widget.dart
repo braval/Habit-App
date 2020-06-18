@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/auth/auth_bloc.dart';
+import 'package:habits/application/habits/habit_actor/habit_actor_bloc.dart';
 import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:habits/routes/router.gr.dart';
 
@@ -17,6 +18,9 @@ class AppWidget extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<HabitWatcherBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<HabitActorBloc>(),
         ),
       ],
       child: MaterialApp(

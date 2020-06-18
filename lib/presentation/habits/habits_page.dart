@@ -1,18 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habits/application/habits/habit_actor/habit_actor_bloc.dart';
 import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
-import 'package:habits/domain/core/value_objects.dart';
 import 'package:habits/domain/habits/habit.dart';
-import 'package:habits/domain/habits/value_objects.dart';
 import 'package:habits/domain/user/user.dart';
-import 'package:habits/injection.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/core/header_widget.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
 import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
 
-import 'widgets/date_picker.dart';
 import 'widgets/habit_card.dart';
 import 'widgets/popup_menu.dart';
 import 'widgets/progress_indicator.dart';
@@ -94,9 +91,11 @@ class _HabitsPageState extends State<HabitsPage> {
                               context.bloc<HabitWatcherBloc>().add(
                                   HabitWatcherEvent.initializeUser(
                                       widget.user));
-
-                              context.bloc<HabitWatcherBloc>().add(
-                                  HabitWatcherEvent.watchAll(DateTime.now()));
+                              context.bloc<HabitActorBloc>().add(
+                                  HabitActorEvent.initializeUser(widget.user));
+                              context
+                                  .bloc<HabitWatcherBloc>()
+                                  .add(const HabitWatcherEvent.watchAll());
                               return CircularProgressBar();
                             },
                             loadInProgress: () {
@@ -124,6 +123,11 @@ class _HabitsPageState extends State<HabitsPage> {
 
   Widget _buildHabitCards(List<HabitItem> habits) {
     return Column(
-        children: habits.map((habit) => HabitCard(habit: habit)).toList());
+        children: habits
+            .map((habit) => HabitCard(
+                  habit: habit,
+                  user: widget.user,
+                ))
+            .toList());
   }
 }

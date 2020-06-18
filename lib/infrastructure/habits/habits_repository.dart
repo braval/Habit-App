@@ -14,8 +14,6 @@ import 'package:intl/intl.dart';
 @LazySingleton(as: IHabitsRepository)
 class HabitsRepository implements IHabitsRepository {
   final Firestore _databaseReference;
-  final StreamController<List<HabitItem>> _postsController =
-      StreamController<List<HabitItem>>.broadcast();
 
   HabitsRepository(this._databaseReference);
 
@@ -44,8 +42,22 @@ class HabitsRepository implements IHabitsRepository {
   @override
   Future<Either<HabitFailure, Unit>> delete(
       User user, HabitItem habitItem) async {
-    // TODO: implement delete
-    throw UnimplementedError();
+    try {
+      final today = DateFormat("yyyy-MM-dd").format(DateTime.now());
+
+      final habitRef = _databaseReference
+          .collection("users")
+          .document(user.id.getOrCrash())
+          .collection("dailyHabits")
+          .document(today)
+          .collection("habits")
+          .document(habitItem.id.getOrCrash());
+
+      await habitRef.delete();
+      return right(unit);
+    } on PlatformException catch (_) {
+      return left(const HabitFailure.unexpected());
+    }
   }
 
   @override
@@ -63,14 +75,13 @@ class HabitsRepository implements IHabitsRepository {
   }
 
   @override
-  Stream<Either<HabitFailure, List<HabitItem>>> watchAll(
-      User user, DateTime dateTime) {
-    final date = DateFormat("yyyy-MM-dd").format(dateTime);
+  Stream<Either<HabitFailure, List<HabitItem>>> watchAll(User user) {
+    final today = DateFormat("yyyy-MM-dd").format(DateTime.now());
     final habitsCollection = _databaseReference
         .collection("users")
         .document(user.id.getOrCrash())
         .collection("dailyHabits")
-        .document(date)
+        .document(today)
         .collection("habits");
 
     return habitsCollection.snapshots().map(

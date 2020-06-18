@@ -31,7 +31,15 @@ class HabitActorBloc extends Bloc<HabitActorEvent, HabitActorState> {
       initializeUser: (e) async* {
         currentUser = e.user;
       },
-      deleted: (e) async* {},
+      deleted: (e) async* {
+        yield const HabitActorState.actionInProgress();
+        final deleteResult =
+            await _habitsRepository.delete(currentUser, e.habit);
+        yield deleteResult.fold(
+          (f) => HabitActorState.deleteFailure(f),
+          (r) => const HabitActorState.deleteSuccess(),
+        );
+      },
       countUpdated: (e) async* {},
       edited: (e) async* {},
     );
