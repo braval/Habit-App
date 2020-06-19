@@ -9,6 +9,7 @@ import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/core/header_widget.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
 import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
+import 'package:habits/presentation/habits/widgets/date_picker.dart';
 
 import 'widgets/habit_card.dart';
 import 'widgets/popup_menu.dart';
@@ -90,13 +91,19 @@ class _HabitsPageState extends State<HabitsPage> {
                           ),
                         ),
                       ),
+                      Positioned(
+                        top: 350.0,
+                        left: 25.0,
+                        right: 25.0,
+                        child: CustomDatePicker(onDateChange),
+                      ),
                       Theme(
                         data: ThemeData(
                           canvasColor: Colors.transparent,
                           cardColor: Colors.transparent,
                         ),
                         child: Container(
-                          padding: const EdgeInsets.fromLTRB(0, 350, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 450, 0, 0),
                           child: state.when(
                             initial: () {
                               context.bloc<HabitWatcherBloc>().add(

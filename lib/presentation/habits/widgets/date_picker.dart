@@ -15,10 +15,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   @override
   Widget build(BuildContext context) {
     return DatePicker(
-      DateTime.now().add(const Duration(days: -3)),
+      DateTime.now().add(const Duration(days: -4)),
       controller: _controller,
       initialSelectedDate: DateTime.now(),
-      daysCount: 4,
+      daysCount: 5,
       selectionColor: kYellow,
       onDateChange: widget.onChanged,
     );
