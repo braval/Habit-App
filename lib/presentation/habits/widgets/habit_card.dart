@@ -145,7 +145,7 @@ class _HabitCardState extends State<HabitCard> {
                               Row(
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: kYellow,
+                                    backgroundColor: kPurple.withAlpha(5000),
                                     child: Icon(
                                       _icons[
                                           widget.habit.category.getOrCrash()],
