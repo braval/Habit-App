@@ -96,6 +96,7 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
                 message: failure.map(
                   unexpected: (_) => "Unexpected Failure",
                   noCategorySelected: (_) => "Please select a category",
+                  noHabitsFound: (_) => null,
                 ),
               ).show(context);
             },

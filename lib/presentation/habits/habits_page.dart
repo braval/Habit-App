@@ -107,7 +107,7 @@ class _HabitsPageState extends State<HabitsPage> {
                               context
                                   .bloc<HabitWatcherBloc>()
                                   .add(const HabitWatcherEvent.watchAll());
-                              return CircularProgressBar();
+                              return Container();
                             },
                             loadInProgress: () {
                               return CircularProgressBar();
@@ -115,8 +115,13 @@ class _HabitsPageState extends State<HabitsPage> {
                             loadSuccess: (habits) {
                               return _buildHabitCards(habits);
                             },
-                            loadFailure: (_) {
-                              return CircularProgressBar();
+                            loadFailure: (f) {
+                              return f.map(
+                                unexpected: (_) => Container(),
+                                noHabitsFound: (_) => Container(),
+                                noCategorySelected: (_) =>
+                                    CircularProgressBar(),
+                              );
                             },
                           ),
                         ),

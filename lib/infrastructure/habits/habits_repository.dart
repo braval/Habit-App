@@ -100,7 +100,7 @@ class HabitsRepository implements IHabitsRepository {
                 .toList(),
           );
         } else {
-          return left(const HabitFailure.unexpected());
+          return left(const HabitFailure.noHabitsFound());
         }
       },
     );
