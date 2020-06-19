@@ -101,23 +101,31 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
         habits.where((habit) => habit.done == true).length.toDouble();
     final double percent =
         totalHabits == completedHabits ? 1.0 : completedHabits / totalHabits;
+    final bool displayProgress = totalHabits != 0.0;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          '${widget.user.firstName.getOrCrash()}, you have completed ${completedHabits.toInt().toString()} tasks for today',
-          style: kHabitSubtitleTextStyle,
-        ),
+        if (displayProgress)
+          Text(
+            '${widget.user.firstName.getOrCrash()}, you have ${(totalHabits.toInt() - completedHabits.toInt()).toString()} task remaining for today',
+            style: kHabitSubtitleTextStyle,
+          )
+        else
+          Text(
+            '${widget.user.firstName.getOrCrash()}, you have no tasks added',
+            style: kHabitSubtitleTextStyle,
+          ),
         const SizedBox(
           height: 10,
         ),
-        LinearPercentIndicator(
-          width: 100.0,
-          lineHeight: 8.0,
-          percent: percent,
-          progressColor: Colors.green,
-        ),
+        if (displayProgress)
+          LinearPercentIndicator(
+            width: 100.0,
+            lineHeight: 8.0,
+            percent: percent,
+            progressColor: Colors.green,
+          ),
       ],
     );
   }
