@@ -61,17 +61,24 @@ class HabitsRepository implements IHabitsRepository {
   }
 
   @override
-  Future<Either<HabitFailure, Unit>> markDone(
-      User user, HabitItem habitItem) async {
-    // TODO: implement markDone
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Either<HabitFailure, Unit>> update(
       User user, HabitItem habitItem) async {
-    // TODO: implement update
-    throw UnimplementedError();
+    try {
+      final today = DateFormat("yyyy-MM-dd").format(DateTime.now());
+
+      final habitRef = _databaseReference
+          .collection("users")
+          .document(user.id.getOrCrash())
+          .collection("dailyHabits")
+          .document(today)
+          .collection("habits")
+          .document(habitItem.id.getOrCrash());
+
+      await habitRef.updateData(HabitItemDto.fromDomain(habitItem).toJson());
+      return right(unit);
+    } on PlatformException catch (_) {
+      return left(const HabitFailure.unexpected());
+    }
   }
 
   @override
@@ -82,7 +89,8 @@ class HabitsRepository implements IHabitsRepository {
         .document(user.id.getOrCrash())
         .collection("dailyHabits")
         .document(today)
-        .collection("habits");
+        .collection("habits")
+        .orderBy('done');
 
     return habitsCollection.snapshots().map(
       (snapshot) {

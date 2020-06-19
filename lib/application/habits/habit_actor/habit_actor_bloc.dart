@@ -40,7 +40,23 @@ class HabitActorBloc extends Bloc<HabitActorEvent, HabitActorState> {
           (r) => const HabitActorState.deleteSuccess(),
         );
       },
-      countUpdated: (e) async* {},
+      countUpdated: (e) async* {
+        yield const HabitActorState.actionInProgress();
+
+        final HabitItem updateHabitItem = e.habit.copyWith(
+          currentCount: e.habit.currentCount == e.habit.totalCount
+              ? 0
+              : e.habit.currentCount + 1,
+          done: e.habit.currentCount + 1 == e.habit.totalCount ? true : false,
+        );
+
+        final updateResult =
+            await _habitsRepository.update(currentUser, updateHabitItem);
+        yield updateResult.fold(
+          (f) => HabitActorState.updateCountFailure(f),
+          (r) => const HabitActorState.updateCountSuccess(),
+        );
+      },
       edited: (e) async* {},
     );
   }

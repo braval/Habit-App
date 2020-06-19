@@ -22,9 +22,6 @@ class HabitCard extends StatefulWidget {
 }
 
 class _HabitCardState extends State<HabitCard> {
-  bool isSelected = false;
-  double progress = 0;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HabitActorBloc, HabitActorState>(
@@ -166,7 +163,8 @@ class _HabitCardState extends State<HabitCard> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(top: 5),
-                                    child: _buildProgressIndicator(),
+                                    child:
+                                        _buildProgressIndicator(widget.habit),
                                   ),
                                   Text(
                                     '${widget.habit.currentCount}/${widget.habit.totalCount}',
@@ -195,29 +193,20 @@ class _HabitCardState extends State<HabitCard> {
     );
   }
 
-  Widget _buildProgressIndicator() {
+  Widget _buildProgressIndicator(HabitItem habit) {
+    double progress = 0;
+    if (habit.currentCount == habit.totalCount) {
+      progress = 1.0;
+    } else {
+      progress = habit.currentCount / habit.totalCount;
+    }
+
     return GestureDetector(
-      onTap: () {
-        setState(
-          () {
-            if (widget.habit.currentCount == widget.habit.totalCount) return;
-            // widget.habit.currentCount++;
-            final updated =
-                (progress + 1 / widget.habit.totalCount).clamp(0.0, 1.0) * 100;
-            setState(
-              () {
-                if (widget.habit.currentCount == widget.habit.totalCount) {
-                  progress = 1.0;
-                } else {
-                  progress = updated.round() / 100;
-                }
-              },
-            );
-          },
-        );
-      },
+      onTap: () => context
+          .bloc<HabitActorBloc>()
+          .add(HabitActorEvent.countUpdated(habit)),
       child: CircularPercentIndicator(
-        animationDuration: 200,
+        animationDuration: 0,
         animateFromLastPercent: true,
         arcType: ArcType.FULL,
         arcBackgroundColor: Colors.black12,
@@ -264,15 +253,16 @@ Widget getDaysOfWeekRow(List<String> strings) {
 
 Widget getWeeklyStatsWidget(List<bool> weeklyStats) {
   return Row(
-      children: weeklyStats
-          .map(
-            (item) => CircularCheckBox(
-              checkColor: Colors.white,
-              disabledColor: Colors.black45,
-              activeColor: Colors.green,
-              value: item,
-              onChanged: (bool value) {},
-            ),
-          )
-          .toList());
+    children: weeklyStats
+        .map(
+          (item) => CircularCheckBox(
+            checkColor: Colors.white,
+            disabledColor: Colors.black45,
+            activeColor: Colors.green,
+            value: item,
+            onChanged: (bool value) {},
+          ),
+        )
+        .toList(),
+  );
 }
