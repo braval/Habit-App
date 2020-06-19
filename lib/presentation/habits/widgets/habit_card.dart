@@ -42,7 +42,8 @@ class _HabitCardState extends State<HabitCard> {
         return Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(14.0),
+              padding:
+                  const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 65.0,
@@ -113,7 +114,8 @@ class _HabitCardState extends State<HabitCard> {
                 ),
               ],
               child: Padding(
-                padding: const EdgeInsets.all(14.0),
+                padding:
+                    const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
