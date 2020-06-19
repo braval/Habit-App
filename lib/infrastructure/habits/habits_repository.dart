@@ -28,7 +28,7 @@ class HabitsRepository implements IHabitsRepository {
           .collection("users")
           .document(user.id.getOrCrash())
           .collection("dailyHabits")
-          .document('2020-06-18')
+          .document(today)
           .collection("habits")
           .document(habitItem.id.getOrCrash())
           .setData(habitItemDto.toJson());
