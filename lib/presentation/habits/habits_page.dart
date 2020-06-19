@@ -77,7 +77,18 @@ class _HabitsPageState extends State<HabitsPage> {
                         top: 250.0,
                         left: 25.0,
                         right: 25.0,
-                        child: CustomProgressIndicator(user: widget.user),
+                        child: state.maybeMap(
+                          loadSuccess: (habits) {
+                            return CustomProgressIndicator(
+                              user: widget.user,
+                              habits: habits.habits,
+                            );
+                          },
+                          orElse: () => CustomProgressIndicator(
+                            user: widget.user,
+                            habits: [],
+                          ),
+                        ),
                       ),
                       Theme(
                         data: ThemeData(

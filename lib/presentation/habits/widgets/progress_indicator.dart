@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
+import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/constants.dart';
@@ -9,8 +10,9 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class CustomProgressIndicator extends StatefulWidget {
   final User user;
+  final List<HabitItem> habits;
 
-  const CustomProgressIndicator({@required this.user});
+  const CustomProgressIndicator({@required this.user, @required this.habits});
 
   @override
   _CustomProgressIndicatorState createState() =>
@@ -89,41 +91,36 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
               ],
             ),
           ),
-          _buildProgressIndicator(),
+          _buildProgressIndicator(widget.habits),
         ],
       ),
     );
   }
 
-  Widget _buildProgressIndicator() {
-    int totalHabits;
-    return BlocBuilder<HabitWatcherBloc, HabitWatcherState>(
-      builder: (context, state) {
-        state.when(
-          initial: () => totalHabits = 0,
-          loadInProgress: () => null,
-          loadSuccess: (habits) => totalHabits = habits.length,
-          loadFailure: (_) => null,
-        );
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '${widget.user.firstName.getOrCrash()}, you have completed 2 tasks for today',
-              style: kHabitSubtitleTextStyle,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            LinearPercentIndicator(
-              width: 100.0,
-              lineHeight: 8.0,
-              percent: 0.8,
-              progressColor: Colors.green,
-            ),
-          ],
-        );
-      },
+  Widget _buildProgressIndicator(List<HabitItem> habits) {
+    final double totalHabits = habits.length.toDouble();
+    final double completedHabits =
+        habits.where((habit) => habit.done == true).length.toDouble();
+    final double percent =
+        totalHabits == completedHabits ? 1.0 : completedHabits / totalHabits;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '${widget.user.firstName.getOrCrash()}, you have completed 2 tasks for today',
+          style: kHabitSubtitleTextStyle,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        LinearPercentIndicator(
+          width: 100.0,
+          lineHeight: 8.0,
+          percent: percent,
+          progressColor: Colors.green,
+        ),
+      ],
     );
   }
 }
