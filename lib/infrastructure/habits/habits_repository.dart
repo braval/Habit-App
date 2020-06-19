@@ -89,8 +89,7 @@ class HabitsRepository implements IHabitsRepository {
         .document(user.id.getOrCrash())
         .collection("dailyHabits")
         .document(today)
-        .collection("habits")
-        .orderBy('done');
+        .collection("habits");
 
     return habitsCollection.snapshots().map(
       (snapshot) {
