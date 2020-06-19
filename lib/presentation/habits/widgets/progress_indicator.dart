@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
@@ -108,7 +106,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          '${widget.user.firstName.getOrCrash()}, you have completed 2 tasks for today',
+          '${widget.user.firstName.getOrCrash()}, you have completed ${completedHabits.toInt().toString()} tasks for today',
           style: kHabitSubtitleTextStyle,
         ),
         const SizedBox(

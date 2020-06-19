@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:habits/application/habits/habit_actor/habit_actor_bloc.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/user/user.dart';
@@ -22,6 +23,18 @@ class HabitCard extends StatefulWidget {
 }
 
 class _HabitCardState extends State<HabitCard> {
+  final Map<String, IconData> _icons = {
+    "Sport": FontAwesomeIcons.footballBall,
+    "Health": FontAwesomeIcons.heartbeat,
+    "Social": FontAwesomeIcons.userFriends,
+    "Fitness": FontAwesomeIcons.running,
+    "Mindfulness": FontAwesomeIcons.brain,
+    "Night Time Routine": FontAwesomeIcons.moon,
+    "Chores": FontAwesomeIcons.utensilSpoon,
+    "Other": FontAwesomeIcons.surprise,
+    "Reading": FontAwesomeIcons.bookReader,
+  };
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HabitActorBloc, HabitActorState>(
@@ -125,10 +138,11 @@ class _HabitCardState extends State<HabitCard> {
                             children: [
                               Row(
                                 children: [
-                                  const CircleAvatar(
+                                  CircleAvatar(
                                     backgroundColor: kYellow,
                                     child: Icon(
-                                      Icons.healing,
+                                      _icons[
+                                          widget.habit.category.getOrCrash()],
                                       color: Colors.black54,
                                     ),
                                   ),
