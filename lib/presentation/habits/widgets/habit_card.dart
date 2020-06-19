@@ -15,8 +15,10 @@ import 'package:circular_check_box/circular_check_box.dart';
 class HabitCard extends StatefulWidget {
   final HabitItem habit;
   final User user;
+  final DateTime dateTime;
 
-  const HabitCard({@required this.habit, @required this.user});
+  const HabitCard(
+      {@required this.habit, @required this.user, @required this.dateTime});
 
   @override
   _HabitCardState createState() => _HabitCardState();
@@ -88,6 +90,8 @@ class _HabitCardState extends State<HabitCard> {
               ),
             ),
             Slidable(
+              enabled: DateFormat("yyyy-MM-dd").format(widget.dateTime) ==
+                  DateFormat("yyyy-MM-dd").format(DateTime.now()),
               key: UniqueKey(),
               actionPane: const SlidableDrawerActionPane(),
               actionExtentRatio: 0.15,

@@ -28,7 +28,7 @@ class HabitsRepository implements IHabitsRepository {
           .collection("users")
           .document(user.id.getOrCrash())
           .collection("dailyHabits")
-          .document(today)
+          .document('2020-06-18')
           .collection("habits")
           .document(habitItem.id.getOrCrash())
           .setData(habitItemDto.toJson());
@@ -82,8 +82,9 @@ class HabitsRepository implements IHabitsRepository {
   }
 
   @override
-  Stream<Either<HabitFailure, List<HabitItem>>> watchAll(User user) {
-    final today = DateFormat("yyyy-MM-dd").format(DateTime.now());
+  Stream<Either<HabitFailure, List<HabitItem>>> watchAll(
+      User user, DateTime dateTime) {
+    final today = DateFormat("yyyy-MM-dd").format(dateTime);
     final habitsCollection = _databaseReference
         .collection("users")
         .document(user.id.getOrCrash())

@@ -36,8 +36,9 @@ class HabitWatcherBloc extends Bloc<HabitWatcherEvent, HabitWatcherState> {
       },
       watchAll: (e) async* {
         yield const HabitWatcherState.loadInProgress();
-        _habitsRepository.watchAll(currentUser).listen((failureOrHabits) =>
-            add(HabitWatcherEvent.notesReceived(failureOrHabits)));
+        _habitsRepository.watchAll(currentUser, e.dateTime).listen(
+            (failureOrHabits) =>
+                add(HabitWatcherEvent.notesReceived(failureOrHabits)));
       },
       watchAllCompleted: (e) async* {},
       notesReceived: (e) async* {

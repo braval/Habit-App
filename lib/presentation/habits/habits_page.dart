@@ -25,8 +25,13 @@ class HabitsPage extends StatefulWidget {
 }
 
 class _HabitsPageState extends State<HabitsPage> {
-  void onDateChange(date) {
-    print(date);
+  DateTime currentSelectedDate = DateTime.now();
+
+  void onDateChange(DateTime dateTime) {
+    currentSelectedDate = dateTime;
+    context
+        .bloc<HabitWatcherBloc>()
+        .add(HabitWatcherEvent.watchAll(currentSelectedDate));
   }
 
   @override
@@ -111,16 +116,17 @@ class _HabitsPageState extends State<HabitsPage> {
                                       widget.user));
                               context.bloc<HabitActorBloc>().add(
                                   HabitActorEvent.initializeUser(widget.user));
-                              context
-                                  .bloc<HabitWatcherBloc>()
-                                  .add(const HabitWatcherEvent.watchAll());
+                              context.bloc<HabitWatcherBloc>().add(
+                                  HabitWatcherEvent.watchAll(
+                                      currentSelectedDate));
                               return Container();
                             },
                             loadInProgress: () {
                               return CircularProgressBar();
                             },
                             loadSuccess: (habits) {
-                              return _buildHabitCards(habits);
+                              return _buildHabitCards(
+                                  habits, currentSelectedDate);
                             },
                             loadFailure: (f) {
                               return f.map(
@@ -144,12 +150,13 @@ class _HabitsPageState extends State<HabitsPage> {
     );
   }
 
-  Widget _buildHabitCards(List<HabitItem> habits) {
+  Widget _buildHabitCards(List<HabitItem> habits, DateTime dateTime) {
     return Column(
         children: habits
             .map((habit) => HabitCard(
                   habit: habit,
                   user: widget.user,
+                  dateTime: dateTime,
                 ))
             .toList());
   }

@@ -18,8 +18,10 @@ class _$HabitWatcherEventTearOff {
     );
   }
 
-  _WatchAll watchAll() {
-    return const _WatchAll();
+  _WatchAll watchAll(DateTime dateTime) {
+    return _WatchAll(
+      dateTime,
+    );
   }
 
   _WatchAllCompleted watchAllCompleted() {
@@ -41,7 +43,7 @@ mixin _$HabitWatcherEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
-    @required Result watchAll(),
+    @required Result watchAll(DateTime dateTime),
     @required Result watchAllCompleted(),
     @required
         Result notesReceived(
@@ -50,7 +52,7 @@ mixin _$HabitWatcherEvent {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
-    Result watchAll(),
+    Result watchAll(DateTime dateTime),
     Result watchAllCompleted(),
     Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
     @required Result orElse(),
@@ -165,7 +167,7 @@ class _$InitializeUser with DiagnosticableTreeMixin implements InitializeUser {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
-    @required Result watchAll(),
+    @required Result watchAll(DateTime dateTime),
     @required Result watchAllCompleted(),
     @required
         Result notesReceived(
@@ -182,7 +184,7 @@ class _$InitializeUser with DiagnosticableTreeMixin implements InitializeUser {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
-    Result watchAll(),
+    Result watchAll(DateTime dateTime),
     Result watchAllCompleted(),
     Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
     @required Result orElse(),
@@ -236,6 +238,7 @@ abstract class InitializeUser implements HabitWatcherEvent {
 abstract class _$WatchAllCopyWith<$Res> {
   factory _$WatchAllCopyWith(_WatchAll value, $Res Function(_WatchAll) then) =
       __$WatchAllCopyWithImpl<$Res>;
+  $Res call({DateTime dateTime});
 }
 
 class __$WatchAllCopyWithImpl<$Res>
@@ -246,35 +249,58 @@ class __$WatchAllCopyWithImpl<$Res>
 
   @override
   _WatchAll get _value => super._value as _WatchAll;
+
+  @override
+  $Res call({
+    Object dateTime = freezed,
+  }) {
+    return _then(_WatchAll(
+      dateTime == freezed ? _value.dateTime : dateTime as DateTime,
+    ));
+  }
 }
 
 class _$_WatchAll with DiagnosticableTreeMixin implements _WatchAll {
-  const _$_WatchAll();
+  const _$_WatchAll(this.dateTime) : assert(dateTime != null);
+
+  @override
+  final DateTime dateTime;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HabitWatcherEvent.watchAll()';
+    return 'HabitWatcherEvent.watchAll(dateTime: $dateTime)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'HabitWatcherEvent.watchAll'));
+    properties
+      ..add(DiagnosticsProperty('type', 'HabitWatcherEvent.watchAll'))
+      ..add(DiagnosticsProperty('dateTime', dateTime));
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _WatchAll);
+    return identical(this, other) ||
+        (other is _WatchAll &&
+            (identical(other.dateTime, dateTime) ||
+                const DeepCollectionEquality()
+                    .equals(other.dateTime, dateTime)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(dateTime);
+
+  @override
+  _$WatchAllCopyWith<_WatchAll> get copyWith =>
+      __$WatchAllCopyWithImpl<_WatchAll>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
-    @required Result watchAll(),
+    @required Result watchAll(DateTime dateTime),
     @required Result watchAllCompleted(),
     @required
         Result notesReceived(
@@ -284,21 +310,21 @@ class _$_WatchAll with DiagnosticableTreeMixin implements _WatchAll {
     assert(watchAll != null);
     assert(watchAllCompleted != null);
     assert(notesReceived != null);
-    return watchAll();
+    return watchAll(dateTime);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
-    Result watchAll(),
+    Result watchAll(DateTime dateTime),
     Result watchAllCompleted(),
     Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (watchAll != null) {
-      return watchAll();
+      return watchAll(dateTime);
     }
     return orElse();
   }
@@ -336,7 +362,10 @@ class _$_WatchAll with DiagnosticableTreeMixin implements _WatchAll {
 }
 
 abstract class _WatchAll implements HabitWatcherEvent {
-  const factory _WatchAll() = _$_WatchAll;
+  const factory _WatchAll(DateTime dateTime) = _$_WatchAll;
+
+  DateTime get dateTime;
+  _$WatchAllCopyWith<_WatchAll> get copyWith;
 }
 
 abstract class _$WatchAllCompletedCopyWith<$Res> {
@@ -385,7 +414,7 @@ class _$_WatchAllCompleted
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
-    @required Result watchAll(),
+    @required Result watchAll(DateTime dateTime),
     @required Result watchAllCompleted(),
     @required
         Result notesReceived(
@@ -402,7 +431,7 @@ class _$_WatchAllCompleted
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
-    Result watchAll(),
+    Result watchAll(DateTime dateTime),
     Result watchAllCompleted(),
     Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
     @required Result orElse(),
@@ -521,7 +550,7 @@ class _$_NotesReceived with DiagnosticableTreeMixin implements _NotesReceived {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
-    @required Result watchAll(),
+    @required Result watchAll(DateTime dateTime),
     @required Result watchAllCompleted(),
     @required
         Result notesReceived(
@@ -538,7 +567,7 @@ class _$_NotesReceived with DiagnosticableTreeMixin implements _NotesReceived {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
-    Result watchAll(),
+    Result watchAll(DateTime dateTime),
     Result watchAllCompleted(),
     Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
     @required Result orElse(),
