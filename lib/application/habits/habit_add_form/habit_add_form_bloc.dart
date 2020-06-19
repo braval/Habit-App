@@ -62,7 +62,7 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
               name: state.habitName,
               category: state.habitCategoryName,
               done: false,
-              totalCount: 1,
+              totalCount: state.habitCount,
               currentCount: 0,
             ),
           );
@@ -76,8 +76,11 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
           habitFailureOrSuccessOption: optionOf(failureOrSuccess),
         );
       },
-      initializeUser: (InitializeUser value) async* {
-        currentUser = value.user;
+      initializeUser: (e) async* {
+        currentUser = e.user;
+      },
+      habitCountChanged: (e) async* {
+        yield state.copyWith(habitCount: e.habitCountInt);
       },
     );
   }

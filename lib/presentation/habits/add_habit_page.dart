@@ -57,7 +57,7 @@ class _BuildAddTaskScreenState extends State<BuildAddTaskScreen> {
               height: 65.0,
               child: const Center(
                 child: Text(
-                  'Create New Habit',
+                  'Create New Daily Routine',
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.white,
@@ -84,6 +84,7 @@ class BuildHabitForm extends StatefulWidget {
 }
 
 class _BuildHabitFormState extends State<BuildHabitForm> {
+  double _value = 1;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HabitAddFormBloc, HabitAddFormState>(
@@ -150,6 +151,66 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
                           ),
                           (_) => null,
                         ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'How many times a day?',
+                        style: constants.kTitleStyle,
+                      ),
+                      Text(
+                        '${_value.toInt()}',
+                        style: const TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: constants.kDarkPurple,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: constants.kDarkPurple,
+                      inactiveTrackColor: constants.kDarkPurple.withAlpha(32),
+                      trackShape: const RoundedRectSliderTrackShape(),
+                      trackHeight: 4.0,
+                      thumbShape:
+                          const RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                      thumbColor: constants.kYellow,
+                      overlayColor: constants.kYellow.withAlpha(32),
+                      overlayShape:
+                          const RoundSliderOverlayShape(overlayRadius: 28.0),
+                      tickMarkShape: const RoundSliderTickMarkShape(),
+                      inactiveTickMarkColor: Colors.transparent,
+                      valueIndicatorShape:
+                          const PaddleSliderValueIndicatorShape(),
+                      valueIndicatorColor: constants.kYellow,
+                      valueIndicatorTextStyle: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: Slider(
+                      value: _value,
+                      min: 1,
+                      max: 11,
+                      divisions: 10,
+                      label: '${_value.toInt()}',
+                      onChanged: (value) {
+                        _value = value;
+                        context.bloc<HabitAddFormBloc>().add(
+                              HabitAddFormEvent.habitCountChanged(
+                                  value.toInt()),
+                            );
+                      },
+                    ),
                   ),
                 ),
                 const Text(

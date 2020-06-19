@@ -5,6 +5,7 @@ abstract class HabitAddFormState with _$HabitAddFormState {
   const factory HabitAddFormState({
     @required HabitName habitName,
     @required HabitCategoryName habitCategoryName,
+    @required int habitCount,
     @required bool isSubmitting,
     @required bool showErrorMessages,
     @required Option<Either<HabitFailure, Unit>> habitFailureOrSuccessOption,
@@ -14,6 +15,7 @@ abstract class HabitAddFormState with _$HabitAddFormState {
         habitName: HabitName(''),
         habitCategoryName: HabitCategoryName(''),
         isSubmitting: false,
+        habitCount: 0,
         showErrorMessages: false,
         habitFailureOrSuccessOption: none(),
       );

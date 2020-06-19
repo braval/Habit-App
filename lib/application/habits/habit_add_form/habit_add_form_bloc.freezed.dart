@@ -24,6 +24,12 @@ class _$HabitAddFormEventTearOff {
     );
   }
 
+  HabitCountChanged habitCountChanged(int habitCountInt) {
+    return HabitCountChanged(
+      habitCountInt,
+    );
+  }
+
   CategorySelectedChanged categorySelectedChanged(String habitCategoryNameStr) {
     return CategorySelectedChanged(
       habitCategoryNameStr,
@@ -45,6 +51,7 @@ mixin _$HabitAddFormEvent {
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
+    @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
     @required Result addHabit(User user),
   });
@@ -52,6 +59,7 @@ mixin _$HabitAddFormEvent {
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
+    Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
     Result addHabit(User user),
     @required Result orElse(),
@@ -60,6 +68,7 @@ mixin _$HabitAddFormEvent {
   Result map<Result extends Object>({
     @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
+    @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   });
@@ -67,6 +76,7 @@ mixin _$HabitAddFormEvent {
   Result maybeMap<Result extends Object>({
     Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
+    Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
     Result addHabit(AddHabit value),
     @required Result orElse(),
@@ -159,11 +169,13 @@ class _$InitializeUser implements InitializeUser {
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
+    @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
     @required Result addHabit(User user),
   }) {
     assert(initializeUser != null);
     assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
     return initializeUser(user);
@@ -174,6 +186,7 @@ class _$InitializeUser implements InitializeUser {
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
+    Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
     Result addHabit(User user),
     @required Result orElse(),
@@ -190,11 +203,13 @@ class _$InitializeUser implements InitializeUser {
   Result map<Result extends Object>({
     @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
+    @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   }) {
     assert(initializeUser != null);
     assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
     return initializeUser(this);
@@ -205,6 +220,7 @@ class _$InitializeUser implements InitializeUser {
   Result maybeMap<Result extends Object>({
     Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
+    Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
     Result addHabit(AddHabit value),
     @required Result orElse(),
@@ -284,11 +300,13 @@ class _$HabitNameChanged implements HabitNameChanged {
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
+    @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
     @required Result addHabit(User user),
   }) {
     assert(initializeUser != null);
     assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
     return habitNameChanged(habitNameStr);
@@ -299,6 +317,7 @@ class _$HabitNameChanged implements HabitNameChanged {
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
+    Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
     Result addHabit(User user),
     @required Result orElse(),
@@ -315,11 +334,13 @@ class _$HabitNameChanged implements HabitNameChanged {
   Result map<Result extends Object>({
     @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
+    @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   }) {
     assert(initializeUser != null);
     assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
     return habitNameChanged(this);
@@ -330,6 +351,7 @@ class _$HabitNameChanged implements HabitNameChanged {
   Result maybeMap<Result extends Object>({
     Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
+    Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
     Result addHabit(AddHabit value),
     @required Result orElse(),
@@ -347,6 +369,137 @@ abstract class HabitNameChanged implements HabitAddFormEvent {
 
   String get habitNameStr;
   $HabitNameChangedCopyWith<HabitNameChanged> get copyWith;
+}
+
+abstract class $HabitCountChangedCopyWith<$Res> {
+  factory $HabitCountChangedCopyWith(
+          HabitCountChanged value, $Res Function(HabitCountChanged) then) =
+      _$HabitCountChangedCopyWithImpl<$Res>;
+  $Res call({int habitCountInt});
+}
+
+class _$HabitCountChangedCopyWithImpl<$Res>
+    extends _$HabitAddFormEventCopyWithImpl<$Res>
+    implements $HabitCountChangedCopyWith<$Res> {
+  _$HabitCountChangedCopyWithImpl(
+      HabitCountChanged _value, $Res Function(HabitCountChanged) _then)
+      : super(_value, (v) => _then(v as HabitCountChanged));
+
+  @override
+  HabitCountChanged get _value => super._value as HabitCountChanged;
+
+  @override
+  $Res call({
+    Object habitCountInt = freezed,
+  }) {
+    return _then(HabitCountChanged(
+      habitCountInt == freezed ? _value.habitCountInt : habitCountInt as int,
+    ));
+  }
+}
+
+class _$HabitCountChanged implements HabitCountChanged {
+  const _$HabitCountChanged(this.habitCountInt) : assert(habitCountInt != null);
+
+  @override
+  final int habitCountInt;
+
+  @override
+  String toString() {
+    return 'HabitAddFormEvent.habitCountChanged(habitCountInt: $habitCountInt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is HabitCountChanged &&
+            (identical(other.habitCountInt, habitCountInt) ||
+                const DeepCollectionEquality()
+                    .equals(other.habitCountInt, habitCountInt)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(habitCountInt);
+
+  @override
+  $HabitCountChangedCopyWith<HabitCountChanged> get copyWith =>
+      _$HabitCountChangedCopyWithImpl<HabitCountChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initializeUser(User user),
+    @required Result habitNameChanged(String habitNameStr),
+    @required Result habitCountChanged(int habitCountInt),
+    @required Result categorySelectedChanged(String habitCategoryNameStr),
+    @required Result addHabit(User user),
+  }) {
+    assert(initializeUser != null);
+    assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
+    assert(categorySelectedChanged != null);
+    assert(addHabit != null);
+    return habitCountChanged(habitCountInt);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initializeUser(User user),
+    Result habitNameChanged(String habitNameStr),
+    Result habitCountChanged(int habitCountInt),
+    Result categorySelectedChanged(String habitCategoryNameStr),
+    Result addHabit(User user),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (habitCountChanged != null) {
+      return habitCountChanged(habitCountInt);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initializeUser(InitializeUser value),
+    @required Result habitNameChanged(HabitNameChanged value),
+    @required Result habitCountChanged(HabitCountChanged value),
+    @required Result categorySelectedChanged(CategorySelectedChanged value),
+    @required Result addHabit(AddHabit value),
+  }) {
+    assert(initializeUser != null);
+    assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
+    assert(categorySelectedChanged != null);
+    assert(addHabit != null);
+    return habitCountChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initializeUser(InitializeUser value),
+    Result habitNameChanged(HabitNameChanged value),
+    Result habitCountChanged(HabitCountChanged value),
+    Result categorySelectedChanged(CategorySelectedChanged value),
+    Result addHabit(AddHabit value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (habitCountChanged != null) {
+      return habitCountChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HabitCountChanged implements HabitAddFormEvent {
+  const factory HabitCountChanged(int habitCountInt) = _$HabitCountChanged;
+
+  int get habitCountInt;
+  $HabitCountChangedCopyWith<HabitCountChanged> get copyWith;
 }
 
 abstract class $CategorySelectedChangedCopyWith<$Res> {
@@ -414,11 +567,13 @@ class _$CategorySelectedChanged implements CategorySelectedChanged {
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
+    @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
     @required Result addHabit(User user),
   }) {
     assert(initializeUser != null);
     assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
     return categorySelectedChanged(habitCategoryNameStr);
@@ -429,6 +584,7 @@ class _$CategorySelectedChanged implements CategorySelectedChanged {
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
+    Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
     Result addHabit(User user),
     @required Result orElse(),
@@ -445,11 +601,13 @@ class _$CategorySelectedChanged implements CategorySelectedChanged {
   Result map<Result extends Object>({
     @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
+    @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   }) {
     assert(initializeUser != null);
     assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
     return categorySelectedChanged(this);
@@ -460,6 +618,7 @@ class _$CategorySelectedChanged implements CategorySelectedChanged {
   Result maybeMap<Result extends Object>({
     Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
+    Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
     Result addHabit(AddHabit value),
     @required Result orElse(),
@@ -548,11 +707,13 @@ class _$AddHabit implements AddHabit {
   Result when<Result extends Object>({
     @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
+    @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
     @required Result addHabit(User user),
   }) {
     assert(initializeUser != null);
     assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
     return addHabit(user);
@@ -563,6 +724,7 @@ class _$AddHabit implements AddHabit {
   Result maybeWhen<Result extends Object>({
     Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
+    Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
     Result addHabit(User user),
     @required Result orElse(),
@@ -579,11 +741,13 @@ class _$AddHabit implements AddHabit {
   Result map<Result extends Object>({
     @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
+    @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   }) {
     assert(initializeUser != null);
     assert(habitNameChanged != null);
+    assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
     return addHabit(this);
@@ -594,6 +758,7 @@ class _$AddHabit implements AddHabit {
   Result maybeMap<Result extends Object>({
     Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
+    Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
     Result addHabit(AddHabit value),
     @required Result orElse(),
@@ -622,6 +787,8 @@ class _$HabitAddFormStateTearOff {
       @required
           HabitCategoryName habitCategoryName,
       @required
+          int habitCount,
+      @required
           bool isSubmitting,
       @required
           bool showErrorMessages,
@@ -630,6 +797,7 @@ class _$HabitAddFormStateTearOff {
     return _HabitAddFormState(
       habitName: habitName,
       habitCategoryName: habitCategoryName,
+      habitCount: habitCount,
       isSubmitting: isSubmitting,
       showErrorMessages: showErrorMessages,
       habitFailureOrSuccessOption: habitFailureOrSuccessOption,
@@ -643,6 +811,7 @@ const $HabitAddFormState = _$HabitAddFormStateTearOff();
 mixin _$HabitAddFormState {
   HabitName get habitName;
   HabitCategoryName get habitCategoryName;
+  int get habitCount;
   bool get isSubmitting;
   bool get showErrorMessages;
   Option<Either<HabitFailure, Unit>> get habitFailureOrSuccessOption;
@@ -657,6 +826,7 @@ abstract class $HabitAddFormStateCopyWith<$Res> {
   $Res call(
       {HabitName habitName,
       HabitCategoryName habitCategoryName,
+      int habitCount,
       bool isSubmitting,
       bool showErrorMessages,
       Option<Either<HabitFailure, Unit>> habitFailureOrSuccessOption});
@@ -674,6 +844,7 @@ class _$HabitAddFormStateCopyWithImpl<$Res>
   $Res call({
     Object habitName = freezed,
     Object habitCategoryName = freezed,
+    Object habitCount = freezed,
     Object isSubmitting = freezed,
     Object showErrorMessages = freezed,
     Object habitFailureOrSuccessOption = freezed,
@@ -684,6 +855,7 @@ class _$HabitAddFormStateCopyWithImpl<$Res>
       habitCategoryName: habitCategoryName == freezed
           ? _value.habitCategoryName
           : habitCategoryName as HabitCategoryName,
+      habitCount: habitCount == freezed ? _value.habitCount : habitCount as int,
       isSubmitting:
           isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
       showErrorMessages: showErrorMessages == freezed
@@ -705,6 +877,7 @@ abstract class _$HabitAddFormStateCopyWith<$Res>
   $Res call(
       {HabitName habitName,
       HabitCategoryName habitCategoryName,
+      int habitCount,
       bool isSubmitting,
       bool showErrorMessages,
       Option<Either<HabitFailure, Unit>> habitFailureOrSuccessOption});
@@ -724,6 +897,7 @@ class __$HabitAddFormStateCopyWithImpl<$Res>
   $Res call({
     Object habitName = freezed,
     Object habitCategoryName = freezed,
+    Object habitCount = freezed,
     Object isSubmitting = freezed,
     Object showErrorMessages = freezed,
     Object habitFailureOrSuccessOption = freezed,
@@ -734,6 +908,7 @@ class __$HabitAddFormStateCopyWithImpl<$Res>
       habitCategoryName: habitCategoryName == freezed
           ? _value.habitCategoryName
           : habitCategoryName as HabitCategoryName,
+      habitCount: habitCount == freezed ? _value.habitCount : habitCount as int,
       isSubmitting:
           isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
       showErrorMessages: showErrorMessages == freezed
@@ -750,11 +925,13 @@ class _$_HabitAddFormState implements _HabitAddFormState {
   const _$_HabitAddFormState(
       {@required this.habitName,
       @required this.habitCategoryName,
+      @required this.habitCount,
       @required this.isSubmitting,
       @required this.showErrorMessages,
       @required this.habitFailureOrSuccessOption})
       : assert(habitName != null),
         assert(habitCategoryName != null),
+        assert(habitCount != null),
         assert(isSubmitting != null),
         assert(showErrorMessages != null),
         assert(habitFailureOrSuccessOption != null);
@@ -764,6 +941,8 @@ class _$_HabitAddFormState implements _HabitAddFormState {
   @override
   final HabitCategoryName habitCategoryName;
   @override
+  final int habitCount;
+  @override
   final bool isSubmitting;
   @override
   final bool showErrorMessages;
@@ -772,7 +951,7 @@ class _$_HabitAddFormState implements _HabitAddFormState {
 
   @override
   String toString() {
-    return 'HabitAddFormState(habitName: $habitName, habitCategoryName: $habitCategoryName, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, habitFailureOrSuccessOption: $habitFailureOrSuccessOption)';
+    return 'HabitAddFormState(habitName: $habitName, habitCategoryName: $habitCategoryName, habitCount: $habitCount, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, habitFailureOrSuccessOption: $habitFailureOrSuccessOption)';
   }
 
   @override
@@ -785,6 +964,9 @@ class _$_HabitAddFormState implements _HabitAddFormState {
             (identical(other.habitCategoryName, habitCategoryName) ||
                 const DeepCollectionEquality()
                     .equals(other.habitCategoryName, habitCategoryName)) &&
+            (identical(other.habitCount, habitCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.habitCount, habitCount)) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 const DeepCollectionEquality()
                     .equals(other.isSubmitting, isSubmitting)) &&
@@ -803,6 +985,7 @@ class _$_HabitAddFormState implements _HabitAddFormState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(habitName) ^
       const DeepCollectionEquality().hash(habitCategoryName) ^
+      const DeepCollectionEquality().hash(habitCount) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(showErrorMessages) ^
       const DeepCollectionEquality().hash(habitFailureOrSuccessOption);
@@ -819,6 +1002,8 @@ abstract class _HabitAddFormState implements HabitAddFormState {
           @required
               HabitCategoryName habitCategoryName,
           @required
+              int habitCount,
+          @required
               bool isSubmitting,
           @required
               bool showErrorMessages,
@@ -830,6 +1015,8 @@ abstract class _HabitAddFormState implements HabitAddFormState {
   HabitName get habitName;
   @override
   HabitCategoryName get habitCategoryName;
+  @override
+  int get habitCount;
   @override
   bool get isSubmitting;
   @override
