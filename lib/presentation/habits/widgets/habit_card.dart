@@ -129,7 +129,7 @@ class _HabitCardState extends State<HabitCard> {
                         blurRadius: 1, // changes position of shadow
                       ),
                     ],
-                    color: Colors.white,
+                    color: widget.habit.done ? Colors.grey[200] : Colors.white,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: ExpandablePanel(
@@ -230,7 +230,7 @@ class _HabitCardState extends State<HabitCard> {
         animateFromLastPercent: true,
         arcType: ArcType.FULL,
         arcBackgroundColor: Colors.black12,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         progressColor: progress == 1.0 ? Colors.lightGreen[400] : kYellow,
         percent: progress,
         animation: true,
