@@ -12,12 +12,6 @@ T _$identity<T>(T value) => value;
 class _$HabitAddFormEventTearOff {
   const _$HabitAddFormEventTearOff();
 
-  InitializeUser initializeUser(User user) {
-    return InitializeUser(
-      user,
-    );
-  }
-
   HabitNameChanged habitNameChanged(String habitNameStr) {
     return HabitNameChanged(
       habitNameStr,
@@ -36,10 +30,8 @@ class _$HabitAddFormEventTearOff {
     );
   }
 
-  AddHabit addHabit(User user) {
-    return AddHabit(
-      user,
-    );
+  AddHabit addHabit() {
+    return const AddHabit();
   }
 }
 
@@ -49,24 +41,21 @@ const $HabitAddFormEvent = _$HabitAddFormEventTearOff();
 mixin _$HabitAddFormEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
     @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
-    @required Result addHabit(User user),
+    @required Result addHabit(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
     Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
-    Result addHabit(User user),
+    Result addHabit(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
     @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
@@ -74,7 +63,6 @@ mixin _$HabitAddFormEvent {
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
     Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
@@ -96,148 +84,6 @@ class _$HabitAddFormEventCopyWithImpl<$Res>
   final HabitAddFormEvent _value;
   // ignore: unused_field
   final $Res Function(HabitAddFormEvent) _then;
-}
-
-abstract class $InitializeUserCopyWith<$Res> {
-  factory $InitializeUserCopyWith(
-          InitializeUser value, $Res Function(InitializeUser) then) =
-      _$InitializeUserCopyWithImpl<$Res>;
-  $Res call({User user});
-
-  $UserCopyWith<$Res> get user;
-}
-
-class _$InitializeUserCopyWithImpl<$Res>
-    extends _$HabitAddFormEventCopyWithImpl<$Res>
-    implements $InitializeUserCopyWith<$Res> {
-  _$InitializeUserCopyWithImpl(
-      InitializeUser _value, $Res Function(InitializeUser) _then)
-      : super(_value, (v) => _then(v as InitializeUser));
-
-  @override
-  InitializeUser get _value => super._value as InitializeUser;
-
-  @override
-  $Res call({
-    Object user = freezed,
-  }) {
-    return _then(InitializeUser(
-      user == freezed ? _value.user : user as User,
-    ));
-  }
-
-  @override
-  $UserCopyWith<$Res> get user {
-    if (_value.user == null) {
-      return null;
-    }
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
-}
-
-class _$InitializeUser implements InitializeUser {
-  const _$InitializeUser(this.user) : assert(user != null);
-
-  @override
-  final User user;
-
-  @override
-  String toString() {
-    return 'HabitAddFormEvent.initializeUser(user: $user)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is InitializeUser &&
-            (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
-
-  @override
-  $InitializeUserCopyWith<InitializeUser> get copyWith =>
-      _$InitializeUserCopyWithImpl<InitializeUser>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initializeUser(User user),
-    @required Result habitNameChanged(String habitNameStr),
-    @required Result habitCountChanged(int habitCountInt),
-    @required Result categorySelectedChanged(String habitCategoryNameStr),
-    @required Result addHabit(User user),
-  }) {
-    assert(initializeUser != null);
-    assert(habitNameChanged != null);
-    assert(habitCountChanged != null);
-    assert(categorySelectedChanged != null);
-    assert(addHabit != null);
-    return initializeUser(user);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
-    Result habitNameChanged(String habitNameStr),
-    Result habitCountChanged(int habitCountInt),
-    Result categorySelectedChanged(String habitCategoryNameStr),
-    Result addHabit(User user),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (initializeUser != null) {
-      return initializeUser(user);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initializeUser(InitializeUser value),
-    @required Result habitNameChanged(HabitNameChanged value),
-    @required Result habitCountChanged(HabitCountChanged value),
-    @required Result categorySelectedChanged(CategorySelectedChanged value),
-    @required Result addHabit(AddHabit value),
-  }) {
-    assert(initializeUser != null);
-    assert(habitNameChanged != null);
-    assert(habitCountChanged != null);
-    assert(categorySelectedChanged != null);
-    assert(addHabit != null);
-    return initializeUser(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initializeUser(InitializeUser value),
-    Result habitNameChanged(HabitNameChanged value),
-    Result habitCountChanged(HabitCountChanged value),
-    Result categorySelectedChanged(CategorySelectedChanged value),
-    Result addHabit(AddHabit value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (initializeUser != null) {
-      return initializeUser(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class InitializeUser implements HabitAddFormEvent {
-  const factory InitializeUser(User user) = _$InitializeUser;
-
-  User get user;
-  $InitializeUserCopyWith<InitializeUser> get copyWith;
 }
 
 abstract class $HabitNameChangedCopyWith<$Res> {
@@ -298,13 +144,11 @@ class _$HabitNameChanged implements HabitNameChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
     @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
-    @required Result addHabit(User user),
+    @required Result addHabit(),
   }) {
-    assert(initializeUser != null);
     assert(habitNameChanged != null);
     assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
@@ -315,11 +159,10 @@ class _$HabitNameChanged implements HabitNameChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
     Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
-    Result addHabit(User user),
+    Result addHabit(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -332,13 +175,11 @@ class _$HabitNameChanged implements HabitNameChanged {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
     @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   }) {
-    assert(initializeUser != null);
     assert(habitNameChanged != null);
     assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
@@ -349,7 +190,6 @@ class _$HabitNameChanged implements HabitNameChanged {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
     Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
@@ -429,13 +269,11 @@ class _$HabitCountChanged implements HabitCountChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
     @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
-    @required Result addHabit(User user),
+    @required Result addHabit(),
   }) {
-    assert(initializeUser != null);
     assert(habitNameChanged != null);
     assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
@@ -446,11 +284,10 @@ class _$HabitCountChanged implements HabitCountChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
     Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
-    Result addHabit(User user),
+    Result addHabit(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -463,13 +300,11 @@ class _$HabitCountChanged implements HabitCountChanged {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
     @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   }) {
-    assert(initializeUser != null);
     assert(habitNameChanged != null);
     assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
@@ -480,7 +315,6 @@ class _$HabitCountChanged implements HabitCountChanged {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
     Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
@@ -565,13 +399,11 @@ class _$CategorySelectedChanged implements CategorySelectedChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
     @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
-    @required Result addHabit(User user),
+    @required Result addHabit(),
   }) {
-    assert(initializeUser != null);
     assert(habitNameChanged != null);
     assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
@@ -582,11 +414,10 @@ class _$CategorySelectedChanged implements CategorySelectedChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
     Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
-    Result addHabit(User user),
+    Result addHabit(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -599,13 +430,11 @@ class _$CategorySelectedChanged implements CategorySelectedChanged {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
     @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   }) {
-    assert(initializeUser != null);
     assert(habitNameChanged != null);
     assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
@@ -616,7 +445,6 @@ class _$CategorySelectedChanged implements CategorySelectedChanged {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
     Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
@@ -642,9 +470,6 @@ abstract class CategorySelectedChanged implements HabitAddFormEvent {
 abstract class $AddHabitCopyWith<$Res> {
   factory $AddHabitCopyWith(AddHabit value, $Res Function(AddHabit) then) =
       _$AddHabitCopyWithImpl<$Res>;
-  $Res call({User user});
-
-  $UserCopyWith<$Res> get user;
 }
 
 class _$AddHabitCopyWithImpl<$Res> extends _$HabitAddFormEventCopyWithImpl<$Res>
@@ -654,84 +479,51 @@ class _$AddHabitCopyWithImpl<$Res> extends _$HabitAddFormEventCopyWithImpl<$Res>
 
   @override
   AddHabit get _value => super._value as AddHabit;
-
-  @override
-  $Res call({
-    Object user = freezed,
-  }) {
-    return _then(AddHabit(
-      user == freezed ? _value.user : user as User,
-    ));
-  }
-
-  @override
-  $UserCopyWith<$Res> get user {
-    if (_value.user == null) {
-      return null;
-    }
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 class _$AddHabit implements AddHabit {
-  const _$AddHabit(this.user) : assert(user != null);
-
-  @override
-  final User user;
+  const _$AddHabit();
 
   @override
   String toString() {
-    return 'HabitAddFormEvent.addHabit(user: $user)';
+    return 'HabitAddFormEvent.addHabit()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is AddHabit &&
-            (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)));
+    return identical(this, other) || (other is AddHabit);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
-
-  @override
-  $AddHabitCopyWith<AddHabit> get copyWith =>
-      _$AddHabitCopyWithImpl<AddHabit>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result habitNameChanged(String habitNameStr),
     @required Result habitCountChanged(int habitCountInt),
     @required Result categorySelectedChanged(String habitCategoryNameStr),
-    @required Result addHabit(User user),
+    @required Result addHabit(),
   }) {
-    assert(initializeUser != null);
     assert(habitNameChanged != null);
     assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
     assert(addHabit != null);
-    return addHabit(user);
+    return addHabit();
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result habitNameChanged(String habitNameStr),
     Result habitCountChanged(int habitCountInt),
     Result categorySelectedChanged(String habitCategoryNameStr),
-    Result addHabit(User user),
+    Result addHabit(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (addHabit != null) {
-      return addHabit(user);
+      return addHabit();
     }
     return orElse();
   }
@@ -739,13 +531,11 @@ class _$AddHabit implements AddHabit {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(InitializeUser value),
     @required Result habitNameChanged(HabitNameChanged value),
     @required Result habitCountChanged(HabitCountChanged value),
     @required Result categorySelectedChanged(CategorySelectedChanged value),
     @required Result addHabit(AddHabit value),
   }) {
-    assert(initializeUser != null);
     assert(habitNameChanged != null);
     assert(habitCountChanged != null);
     assert(categorySelectedChanged != null);
@@ -756,7 +546,6 @@ class _$AddHabit implements AddHabit {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(InitializeUser value),
     Result habitNameChanged(HabitNameChanged value),
     Result habitCountChanged(HabitCountChanged value),
     Result categorySelectedChanged(CategorySelectedChanged value),
@@ -772,10 +561,7 @@ class _$AddHabit implements AddHabit {
 }
 
 abstract class AddHabit implements HabitAddFormEvent {
-  const factory AddHabit(User user) = _$AddHabit;
-
-  User get user;
-  $AddHabitCopyWith<AddHabit> get copyWith;
+  const factory AddHabit() = _$AddHabit;
 }
 
 class _$HabitAddFormStateTearOff {

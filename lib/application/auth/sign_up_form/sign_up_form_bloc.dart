@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:habits/domain/auth/auth_failure.dart';
 import 'package:habits/domain/auth/i_auth_facade.dart';
@@ -14,9 +13,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
 part 'sign_up_form_event.dart';
-
 part 'sign_up_form_state.dart';
-
 part 'sign_up_form_bloc.freezed.dart';
 
 @injectable

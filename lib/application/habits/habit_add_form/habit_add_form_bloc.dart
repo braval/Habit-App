@@ -8,7 +8,6 @@ import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/habits/habit_failure.dart';
 import 'package:habits/domain/habits/i_habits_repository.dart';
 import 'package:habits/domain/habits/value_objects.dart';
-import 'package:habits/domain/user/user.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
@@ -20,7 +19,6 @@ part 'habit_add_form_bloc.freezed.dart';
 @injectable
 class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
   final IHabitsRepository _habitsRepository;
-  User currentUser;
 
   HabitAddFormBloc(this._habitsRepository);
   @override
@@ -56,7 +54,6 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
           );
 
           failureOrSuccess = await _habitsRepository.add(
-            currentUser,
             HabitItem(
               id: UniqueId(),
               name: state.habitName,
@@ -75,9 +72,6 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
           showErrorMessages: true,
           habitFailureOrSuccessOption: optionOf(failureOrSuccess),
         );
-      },
-      initializeUser: (e) async* {
-        currentUser = e.user;
       },
       habitCountChanged: (e) async* {
         yield state.copyWith(habitCount: e.habitCountInt);

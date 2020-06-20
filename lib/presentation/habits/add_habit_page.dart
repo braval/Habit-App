@@ -3,31 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/habits/habit_add_form/habit_add_form_bloc.dart';
 import 'package:habits/domain/habits/value_objects.dart';
-import 'package:habits/domain/user/user.dart';
 import 'package:habits/injection.dart';
 import 'package:habits/presentation/constants.dart' as constants;
 import 'package:habits/presentation/habits/widgets/categories.dart';
 import 'package:habits/presentation/login/widgets/form_widget_helper.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final User user;
-
-  const AddTaskScreen({this.user});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => getIt<HabitAddFormBloc>()
-        ..add(HabitAddFormEvent.initializeUser(user)),
-      child: BuildAddTaskScreen(user: user),
+      create: (BuildContext context) => getIt<HabitAddFormBloc>(),
+      child: BuildAddTaskScreen(),
     );
   }
 }
 
 class BuildAddTaskScreen extends StatefulWidget {
-  final User user;
-
-  const BuildAddTaskScreen({Key key, this.user}) : super(key: key);
   @override
   _BuildAddTaskScreenState createState() => _BuildAddTaskScreenState();
 }
@@ -67,7 +58,7 @@ class _BuildAddTaskScreenState extends State<BuildAddTaskScreen> {
                 ),
               ),
             ),
-            BuildHabitForm(user: widget.user),
+            BuildHabitForm(),
           ],
         ),
       ),
@@ -76,9 +67,6 @@ class _BuildAddTaskScreenState extends State<BuildAddTaskScreen> {
 }
 
 class BuildHabitForm extends StatefulWidget {
-  final User user;
-
-  const BuildHabitForm({Key key, this.user}) : super(key: key);
   @override
   _BuildHabitFormState createState() => _BuildHabitFormState();
 }
@@ -232,7 +220,7 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
                     onPressed: () {
                       context
                           .bloc<HabitAddFormBloc>()
-                          .add(HabitAddFormEvent.addHabit(widget.user));
+                          .add(const HabitAddFormEvent.addHabit());
                     },
                     child: const Text(
                       'Add Habit',

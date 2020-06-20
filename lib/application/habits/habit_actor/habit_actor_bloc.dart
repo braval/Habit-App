@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/habits/habit_failure.dart';
 import 'package:habits/domain/habits/i_habits_repository.dart';
-import 'package:habits/domain/user/user.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
@@ -17,7 +16,6 @@ part 'habit_actor_bloc.freezed.dart';
 @injectable
 class HabitActorBloc extends Bloc<HabitActorEvent, HabitActorState> {
   final IHabitsRepository _habitsRepository;
-  User currentUser;
 
   HabitActorBloc(this._habitsRepository);
   @override
@@ -28,13 +26,9 @@ class HabitActorBloc extends Bloc<HabitActorEvent, HabitActorState> {
     HabitActorEvent event,
   ) async* {
     yield* event.map(
-      initializeUser: (e) async* {
-        currentUser = e.user;
-      },
       deleted: (e) async* {
         yield const HabitActorState.actionInProgress();
-        final deleteResult =
-            await _habitsRepository.delete(currentUser, e.habit);
+        final deleteResult = await _habitsRepository.delete(e.habit);
         yield deleteResult.fold(
           (f) => HabitActorState.deleteFailure(f),
           (r) => const HabitActorState.deleteSuccess(),
@@ -50,8 +44,7 @@ class HabitActorBloc extends Bloc<HabitActorEvent, HabitActorState> {
           done: e.habit.currentCount + 1 == e.habit.totalCount ? true : false,
         );
 
-        final updateResult =
-            await _habitsRepository.update(currentUser, updateHabitItem);
+        final updateResult = await _habitsRepository.update(updateHabitItem);
         yield updateResult.fold(
           (f) => HabitActorState.updateCountFailure(f),
           (r) => const HabitActorState.updateCountSuccess(),

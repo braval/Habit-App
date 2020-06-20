@@ -4,21 +4,17 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:habits/application/habits/habit_actor/habit_actor_bloc.dart';
 import 'package:habits/domain/habits/habit.dart';
-import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:expandable/expandable.dart';
-import 'package:circular_check_box/circular_check_box.dart';
 
 class HabitCard extends StatefulWidget {
   final HabitItem habit;
-  final User user;
   final DateTime dateTime;
 
-  const HabitCard(
-      {@required this.habit, @required this.user, @required this.dateTime});
+  const HabitCard({@required this.habit, @required this.dateTime});
 
   @override
   _HabitCardState createState() => _HabitCardState();
@@ -149,7 +145,7 @@ class _HabitCardState extends State<HabitCard> {
                                     child: Icon(
                                       _icons[
                                           widget.habit.category.getOrCrash()],
-                                      color: Colors.black54,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   Padding(
@@ -160,12 +156,7 @@ class _HabitCardState extends State<HabitCard> {
                                       children: [
                                         Text(
                                           widget.habit.name.getOrCrash(),
-                                          style: const TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18.0,
-                                          ),
+                                          style: kHabitNameTextStyle,
                                         ),
                                         Text(
                                           widget.habit.category.getOrCrash(),
@@ -262,11 +253,7 @@ Widget getDaysOfWeekRow(List<String> strings) {
               children: [
                 Text(
                   item,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontFamily: 'Montserrat',
-                    color: Colors.black54,
-                  ),
+                  style: kHabitSubtitleTextStyle,
                 ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),

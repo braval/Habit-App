@@ -12,12 +12,6 @@ T _$identity<T>(T value) => value;
 class _$HabitActorEventTearOff {
   const _$HabitActorEventTearOff();
 
-  _InitializeUser initializeUser(User user) {
-    return _InitializeUser(
-      user,
-    );
-  }
-
   _Deleted deleted(HabitItem habit) {
     return _Deleted(
       habit,
@@ -41,16 +35,16 @@ class _$HabitActorEventTearOff {
 const $HabitActorEvent = _$HabitActorEventTearOff();
 
 mixin _$HabitActorEvent {
+  HabitItem get habit;
+
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result deleted(HabitItem habit),
     @required Result countUpdated(HabitItem habit),
     @required Result edited(HabitItem habit),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result deleted(HabitItem habit),
     Result countUpdated(HabitItem habit),
     Result edited(HabitItem habit),
@@ -58,25 +52,28 @@ mixin _$HabitActorEvent {
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(_InitializeUser value),
     @required Result deleted(_Deleted value),
     @required Result countUpdated(_CountUpdated value),
     @required Result edited(_Edited value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(_InitializeUser value),
     Result deleted(_Deleted value),
     Result countUpdated(_CountUpdated value),
     Result edited(_Edited value),
     @required Result orElse(),
   });
+
+  $HabitActorEventCopyWith<HabitActorEvent> get copyWith;
 }
 
 abstract class $HabitActorEventCopyWith<$Res> {
   factory $HabitActorEventCopyWith(
           HabitActorEvent value, $Res Function(HabitActorEvent) then) =
       _$HabitActorEventCopyWithImpl<$Res>;
+  $Res call({HabitItem habit});
+
+  $HabitItemCopyWith<$Res> get habit;
 }
 
 class _$HabitActorEventCopyWithImpl<$Res>
@@ -86,149 +83,35 @@ class _$HabitActorEventCopyWithImpl<$Res>
   final HabitActorEvent _value;
   // ignore: unused_field
   final $Res Function(HabitActorEvent) _then;
-}
-
-abstract class _$InitializeUserCopyWith<$Res> {
-  factory _$InitializeUserCopyWith(
-          _InitializeUser value, $Res Function(_InitializeUser) then) =
-      __$InitializeUserCopyWithImpl<$Res>;
-  $Res call({User user});
-
-  $UserCopyWith<$Res> get user;
-}
-
-class __$InitializeUserCopyWithImpl<$Res>
-    extends _$HabitActorEventCopyWithImpl<$Res>
-    implements _$InitializeUserCopyWith<$Res> {
-  __$InitializeUserCopyWithImpl(
-      _InitializeUser _value, $Res Function(_InitializeUser) _then)
-      : super(_value, (v) => _then(v as _InitializeUser));
-
-  @override
-  _InitializeUser get _value => super._value as _InitializeUser;
 
   @override
   $Res call({
-    Object user = freezed,
+    Object habit = freezed,
   }) {
-    return _then(_InitializeUser(
-      user == freezed ? _value.user : user as User,
+    return _then(_value.copyWith(
+      habit: habit == freezed ? _value.habit : habit as HabitItem,
     ));
   }
 
   @override
-  $UserCopyWith<$Res> get user {
-    if (_value.user == null) {
+  $HabitItemCopyWith<$Res> get habit {
+    if (_value.habit == null) {
       return null;
     }
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+    return $HabitItemCopyWith<$Res>(_value.habit, (value) {
+      return _then(_value.copyWith(habit: value));
     });
   }
 }
 
-class _$_InitializeUser implements _InitializeUser {
-  const _$_InitializeUser(this.user) : assert(user != null);
-
-  @override
-  final User user;
-
-  @override
-  String toString() {
-    return 'HabitActorEvent.initializeUser(user: $user)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _InitializeUser &&
-            (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
-
-  @override
-  _$InitializeUserCopyWith<_InitializeUser> get copyWith =>
-      __$InitializeUserCopyWithImpl<_InitializeUser>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initializeUser(User user),
-    @required Result deleted(HabitItem habit),
-    @required Result countUpdated(HabitItem habit),
-    @required Result edited(HabitItem habit),
-  }) {
-    assert(initializeUser != null);
-    assert(deleted != null);
-    assert(countUpdated != null);
-    assert(edited != null);
-    return initializeUser(user);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
-    Result deleted(HabitItem habit),
-    Result countUpdated(HabitItem habit),
-    Result edited(HabitItem habit),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (initializeUser != null) {
-      return initializeUser(user);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initializeUser(_InitializeUser value),
-    @required Result deleted(_Deleted value),
-    @required Result countUpdated(_CountUpdated value),
-    @required Result edited(_Edited value),
-  }) {
-    assert(initializeUser != null);
-    assert(deleted != null);
-    assert(countUpdated != null);
-    assert(edited != null);
-    return initializeUser(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initializeUser(_InitializeUser value),
-    Result deleted(_Deleted value),
-    Result countUpdated(_CountUpdated value),
-    Result edited(_Edited value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (initializeUser != null) {
-      return initializeUser(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _InitializeUser implements HabitActorEvent {
-  const factory _InitializeUser(User user) = _$_InitializeUser;
-
-  User get user;
-  _$InitializeUserCopyWith<_InitializeUser> get copyWith;
-}
-
-abstract class _$DeletedCopyWith<$Res> {
+abstract class _$DeletedCopyWith<$Res>
+    implements $HabitActorEventCopyWith<$Res> {
   factory _$DeletedCopyWith(_Deleted value, $Res Function(_Deleted) then) =
       __$DeletedCopyWithImpl<$Res>;
+  @override
   $Res call({HabitItem habit});
 
+  @override
   $HabitItemCopyWith<$Res> get habit;
 }
 
@@ -247,16 +130,6 @@ class __$DeletedCopyWithImpl<$Res> extends _$HabitActorEventCopyWithImpl<$Res>
     return _then(_Deleted(
       habit == freezed ? _value.habit : habit as HabitItem,
     ));
-  }
-
-  @override
-  $HabitItemCopyWith<$Res> get habit {
-    if (_value.habit == null) {
-      return null;
-    }
-    return $HabitItemCopyWith<$Res>(_value.habit, (value) {
-      return _then(_value.copyWith(habit: value));
-    });
   }
 }
 
@@ -290,12 +163,10 @@ class _$_Deleted implements _Deleted {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result deleted(HabitItem habit),
     @required Result countUpdated(HabitItem habit),
     @required Result edited(HabitItem habit),
   }) {
-    assert(initializeUser != null);
     assert(deleted != null);
     assert(countUpdated != null);
     assert(edited != null);
@@ -305,7 +176,6 @@ class _$_Deleted implements _Deleted {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result deleted(HabitItem habit),
     Result countUpdated(HabitItem habit),
     Result edited(HabitItem habit),
@@ -321,12 +191,10 @@ class _$_Deleted implements _Deleted {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(_InitializeUser value),
     @required Result deleted(_Deleted value),
     @required Result countUpdated(_CountUpdated value),
     @required Result edited(_Edited value),
   }) {
-    assert(initializeUser != null);
     assert(deleted != null);
     assert(countUpdated != null);
     assert(edited != null);
@@ -336,7 +204,6 @@ class _$_Deleted implements _Deleted {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(_InitializeUser value),
     Result deleted(_Deleted value),
     Result countUpdated(_CountUpdated value),
     Result edited(_Edited value),
@@ -353,16 +220,21 @@ class _$_Deleted implements _Deleted {
 abstract class _Deleted implements HabitActorEvent {
   const factory _Deleted(HabitItem habit) = _$_Deleted;
 
+  @override
   HabitItem get habit;
+  @override
   _$DeletedCopyWith<_Deleted> get copyWith;
 }
 
-abstract class _$CountUpdatedCopyWith<$Res> {
+abstract class _$CountUpdatedCopyWith<$Res>
+    implements $HabitActorEventCopyWith<$Res> {
   factory _$CountUpdatedCopyWith(
           _CountUpdated value, $Res Function(_CountUpdated) then) =
       __$CountUpdatedCopyWithImpl<$Res>;
+  @override
   $Res call({HabitItem habit});
 
+  @override
   $HabitItemCopyWith<$Res> get habit;
 }
 
@@ -383,16 +255,6 @@ class __$CountUpdatedCopyWithImpl<$Res>
     return _then(_CountUpdated(
       habit == freezed ? _value.habit : habit as HabitItem,
     ));
-  }
-
-  @override
-  $HabitItemCopyWith<$Res> get habit {
-    if (_value.habit == null) {
-      return null;
-    }
-    return $HabitItemCopyWith<$Res>(_value.habit, (value) {
-      return _then(_value.copyWith(habit: value));
-    });
   }
 }
 
@@ -426,12 +288,10 @@ class _$_CountUpdated implements _CountUpdated {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result deleted(HabitItem habit),
     @required Result countUpdated(HabitItem habit),
     @required Result edited(HabitItem habit),
   }) {
-    assert(initializeUser != null);
     assert(deleted != null);
     assert(countUpdated != null);
     assert(edited != null);
@@ -441,7 +301,6 @@ class _$_CountUpdated implements _CountUpdated {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result deleted(HabitItem habit),
     Result countUpdated(HabitItem habit),
     Result edited(HabitItem habit),
@@ -457,12 +316,10 @@ class _$_CountUpdated implements _CountUpdated {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(_InitializeUser value),
     @required Result deleted(_Deleted value),
     @required Result countUpdated(_CountUpdated value),
     @required Result edited(_Edited value),
   }) {
-    assert(initializeUser != null);
     assert(deleted != null);
     assert(countUpdated != null);
     assert(edited != null);
@@ -472,7 +329,6 @@ class _$_CountUpdated implements _CountUpdated {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(_InitializeUser value),
     Result deleted(_Deleted value),
     Result countUpdated(_CountUpdated value),
     Result edited(_Edited value),
@@ -489,15 +345,20 @@ class _$_CountUpdated implements _CountUpdated {
 abstract class _CountUpdated implements HabitActorEvent {
   const factory _CountUpdated(HabitItem habit) = _$_CountUpdated;
 
+  @override
   HabitItem get habit;
+  @override
   _$CountUpdatedCopyWith<_CountUpdated> get copyWith;
 }
 
-abstract class _$EditedCopyWith<$Res> {
+abstract class _$EditedCopyWith<$Res>
+    implements $HabitActorEventCopyWith<$Res> {
   factory _$EditedCopyWith(_Edited value, $Res Function(_Edited) then) =
       __$EditedCopyWithImpl<$Res>;
+  @override
   $Res call({HabitItem habit});
 
+  @override
   $HabitItemCopyWith<$Res> get habit;
 }
 
@@ -516,16 +377,6 @@ class __$EditedCopyWithImpl<$Res> extends _$HabitActorEventCopyWithImpl<$Res>
     return _then(_Edited(
       habit == freezed ? _value.habit : habit as HabitItem,
     ));
-  }
-
-  @override
-  $HabitItemCopyWith<$Res> get habit {
-    if (_value.habit == null) {
-      return null;
-    }
-    return $HabitItemCopyWith<$Res>(_value.habit, (value) {
-      return _then(_value.copyWith(habit: value));
-    });
   }
 }
 
@@ -559,12 +410,10 @@ class _$_Edited implements _Edited {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initializeUser(User user),
     @required Result deleted(HabitItem habit),
     @required Result countUpdated(HabitItem habit),
     @required Result edited(HabitItem habit),
   }) {
-    assert(initializeUser != null);
     assert(deleted != null);
     assert(countUpdated != null);
     assert(edited != null);
@@ -574,7 +423,6 @@ class _$_Edited implements _Edited {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initializeUser(User user),
     Result deleted(HabitItem habit),
     Result countUpdated(HabitItem habit),
     Result edited(HabitItem habit),
@@ -590,12 +438,10 @@ class _$_Edited implements _Edited {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result initializeUser(_InitializeUser value),
     @required Result deleted(_Deleted value),
     @required Result countUpdated(_CountUpdated value),
     @required Result edited(_Edited value),
   }) {
-    assert(initializeUser != null);
     assert(deleted != null);
     assert(countUpdated != null);
     assert(edited != null);
@@ -605,7 +451,6 @@ class _$_Edited implements _Edited {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result initializeUser(_InitializeUser value),
     Result deleted(_Deleted value),
     Result countUpdated(_CountUpdated value),
     Result edited(_Edited value),
@@ -622,7 +467,9 @@ class _$_Edited implements _Edited {
 abstract class _Edited implements HabitActorEvent {
   const factory _Edited(HabitItem habit) = _$_Edited;
 
+  @override
   HabitItem get habit;
+  @override
   _$EditedCopyWith<_Edited> get copyWith;
 }
 

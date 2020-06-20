@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habits/application/habits/habit_actor/habit_actor_bloc.dart';
 import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:habits/domain/habits/habit.dart';
-import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
 import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
@@ -12,10 +11,6 @@ import 'widgets/habit_card.dart';
 import 'widgets/progress_indicator.dart';
 
 class HabitsPage extends StatefulWidget {
-  final User user;
-
-  const HabitsPage({Key key, this.user}) : super(key: key);
-
   @override
   _HabitsPageState createState() => _HabitsPageState();
 }
@@ -52,7 +47,7 @@ class _HabitsPageState extends State<HabitsPage> {
                   child: Container(
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTaskScreen(user: widget.user),
+                    child: AddTaskScreen(),
                   ),
                 ),
                 backgroundColor: Colors.white,
@@ -84,11 +79,6 @@ class _HabitsPageState extends State<HabitsPage> {
                           padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
                           child: state.when(
                             initial: () {
-                              context.bloc<HabitWatcherBloc>().add(
-                                  HabitWatcherEvent.initializeUser(
-                                      widget.user));
-                              context.bloc<HabitActorBloc>().add(
-                                  HabitActorEvent.initializeUser(widget.user));
                               context.bloc<HabitWatcherBloc>().add(
                                   HabitWatcherEvent.watchAll(
                                       currentSelectedDate));
@@ -128,7 +118,6 @@ class _HabitsPageState extends State<HabitsPage> {
         children: habits
             .map((habit) => HabitCard(
                   habit: habit,
-                  user: widget.user,
                   dateTime: dateTime,
                 ))
             .toList());

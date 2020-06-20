@@ -17,10 +17,8 @@ class _SplashPageState extends State<SplashPage> {
         state.map(
           initial: (_) {},
           authenticated: (user) {
-            ExtendedNavigator.of(context).pushReplacementNamed(
-              Routes.landingPage,
-              arguments: LandingPageArguments(user: user.user),
-            );
+            ExtendedNavigator.of(context)
+                .pushReplacementNamed(Routes.landingPage);
           },
           unauthenticated: (_) {
             ExtendedNavigator.of(context)

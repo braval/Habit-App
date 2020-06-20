@@ -4,10 +4,6 @@ import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/habits_page.dart';
 
 class LandingPage extends StatefulWidget {
-  final User user;
-
-  const LandingPage({@required this.user});
-
   @override
   _LandingPageState createState() => _LandingPageState();
 }
@@ -33,7 +29,7 @@ class _LandingPageState extends State<LandingPage>
   Widget build(BuildContext context) {
     final List<Widget> _tabs = [
       Container(),
-      HabitsPage(user: widget.user),
+      HabitsPage(),
       Container(),
     ];
 

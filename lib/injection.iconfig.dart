@@ -32,14 +32,13 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerLazySingleton<IAuthFacade>(
       () => FirebaseAuthFacade(g<FirebaseAuth>(), g<GoogleSignIn>()));
   g.registerLazySingleton<IHabitsRepository>(
-      () => HabitsRepository(g<Firestore>()));
+      () => HabitsRepository(g<Firestore>(), g<IAuthFacade>()));
   g.registerLazySingleton<IUserRepository>(
       () => UserRepository(g<Firestore>()));
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(
       () => SignUpFormBloc(g<IAuthFacade>(), g<IUserRepository>()));
-  g.registerFactory<AuthBloc>(
-      () => AuthBloc(g<IAuthFacade>(), g<IUserRepository>()));
+  g.registerFactory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
   g.registerFactory<HabitActorBloc>(
       () => HabitActorBloc(g<IHabitsRepository>()));
   g.registerFactory<HabitAddFormBloc>(
