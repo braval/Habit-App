@@ -6,13 +6,9 @@ import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart'
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
-import 'package:habits/presentation/core/header_widget.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
 import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
-import 'package:habits/presentation/habits/widgets/date_picker.dart';
-
 import 'widgets/habit_card.dart';
-import 'widgets/popup_menu.dart';
 import 'widgets/progress_indicator.dart';
 
 class HabitsPage extends StatefulWidget {
