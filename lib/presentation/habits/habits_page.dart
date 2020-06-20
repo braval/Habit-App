@@ -73,34 +73,11 @@ class _HabitsPageState extends State<HabitsPage> {
                   Stack(
                     overflow: Overflow.visible,
                     children: [
-                      Header(),
                       Positioned(
-                        top: 40.0,
-                        right: 10.0,
-                        child: PopupMenu(),
-                      ),
-                      Positioned(
-                        top: 250.0,
-                        left: 25.0,
-                        right: 25.0,
-                        child: state.maybeMap(
-                          loadSuccess: (habits) {
-                            return CustomProgressIndicator(
-                              user: widget.user,
-                              habits: habits.habits,
-                            );
-                          },
-                          orElse: () => CustomProgressIndicator(
-                            user: widget.user,
-                            habits: [],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 350.0,
-                        left: 25.0,
-                        right: 25.0,
-                        child: CustomDatePicker(onDateChange),
+                        top: 50,
+                        left: 20,
+                        right: 20,
+                        child: CustomProgressIndicator(),
                       ),
                       Theme(
                         data: ThemeData(
@@ -108,7 +85,7 @@ class _HabitsPageState extends State<HabitsPage> {
                           cardColor: Colors.transparent,
                         ),
                         child: Container(
-                          padding: const EdgeInsets.fromLTRB(0, 450, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
                           child: state.when(
                             initial: () {
                               context.bloc<HabitWatcherBloc>().add(

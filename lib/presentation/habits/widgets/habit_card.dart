@@ -45,7 +45,7 @@ class _HabitCardState extends State<HabitCard> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+                  const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 65.0,
@@ -119,14 +119,14 @@ class _HabitCardState extends State<HabitCard> {
               ],
               child: Padding(
                 padding:
-                    const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.4),
-                        blurRadius: 1, // changes position of shadow
+                        blurRadius: 1,
                       ),
                     ],
                     color: widget.habit.done ? Colors.grey[200] : Colors.white,
@@ -200,7 +200,6 @@ class _HabitCardState extends State<HabitCard> {
                     expanded: Column(
                       children: [
                         getDaysOfWeekRow(getDaysOfWeek()),
-                        getWeeklyStatsWidget(getWeeklyStatList()),
                       ],
                     ),
                   ),
@@ -259,30 +258,25 @@ Widget getDaysOfWeekRow(List<String> strings) {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: strings
           .map(
-            (item) => Text(
-              item,
-              style: const TextStyle(
-                fontSize: 10,
-                fontFamily: 'Montserrat',
-                color: Colors.black54,
-              ),
+            (item) => Column(
+              children: [
+                Text(
+                  item,
+                  style: const TextStyle(
+                    fontSize: 10,
+                    fontFamily: 'Montserrat',
+                    color: Colors.black54,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.check,
+                    size: 15.0,
+                  ),
+                ),
+              ],
             ),
           )
           .toList());
-}
-
-Widget getWeeklyStatsWidget(List<bool> weeklyStats) {
-  return Row(
-    children: weeklyStats
-        .map(
-          (item) => CircularCheckBox(
-            checkColor: Colors.white,
-            disabledColor: Colors.black45,
-            activeColor: Colors.green,
-            value: item,
-            onChanged: (bool value) {},
-          ),
-        )
-        .toList(),
-  );
 }

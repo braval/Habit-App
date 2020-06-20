@@ -15,7 +15,7 @@ abstract class HabitAddFormState with _$HabitAddFormState {
         habitName: HabitName(''),
         habitCategoryName: HabitCategoryName(''),
         isSubmitting: false,
-        habitCount: 0,
+        habitCount: 1,
         showErrorMessages: false,
         habitFailureOrSuccessOption: none(),
       );

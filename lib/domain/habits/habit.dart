@@ -24,7 +24,7 @@ abstract class HabitItem implements _$HabitItem {
         category: HabitCategoryName(''),
         name: HabitName(''),
         done: false,
-        totalCount: 1,
+        totalCount: 0,
         currentCount: 0,
       );
 

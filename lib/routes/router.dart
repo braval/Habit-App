@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:habits/presentation/core/landing_page.dart';
 import 'package:habits/presentation/habits/habits_page.dart';
 import 'package:habits/presentation/login/sign_in/sign_in_page.dart';
 import 'package:habits/presentation/login/sign_up/sign_up_page.dart';
@@ -8,6 +9,7 @@ import 'package:habits/presentation/splash/splash_page.dart';
 class $Router {
   @initial
   SplashPage splashPage;
+  LandingPage landingPage;
   HabitsPage habitsPage;
   SignInPage signInPage;
   SignUpPage signUpPage;

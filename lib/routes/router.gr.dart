@@ -8,18 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:habits/presentation/splash/splash_page.dart';
-import 'package:habits/presentation/habits/habits_page.dart';
+import 'package:habits/presentation/core/landing_page.dart';
 import 'package:habits/domain/user/user.dart';
+import 'package:habits/presentation/habits/habits_page.dart';
 import 'package:habits/presentation/login/sign_in/sign_in_page.dart';
 import 'package:habits/presentation/login/sign_up/sign_up_page.dart';
 
 abstract class Routes {
   static const splashPage = '/';
+  static const landingPage = '/landing-page';
   static const habitsPage = '/habits-page';
   static const signInPage = '/sign-in-page';
   static const signUpPage = '/sign-up-page';
   static const all = {
     splashPage,
+    landingPage,
     habitsPage,
     signInPage,
     signUpPage,
@@ -41,6 +44,15 @@ class Router extends RouterBase {
       case Routes.splashPage:
         return MaterialPageRoute<dynamic>(
           builder: (context) => SplashPage(),
+          settings: settings,
+        );
+      case Routes.landingPage:
+        if (hasInvalidArgs<LandingPageArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<LandingPageArguments>(args);
+        }
+        final typedArgs = args as LandingPageArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => LandingPage(user: typedArgs.user),
           settings: settings,
         );
       case Routes.habitsPage:
@@ -73,6 +85,12 @@ class Router extends RouterBase {
 // Arguments holder classes
 // **************************************************************************
 
+//LandingPage arguments holder class
+class LandingPageArguments {
+  final User user;
+  LandingPageArguments({@required this.user});
+}
+
 //HabitsPage arguments holder class
 class HabitsPageArguments {
   final Key key;
@@ -86,6 +104,14 @@ class HabitsPageArguments {
 
 extension RouterNavigationHelperMethods on ExtendedNavigatorState {
   Future pushSplashPage() => pushNamed(Routes.splashPage);
+
+  Future pushLandingPage({
+    @required User user,
+  }) =>
+      pushNamed(
+        Routes.landingPage,
+        arguments: LandingPageArguments(user: user),
+      );
 
   Future pushHabitsPage({
     Key key,
