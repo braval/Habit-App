@@ -17,10 +17,13 @@ class _SplashPageState extends State<SplashPage> {
         state.map(
           initial: (_) {},
           authenticated: (user) {
+            print('authenticated');
             ExtendedNavigator.of(context)
                 .pushReplacementNamed(Routes.landingPage);
           },
           unauthenticated: (_) {
+            print('unauthenticated');
+
             ExtendedNavigator.of(context)
                 .pushReplacementNamed(Routes.signInPage);
           },

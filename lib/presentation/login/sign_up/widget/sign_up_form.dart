@@ -28,7 +28,7 @@ class SignUpForm extends StatelessWidget {
             },
             (_) {
               ExtendedNavigator.of(context)
-                  .pushReplacementNamed(Routes.splashPage);
+                  .pushReplacementNamed(Routes.landingPage);
             },
           ),
         );
