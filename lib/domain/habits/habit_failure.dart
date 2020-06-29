@@ -6,5 +6,6 @@ part 'habit_failure.freezed.dart';
 abstract class HabitFailure with _$HabitFailure {
   const factory HabitFailure.unexpected() = _Unexpected;
   const factory HabitFailure.noHabitsFound() = _NoHabitsFound;
+  const factory HabitFailure.habitAlreadyExists() = _HabitAlreadyExists;
   const factory HabitFailure.noCategorySelected() = _NoCategorySelected;
 }

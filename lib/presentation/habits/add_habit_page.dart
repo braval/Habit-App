@@ -86,6 +86,7 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
                   unexpected: (_) => "Unexpected Failure",
                   noCategorySelected: (_) => "Please select a category",
                   noHabitsFound: (_) => null,
+                  habitAlreadyExists: (_) => "Habit already exists",
                 ),
               ).show(context);
             },

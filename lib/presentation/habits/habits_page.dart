@@ -94,6 +94,7 @@ class _HabitsPageState extends State<HabitsPage> {
                             loadFailure: (f) {
                               return f.map(
                                 unexpected: (_) => Container(),
+                                habitAlreadyExists: (_) => Container(),
                                 noHabitsFound: (_) => Container(),
                                 noCategorySelected: (_) =>
                                     CircularProgressBar(),

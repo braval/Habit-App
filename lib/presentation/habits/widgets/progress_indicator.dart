@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habits/domain/habits/habit.dart';
-import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
-import 'package:habits/presentation/habits/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -21,8 +18,8 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            height: 40.0,
-            width: 40.0,
+            height: 50.0,
+            width: 50.0,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -37,8 +34,8 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
             child: Column(
               children: [
                 Container(
-                  height: 15.0,
-                  width: 40.0,
+                  height: 20.0,
+                  width: 50.0,
                   decoration: const BoxDecoration(
                     color: kYellow,
                     borderRadius: BorderRadius.only(
@@ -58,7 +55,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
+                  padding: const EdgeInsets.only(top: 6.0),
                   child: Center(
                     child: Text(
                       DateFormat("d").format(DateTime.now()),

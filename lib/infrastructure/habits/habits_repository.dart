@@ -26,10 +26,14 @@ class HabitsRepository implements IHabitsRepository {
       final userDoc = await _firestore.userDocument();
       final dailyHabitCollection = userDoc.dailyHabitsCollection;
 
+      final existingHabit =
+          await dailyHabitCollection.document(habitItemDto.name).get();
+      if (existingHabit.exists) {
+        return left(const HabitFailure.habitAlreadyExists());
+      }
+
       await dailyHabitCollection
-          .document(today)
-          .habitsCollection
-          .document(habitItem.id.getOrCrash())
+          .document(habitItemDto.name)
           .setData(habitItemDto.toJson());
 
       return right(unit);

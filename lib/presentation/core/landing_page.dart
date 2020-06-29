@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:habits/domain/user/user.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/habits_page.dart';
 
@@ -35,6 +34,7 @@ class _LandingPageState extends State<LandingPage>
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 0.0,
         selectedItemColor: kDarkPurple,
         currentIndex: _tabIndex,
         items: myTabs,

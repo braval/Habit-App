@@ -20,6 +20,10 @@ class _$HabitFailureTearOff {
     return const _NoHabitsFound();
   }
 
+  _HabitAlreadyExists habitAlreadyExists() {
+    return const _HabitAlreadyExists();
+  }
+
   _NoCategorySelected noCategorySelected() {
     return const _NoCategorySelected();
   }
@@ -33,12 +37,14 @@ mixin _$HabitFailure {
   Result when<Result extends Object>({
     @required Result unexpected(),
     @required Result noHabitsFound(),
+    @required Result habitAlreadyExists(),
     @required Result noCategorySelected(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unexpected(),
     Result noHabitsFound(),
+    Result habitAlreadyExists(),
     Result noCategorySelected(),
     @required Result orElse(),
   });
@@ -46,12 +52,14 @@ mixin _$HabitFailure {
   Result map<Result extends Object>({
     @required Result unexpected(_Unexpected value),
     @required Result noHabitsFound(_NoHabitsFound value),
+    @required Result habitAlreadyExists(_HabitAlreadyExists value),
     @required Result noCategorySelected(_NoCategorySelected value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unexpected(_Unexpected value),
     Result noHabitsFound(_NoHabitsFound value),
+    Result habitAlreadyExists(_HabitAlreadyExists value),
     Result noCategorySelected(_NoCategorySelected value),
     @required Result orElse(),
   });
@@ -108,10 +116,12 @@ class _$_Unexpected implements _Unexpected {
   Result when<Result extends Object>({
     @required Result unexpected(),
     @required Result noHabitsFound(),
+    @required Result habitAlreadyExists(),
     @required Result noCategorySelected(),
   }) {
     assert(unexpected != null);
     assert(noHabitsFound != null);
+    assert(habitAlreadyExists != null);
     assert(noCategorySelected != null);
     return unexpected();
   }
@@ -121,6 +131,7 @@ class _$_Unexpected implements _Unexpected {
   Result maybeWhen<Result extends Object>({
     Result unexpected(),
     Result noHabitsFound(),
+    Result habitAlreadyExists(),
     Result noCategorySelected(),
     @required Result orElse(),
   }) {
@@ -136,10 +147,12 @@ class _$_Unexpected implements _Unexpected {
   Result map<Result extends Object>({
     @required Result unexpected(_Unexpected value),
     @required Result noHabitsFound(_NoHabitsFound value),
+    @required Result habitAlreadyExists(_HabitAlreadyExists value),
     @required Result noCategorySelected(_NoCategorySelected value),
   }) {
     assert(unexpected != null);
     assert(noHabitsFound != null);
+    assert(habitAlreadyExists != null);
     assert(noCategorySelected != null);
     return unexpected(this);
   }
@@ -149,6 +162,7 @@ class _$_Unexpected implements _Unexpected {
   Result maybeMap<Result extends Object>({
     Result unexpected(_Unexpected value),
     Result noHabitsFound(_NoHabitsFound value),
+    Result habitAlreadyExists(_HabitAlreadyExists value),
     Result noCategorySelected(_NoCategorySelected value),
     @required Result orElse(),
   }) {
@@ -202,10 +216,12 @@ class _$_NoHabitsFound implements _NoHabitsFound {
   Result when<Result extends Object>({
     @required Result unexpected(),
     @required Result noHabitsFound(),
+    @required Result habitAlreadyExists(),
     @required Result noCategorySelected(),
   }) {
     assert(unexpected != null);
     assert(noHabitsFound != null);
+    assert(habitAlreadyExists != null);
     assert(noCategorySelected != null);
     return noHabitsFound();
   }
@@ -215,6 +231,7 @@ class _$_NoHabitsFound implements _NoHabitsFound {
   Result maybeWhen<Result extends Object>({
     Result unexpected(),
     Result noHabitsFound(),
+    Result habitAlreadyExists(),
     Result noCategorySelected(),
     @required Result orElse(),
   }) {
@@ -230,10 +247,12 @@ class _$_NoHabitsFound implements _NoHabitsFound {
   Result map<Result extends Object>({
     @required Result unexpected(_Unexpected value),
     @required Result noHabitsFound(_NoHabitsFound value),
+    @required Result habitAlreadyExists(_HabitAlreadyExists value),
     @required Result noCategorySelected(_NoCategorySelected value),
   }) {
     assert(unexpected != null);
     assert(noHabitsFound != null);
+    assert(habitAlreadyExists != null);
     assert(noCategorySelected != null);
     return noHabitsFound(this);
   }
@@ -243,6 +262,7 @@ class _$_NoHabitsFound implements _NoHabitsFound {
   Result maybeMap<Result extends Object>({
     Result unexpected(_Unexpected value),
     Result noHabitsFound(_NoHabitsFound value),
+    Result habitAlreadyExists(_HabitAlreadyExists value),
     Result noCategorySelected(_NoCategorySelected value),
     @required Result orElse(),
   }) {
@@ -256,6 +276,106 @@ class _$_NoHabitsFound implements _NoHabitsFound {
 
 abstract class _NoHabitsFound implements HabitFailure {
   const factory _NoHabitsFound() = _$_NoHabitsFound;
+}
+
+abstract class _$HabitAlreadyExistsCopyWith<$Res> {
+  factory _$HabitAlreadyExistsCopyWith(
+          _HabitAlreadyExists value, $Res Function(_HabitAlreadyExists) then) =
+      __$HabitAlreadyExistsCopyWithImpl<$Res>;
+}
+
+class __$HabitAlreadyExistsCopyWithImpl<$Res>
+    extends _$HabitFailureCopyWithImpl<$Res>
+    implements _$HabitAlreadyExistsCopyWith<$Res> {
+  __$HabitAlreadyExistsCopyWithImpl(
+      _HabitAlreadyExists _value, $Res Function(_HabitAlreadyExists) _then)
+      : super(_value, (v) => _then(v as _HabitAlreadyExists));
+
+  @override
+  _HabitAlreadyExists get _value => super._value as _HabitAlreadyExists;
+}
+
+class _$_HabitAlreadyExists implements _HabitAlreadyExists {
+  const _$_HabitAlreadyExists();
+
+  @override
+  String toString() {
+    return 'HabitFailure.habitAlreadyExists()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _HabitAlreadyExists);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unexpected(),
+    @required Result noHabitsFound(),
+    @required Result habitAlreadyExists(),
+    @required Result noCategorySelected(),
+  }) {
+    assert(unexpected != null);
+    assert(noHabitsFound != null);
+    assert(habitAlreadyExists != null);
+    assert(noCategorySelected != null);
+    return habitAlreadyExists();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unexpected(),
+    Result noHabitsFound(),
+    Result habitAlreadyExists(),
+    Result noCategorySelected(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (habitAlreadyExists != null) {
+      return habitAlreadyExists();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unexpected(_Unexpected value),
+    @required Result noHabitsFound(_NoHabitsFound value),
+    @required Result habitAlreadyExists(_HabitAlreadyExists value),
+    @required Result noCategorySelected(_NoCategorySelected value),
+  }) {
+    assert(unexpected != null);
+    assert(noHabitsFound != null);
+    assert(habitAlreadyExists != null);
+    assert(noCategorySelected != null);
+    return habitAlreadyExists(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unexpected(_Unexpected value),
+    Result noHabitsFound(_NoHabitsFound value),
+    Result habitAlreadyExists(_HabitAlreadyExists value),
+    Result noCategorySelected(_NoCategorySelected value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (habitAlreadyExists != null) {
+      return habitAlreadyExists(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HabitAlreadyExists implements HabitFailure {
+  const factory _HabitAlreadyExists() = _$_HabitAlreadyExists;
 }
 
 abstract class _$NoCategorySelectedCopyWith<$Res> {
@@ -296,10 +416,12 @@ class _$_NoCategorySelected implements _NoCategorySelected {
   Result when<Result extends Object>({
     @required Result unexpected(),
     @required Result noHabitsFound(),
+    @required Result habitAlreadyExists(),
     @required Result noCategorySelected(),
   }) {
     assert(unexpected != null);
     assert(noHabitsFound != null);
+    assert(habitAlreadyExists != null);
     assert(noCategorySelected != null);
     return noCategorySelected();
   }
@@ -309,6 +431,7 @@ class _$_NoCategorySelected implements _NoCategorySelected {
   Result maybeWhen<Result extends Object>({
     Result unexpected(),
     Result noHabitsFound(),
+    Result habitAlreadyExists(),
     Result noCategorySelected(),
     @required Result orElse(),
   }) {
@@ -324,10 +447,12 @@ class _$_NoCategorySelected implements _NoCategorySelected {
   Result map<Result extends Object>({
     @required Result unexpected(_Unexpected value),
     @required Result noHabitsFound(_NoHabitsFound value),
+    @required Result habitAlreadyExists(_HabitAlreadyExists value),
     @required Result noCategorySelected(_NoCategorySelected value),
   }) {
     assert(unexpected != null);
     assert(noHabitsFound != null);
+    assert(habitAlreadyExists != null);
     assert(noCategorySelected != null);
     return noCategorySelected(this);
   }
@@ -337,6 +462,7 @@ class _$_NoCategorySelected implements _NoCategorySelected {
   Result maybeMap<Result extends Object>({
     Result unexpected(_Unexpected value),
     Result noHabitsFound(_NoHabitsFound value),
+    Result habitAlreadyExists(_HabitAlreadyExists value),
     Result noCategorySelected(_NoCategorySelected value),
     @required Result orElse(),
   }) {
