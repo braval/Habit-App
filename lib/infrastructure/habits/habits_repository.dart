@@ -13,8 +13,7 @@ import 'package:intl/intl.dart';
 @LazySingleton(as: IHabitsRepository)
 class HabitsRepository implements IHabitsRepository {
   final Firestore _firestore;
-  String _currentDate = DateFormat("yyyy-MM-dd")
-      .format(DateTime.now().subtract(Duration(days: 1)));
+  String _currentDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
 
   HabitsRepository(this._firestore);
 
@@ -75,7 +74,7 @@ class HabitsRepository implements IHabitsRepository {
   Stream<Either<HabitFailure, List<HabitItem>>> watchAll(
       DateTime dateTime) async* {
     final userDoc = await _firestore.userDocument();
-    final dailyHabitCollection = userDoc.dailyHabitsCollection;
+    final dailyHabitCollection = userDoc.dailyHabitsCollection.orderBy("done");
 
     final today = DateFormat("yyyy-MM-dd").format(DateTime.now());
     if (_currentDate != today) {

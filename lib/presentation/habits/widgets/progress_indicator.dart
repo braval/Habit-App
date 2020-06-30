@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class CustomProgressIndicator extends StatefulWidget {
+  final List<HabitItem> habits;
+  const CustomProgressIndicator({@required this.habits});
+
   @override
   _CustomProgressIndicatorState createState() =>
       _CustomProgressIndicatorState();
@@ -71,26 +75,25 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
               ],
             ),
           ),
-          _buildProgressIndicator(),
+          _buildProgressIndicator(widget.habits),
         ],
       ),
     );
   }
 
-  Widget _buildProgressIndicator() {
-    // final double totalHabits = habits.length.toDouble();
-    // final double completedHabits =
-    //     habits.where((habit) => habit.done == true).length.toDouble();
-    // final double percent =
-    //     totalHabits == completedHabits ? 1.0 : completedHabits / totalHabits;
-    // final bool displayProgress = totalHabits != 0.0;
+  Widget _buildProgressIndicator(List<HabitItem> habits) {
+    final double totalHabits = habits.length.toDouble();
+    final double completedHabits =
+        habits.where((habit) => habit.done == true).length.toDouble();
+    final double percent =
+        totalHabits == completedHabits ? 1.0 : completedHabits / totalHabits;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          '40 % ',
-          style: TextStyle(
+        Text(
+          '${(percent * 100).toInt()} % ',
+          style: const TextStyle(
             fontSize: 25.0,
             fontFamily: 'Montserrat',
             color: Colors.black54,
@@ -110,7 +113,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
         LinearPercentIndicator(
           width: 200.0,
           lineHeight: 8.0,
-          percent: 0.4,
+          percent: percent,
           progressColor: kYellow,
         ),
       ],
