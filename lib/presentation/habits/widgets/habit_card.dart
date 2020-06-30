@@ -86,8 +86,6 @@ class _HabitCardState extends State<HabitCard> {
               ),
             ),
             Slidable(
-              enabled: DateFormat("yyyy-MM-dd").format(widget.dateTime) ==
-                  DateFormat("yyyy-MM-dd").format(DateTime.now()),
               key: UniqueKey(),
               actionPane: const SlidableDrawerActionPane(),
               actionExtentRatio: 0.15,

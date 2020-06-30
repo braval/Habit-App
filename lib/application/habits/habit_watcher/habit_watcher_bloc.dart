@@ -34,7 +34,6 @@ class HabitWatcherBloc extends Bloc<HabitWatcherEvent, HabitWatcherState> {
         _habitsRepository.watchAll(e.dateTime).listen((failureOrHabits) =>
             add(HabitWatcherEvent.notesReceived(failureOrHabits)));
       },
-      watchAllCompleted: (e) async* {},
       notesReceived: (e) async* {
         yield e.failureOrHabits.fold(
           (f) => HabitWatcherState.loadFailure(f),

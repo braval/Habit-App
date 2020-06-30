@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:habits/application/habits/habit_actor/habit_actor_bloc.dart';
 import 'package:habits/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/presentation/constants.dart';
+import 'package:habits/presentation/core/lifecycle_handler.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
 import 'package:habits/presentation/habits/widgets/circular_progress_indicator.dart';
 import 'widgets/habit_card.dart';
@@ -18,11 +18,21 @@ class HabitsPage extends StatefulWidget {
 class _HabitsPageState extends State<HabitsPage> {
   DateTime currentSelectedDate = DateTime.now();
 
-  void onDateChange(DateTime dateTime) {
-    currentSelectedDate = dateTime;
-    context
-        .bloc<HabitWatcherBloc>()
-        .add(HabitWatcherEvent.watchAll(currentSelectedDate));
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(
+      LifecycleEventHandler(
+        resumeCallBack: () async => setState(
+          () {
+            currentSelectedDate = DateTime.now();
+            context
+                .bloc<HabitWatcherBloc>()
+                .add(HabitWatcherEvent.watchAll(currentSelectedDate));
+          },
+        ),
+      ),
+    );
+    super.initState();
   }
 
   @override

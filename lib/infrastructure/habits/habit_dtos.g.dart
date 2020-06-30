@@ -14,6 +14,8 @@ _$_HabitItemDto _$_$_HabitItemDtoFromJson(Map<String, dynamic> json) {
     done: json['done'] as bool,
     currentCount: json['currentCount'] as int,
     totalCount: json['totalCount'] as int,
+    longestStreak: json['longestStreak'] as int,
+    currentStreak: json['currentStreak'] as int,
   );
 }
 
@@ -25,4 +27,6 @@ Map<String, dynamic> _$_$_HabitItemDtoToJson(_$_HabitItemDto instance) =>
       'done': instance.done,
       'currentCount': instance.currentCount,
       'totalCount': instance.totalCount,
+      'longestStreak': instance.longestStreak,
+      'currentStreak': instance.currentStreak,
     };

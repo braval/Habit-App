@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:habits/domain/auth/i_auth_facade.dart';
 import 'package:habits/domain/habits/habit_failure.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:dartz/dartz.dart';
@@ -9,13 +8,15 @@ import 'package:habits/domain/habits/i_habits_repository.dart';
 import 'package:habits/infrastructure/habits/habit_dtos.dart';
 import 'package:injectable/injectable.dart';
 import 'package:habits/infrastructure/core/firestore_helpers.dart';
+import 'package:intl/intl.dart';
 
 @LazySingleton(as: IHabitsRepository)
 class HabitsRepository implements IHabitsRepository {
   final Firestore _firestore;
-  final IAuthFacade _authFacade;
+  String _currentDate = DateFormat("yyyy-MM-dd")
+      .format(DateTime.now().subtract(Duration(days: 1)));
 
-  HabitsRepository(this._firestore, this._authFacade);
+  HabitsRepository(this._firestore);
 
   @override
   Future<Either<HabitFailure, Unit>> add(HabitItem habitItem) async {
@@ -75,6 +76,31 @@ class HabitsRepository implements IHabitsRepository {
       DateTime dateTime) async* {
     final userDoc = await _firestore.userDocument();
     final dailyHabitCollection = userDoc.dailyHabitsCollection;
+
+    final today = DateFormat("yyyy-MM-dd").format(DateTime.now());
+    if (_currentDate != today) {
+      dailyHabitCollection.getDocuments().then(
+        (snapshot) {
+          snapshot.documents.forEach((doc) {
+            final newCurrentStreak =
+                doc.data["done"] == true ? doc.data["currentStreak"] + 1 : 0;
+            final newLongestStreak =
+                (newCurrentStreak as int) >= (doc.data["longestStreak"] as int)
+                    ? newCurrentStreak
+                    : doc.data["longestStreak"];
+            doc.reference.updateData(
+              {
+                "currentStreak": newCurrentStreak,
+                "longestStreak": newLongestStreak,
+                "currentCount": 0,
+                "done": false,
+              },
+            );
+          });
+        },
+      );
+      _currentDate = today;
+    }
 
     yield* dailyHabitCollection.snapshots().map(
       (snapshot) {

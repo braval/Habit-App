@@ -9,6 +9,7 @@ import 'package:habits/domain/habits/habit_failure.dart';
 import 'package:habits/domain/habits/i_habits_repository.dart';
 import 'package:habits/domain/habits/value_objects.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 part 'habit_add_form_event.dart';
@@ -61,6 +62,8 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
               done: false,
               totalCount: state.habitCount,
               currentCount: 0,
+              currentStreak: 0,
+              longestStreak: 0,
             ),
           );
         } else {

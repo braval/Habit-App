@@ -18,10 +18,6 @@ class _$HabitWatcherEventTearOff {
     );
   }
 
-  _WatchAllCompleted watchAllCompleted() {
-    return const _WatchAllCompleted();
-  }
-
   _NotesReceived notesReceived(
       Either<HabitFailure, List<HabitItem>> failureOrHabits) {
     return _NotesReceived(
@@ -37,7 +33,6 @@ mixin _$HabitWatcherEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result watchAll(DateTime dateTime),
-    @required Result watchAllCompleted(),
     @required
         Result notesReceived(
             Either<HabitFailure, List<HabitItem>> failureOrHabits),
@@ -45,20 +40,17 @@ mixin _$HabitWatcherEvent {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result watchAll(DateTime dateTime),
-    Result watchAllCompleted(),
     Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result watchAll(_WatchAll value),
-    @required Result watchAllCompleted(_WatchAllCompleted value),
     @required Result notesReceived(_NotesReceived value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result watchAll(_WatchAll value),
-    Result watchAllCompleted(_WatchAllCompleted value),
     Result notesReceived(_NotesReceived value),
     @required Result orElse(),
   });
@@ -144,13 +136,11 @@ class _$_WatchAll with DiagnosticableTreeMixin implements _WatchAll {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result watchAll(DateTime dateTime),
-    @required Result watchAllCompleted(),
     @required
         Result notesReceived(
             Either<HabitFailure, List<HabitItem>> failureOrHabits),
   }) {
     assert(watchAll != null);
-    assert(watchAllCompleted != null);
     assert(notesReceived != null);
     return watchAll(dateTime);
   }
@@ -159,7 +149,6 @@ class _$_WatchAll with DiagnosticableTreeMixin implements _WatchAll {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result watchAll(DateTime dateTime),
-    Result watchAllCompleted(),
     Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
     @required Result orElse(),
   }) {
@@ -174,11 +163,9 @@ class _$_WatchAll with DiagnosticableTreeMixin implements _WatchAll {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result watchAll(_WatchAll value),
-    @required Result watchAllCompleted(_WatchAllCompleted value),
     @required Result notesReceived(_NotesReceived value),
   }) {
     assert(watchAll != null);
-    assert(watchAllCompleted != null);
     assert(notesReceived != null);
     return watchAll(this);
   }
@@ -187,7 +174,6 @@ class _$_WatchAll with DiagnosticableTreeMixin implements _WatchAll {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result watchAll(_WatchAll value),
-    Result watchAllCompleted(_WatchAllCompleted value),
     Result notesReceived(_NotesReceived value),
     @required Result orElse(),
   }) {
@@ -204,111 +190,6 @@ abstract class _WatchAll implements HabitWatcherEvent {
 
   DateTime get dateTime;
   _$WatchAllCopyWith<_WatchAll> get copyWith;
-}
-
-abstract class _$WatchAllCompletedCopyWith<$Res> {
-  factory _$WatchAllCompletedCopyWith(
-          _WatchAllCompleted value, $Res Function(_WatchAllCompleted) then) =
-      __$WatchAllCompletedCopyWithImpl<$Res>;
-}
-
-class __$WatchAllCompletedCopyWithImpl<$Res>
-    extends _$HabitWatcherEventCopyWithImpl<$Res>
-    implements _$WatchAllCompletedCopyWith<$Res> {
-  __$WatchAllCompletedCopyWithImpl(
-      _WatchAllCompleted _value, $Res Function(_WatchAllCompleted) _then)
-      : super(_value, (v) => _then(v as _WatchAllCompleted));
-
-  @override
-  _WatchAllCompleted get _value => super._value as _WatchAllCompleted;
-}
-
-class _$_WatchAllCompleted
-    with DiagnosticableTreeMixin
-    implements _WatchAllCompleted {
-  const _$_WatchAllCompleted();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HabitWatcherEvent.watchAllCompleted()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'HabitWatcherEvent.watchAllCompleted'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _WatchAllCompleted);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result watchAll(DateTime dateTime),
-    @required Result watchAllCompleted(),
-    @required
-        Result notesReceived(
-            Either<HabitFailure, List<HabitItem>> failureOrHabits),
-  }) {
-    assert(watchAll != null);
-    assert(watchAllCompleted != null);
-    assert(notesReceived != null);
-    return watchAllCompleted();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result watchAll(DateTime dateTime),
-    Result watchAllCompleted(),
-    Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (watchAllCompleted != null) {
-      return watchAllCompleted();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result watchAll(_WatchAll value),
-    @required Result watchAllCompleted(_WatchAllCompleted value),
-    @required Result notesReceived(_NotesReceived value),
-  }) {
-    assert(watchAll != null);
-    assert(watchAllCompleted != null);
-    assert(notesReceived != null);
-    return watchAllCompleted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result watchAll(_WatchAll value),
-    Result watchAllCompleted(_WatchAllCompleted value),
-    Result notesReceived(_NotesReceived value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (watchAllCompleted != null) {
-      return watchAllCompleted(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _WatchAllCompleted implements HabitWatcherEvent {
-  const factory _WatchAllCompleted() = _$_WatchAllCompleted;
 }
 
 abstract class _$NotesReceivedCopyWith<$Res> {
@@ -382,13 +263,11 @@ class _$_NotesReceived with DiagnosticableTreeMixin implements _NotesReceived {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result watchAll(DateTime dateTime),
-    @required Result watchAllCompleted(),
     @required
         Result notesReceived(
             Either<HabitFailure, List<HabitItem>> failureOrHabits),
   }) {
     assert(watchAll != null);
-    assert(watchAllCompleted != null);
     assert(notesReceived != null);
     return notesReceived(failureOrHabits);
   }
@@ -397,7 +276,6 @@ class _$_NotesReceived with DiagnosticableTreeMixin implements _NotesReceived {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result watchAll(DateTime dateTime),
-    Result watchAllCompleted(),
     Result notesReceived(Either<HabitFailure, List<HabitItem>> failureOrHabits),
     @required Result orElse(),
   }) {
@@ -412,11 +290,9 @@ class _$_NotesReceived with DiagnosticableTreeMixin implements _NotesReceived {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result watchAll(_WatchAll value),
-    @required Result watchAllCompleted(_WatchAllCompleted value),
     @required Result notesReceived(_NotesReceived value),
   }) {
     assert(watchAll != null);
-    assert(watchAllCompleted != null);
     assert(notesReceived != null);
     return notesReceived(this);
   }
@@ -425,7 +301,6 @@ class _$_NotesReceived with DiagnosticableTreeMixin implements _NotesReceived {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result watchAll(_WatchAll value),
-    Result watchAllCompleted(_WatchAllCompleted value),
     Result notesReceived(_NotesReceived value),
     @required Result orElse(),
   }) {

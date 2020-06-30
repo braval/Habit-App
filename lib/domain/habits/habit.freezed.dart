@@ -18,7 +18,9 @@ class _$HabitItemTearOff {
       @required HabitCategoryName category,
       @required bool done,
       @required int totalCount,
-      @required int currentCount}) {
+      @required int currentCount,
+      @required int longestStreak,
+      @required int currentStreak}) {
     return _HabitItem(
       id: id,
       name: name,
@@ -26,6 +28,8 @@ class _$HabitItemTearOff {
       done: done,
       totalCount: totalCount,
       currentCount: currentCount,
+      longestStreak: longestStreak,
+      currentStreak: currentStreak,
     );
   }
 }
@@ -40,6 +44,8 @@ mixin _$HabitItem {
   bool get done;
   int get totalCount;
   int get currentCount;
+  int get longestStreak;
+  int get currentStreak;
 
   $HabitItemCopyWith<HabitItem> get copyWith;
 }
@@ -53,7 +59,9 @@ abstract class $HabitItemCopyWith<$Res> {
       HabitCategoryName category,
       bool done,
       int totalCount,
-      int currentCount});
+      int currentCount,
+      int longestStreak,
+      int currentStreak});
 }
 
 class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
@@ -71,6 +79,8 @@ class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
     Object done = freezed,
     Object totalCount = freezed,
     Object currentCount = freezed,
+    Object longestStreak = freezed,
+    Object currentStreak = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
@@ -81,6 +91,12 @@ class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
       totalCount: totalCount == freezed ? _value.totalCount : totalCount as int,
       currentCount:
           currentCount == freezed ? _value.currentCount : currentCount as int,
+      longestStreak: longestStreak == freezed
+          ? _value.longestStreak
+          : longestStreak as int,
+      currentStreak: currentStreak == freezed
+          ? _value.currentStreak
+          : currentStreak as int,
     ));
   }
 }
@@ -96,7 +112,9 @@ abstract class _$HabitItemCopyWith<$Res> implements $HabitItemCopyWith<$Res> {
       HabitCategoryName category,
       bool done,
       int totalCount,
-      int currentCount});
+      int currentCount,
+      int longestStreak,
+      int currentStreak});
 }
 
 class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
@@ -115,6 +133,8 @@ class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
     Object done = freezed,
     Object totalCount = freezed,
     Object currentCount = freezed,
+    Object longestStreak = freezed,
+    Object currentStreak = freezed,
   }) {
     return _then(_HabitItem(
       id: id == freezed ? _value.id : id as UniqueId,
@@ -125,6 +145,12 @@ class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
       totalCount: totalCount == freezed ? _value.totalCount : totalCount as int,
       currentCount:
           currentCount == freezed ? _value.currentCount : currentCount as int,
+      longestStreak: longestStreak == freezed
+          ? _value.longestStreak
+          : longestStreak as int,
+      currentStreak: currentStreak == freezed
+          ? _value.currentStreak
+          : currentStreak as int,
     ));
   }
 }
@@ -136,13 +162,17 @@ class _$_HabitItem extends _HabitItem {
       @required this.category,
       @required this.done,
       @required this.totalCount,
-      @required this.currentCount})
+      @required this.currentCount,
+      @required this.longestStreak,
+      @required this.currentStreak})
       : assert(id != null),
         assert(name != null),
         assert(category != null),
         assert(done != null),
         assert(totalCount != null),
         assert(currentCount != null),
+        assert(longestStreak != null),
+        assert(currentStreak != null),
         super._();
 
   @override
@@ -157,10 +187,14 @@ class _$_HabitItem extends _HabitItem {
   final int totalCount;
   @override
   final int currentCount;
+  @override
+  final int longestStreak;
+  @override
+  final int currentStreak;
 
   @override
   String toString() {
-    return 'HabitItem(id: $id, name: $name, category: $category, done: $done, totalCount: $totalCount, currentCount: $currentCount)';
+    return 'HabitItem(id: $id, name: $name, category: $category, done: $done, totalCount: $totalCount, currentCount: $currentCount, longestStreak: $longestStreak, currentStreak: $currentStreak)';
   }
 
   @override
@@ -181,7 +215,13 @@ class _$_HabitItem extends _HabitItem {
                     .equals(other.totalCount, totalCount)) &&
             (identical(other.currentCount, currentCount) ||
                 const DeepCollectionEquality()
-                    .equals(other.currentCount, currentCount)));
+                    .equals(other.currentCount, currentCount)) &&
+            (identical(other.longestStreak, longestStreak) ||
+                const DeepCollectionEquality()
+                    .equals(other.longestStreak, longestStreak)) &&
+            (identical(other.currentStreak, currentStreak) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentStreak, currentStreak)));
   }
 
   @override
@@ -192,7 +232,9 @@ class _$_HabitItem extends _HabitItem {
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(done) ^
       const DeepCollectionEquality().hash(totalCount) ^
-      const DeepCollectionEquality().hash(currentCount);
+      const DeepCollectionEquality().hash(currentCount) ^
+      const DeepCollectionEquality().hash(longestStreak) ^
+      const DeepCollectionEquality().hash(currentStreak);
 
   @override
   _$HabitItemCopyWith<_HabitItem> get copyWith =>
@@ -207,7 +249,9 @@ abstract class _HabitItem extends HabitItem {
       @required HabitCategoryName category,
       @required bool done,
       @required int totalCount,
-      @required int currentCount}) = _$_HabitItem;
+      @required int currentCount,
+      @required int longestStreak,
+      @required int currentStreak}) = _$_HabitItem;
 
   @override
   UniqueId get id;
@@ -221,6 +265,10 @@ abstract class _HabitItem extends HabitItem {
   int get totalCount;
   @override
   int get currentCount;
+  @override
+  int get longestStreak;
+  @override
+  int get currentStreak;
   @override
   _$HabitItemCopyWith<_HabitItem> get copyWith;
 }

@@ -18,6 +18,8 @@ abstract class HabitItemDto implements _$HabitItemDto {
     @required bool done,
     @required int currentCount,
     @required int totalCount,
+    @required int longestStreak,
+    @required int currentStreak,
   }) = _HabitItemDto;
 
   factory HabitItemDto.fromDomain(HabitItem habitItem) {
@@ -28,6 +30,8 @@ abstract class HabitItemDto implements _$HabitItemDto {
       currentCount: habitItem.currentCount,
       totalCount: habitItem.totalCount,
       done: habitItem.done,
+      longestStreak: habitItem.longestStreak,
+      currentStreak: habitItem.currentStreak,
     );
   }
 
@@ -39,6 +43,8 @@ abstract class HabitItemDto implements _$HabitItemDto {
       currentCount: currentCount,
       totalCount: totalCount,
       name: HabitName(name),
+      longestStreak: longestStreak,
+      currentStreak: currentStreak,
     );
   }
 

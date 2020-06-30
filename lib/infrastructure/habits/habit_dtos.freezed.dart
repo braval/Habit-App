@@ -21,7 +21,9 @@ class _$HabitItemDtoTearOff {
       @required String category,
       @required bool done,
       @required int currentCount,
-      @required int totalCount}) {
+      @required int totalCount,
+      @required int longestStreak,
+      @required int currentStreak}) {
     return _HabitItemDto(
       uniqueId: uniqueId,
       name: name,
@@ -29,6 +31,8 @@ class _$HabitItemDtoTearOff {
       done: done,
       currentCount: currentCount,
       totalCount: totalCount,
+      longestStreak: longestStreak,
+      currentStreak: currentStreak,
     );
   }
 }
@@ -43,6 +47,8 @@ mixin _$HabitItemDto {
   bool get done;
   int get currentCount;
   int get totalCount;
+  int get longestStreak;
+  int get currentStreak;
 
   Map<String, dynamic> toJson();
   $HabitItemDtoCopyWith<HabitItemDto> get copyWith;
@@ -58,7 +64,9 @@ abstract class $HabitItemDtoCopyWith<$Res> {
       String category,
       bool done,
       int currentCount,
-      int totalCount});
+      int totalCount,
+      int longestStreak,
+      int currentStreak});
 }
 
 class _$HabitItemDtoCopyWithImpl<$Res> implements $HabitItemDtoCopyWith<$Res> {
@@ -76,6 +84,8 @@ class _$HabitItemDtoCopyWithImpl<$Res> implements $HabitItemDtoCopyWith<$Res> {
     Object done = freezed,
     Object currentCount = freezed,
     Object totalCount = freezed,
+    Object longestStreak = freezed,
+    Object currentStreak = freezed,
   }) {
     return _then(_value.copyWith(
       uniqueId: uniqueId == freezed ? _value.uniqueId : uniqueId as String,
@@ -85,6 +95,12 @@ class _$HabitItemDtoCopyWithImpl<$Res> implements $HabitItemDtoCopyWith<$Res> {
       currentCount:
           currentCount == freezed ? _value.currentCount : currentCount as int,
       totalCount: totalCount == freezed ? _value.totalCount : totalCount as int,
+      longestStreak: longestStreak == freezed
+          ? _value.longestStreak
+          : longestStreak as int,
+      currentStreak: currentStreak == freezed
+          ? _value.currentStreak
+          : currentStreak as int,
     ));
   }
 }
@@ -101,7 +117,9 @@ abstract class _$HabitItemDtoCopyWith<$Res>
       String category,
       bool done,
       int currentCount,
-      int totalCount});
+      int totalCount,
+      int longestStreak,
+      int currentStreak});
 }
 
 class __$HabitItemDtoCopyWithImpl<$Res> extends _$HabitItemDtoCopyWithImpl<$Res>
@@ -121,6 +139,8 @@ class __$HabitItemDtoCopyWithImpl<$Res> extends _$HabitItemDtoCopyWithImpl<$Res>
     Object done = freezed,
     Object currentCount = freezed,
     Object totalCount = freezed,
+    Object longestStreak = freezed,
+    Object currentStreak = freezed,
   }) {
     return _then(_HabitItemDto(
       uniqueId: uniqueId == freezed ? _value.uniqueId : uniqueId as String,
@@ -130,6 +150,12 @@ class __$HabitItemDtoCopyWithImpl<$Res> extends _$HabitItemDtoCopyWithImpl<$Res>
       currentCount:
           currentCount == freezed ? _value.currentCount : currentCount as int,
       totalCount: totalCount == freezed ? _value.totalCount : totalCount as int,
+      longestStreak: longestStreak == freezed
+          ? _value.longestStreak
+          : longestStreak as int,
+      currentStreak: currentStreak == freezed
+          ? _value.currentStreak
+          : currentStreak as int,
     ));
   }
 }
@@ -142,13 +168,17 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
       @required this.category,
       @required this.done,
       @required this.currentCount,
-      @required this.totalCount})
+      @required this.totalCount,
+      @required this.longestStreak,
+      @required this.currentStreak})
       : assert(uniqueId != null),
         assert(name != null),
         assert(category != null),
         assert(done != null),
         assert(currentCount != null),
         assert(totalCount != null),
+        assert(longestStreak != null),
+        assert(currentStreak != null),
         super._();
 
   factory _$_HabitItemDto.fromJson(Map<String, dynamic> json) =>
@@ -166,10 +196,14 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
   final int currentCount;
   @override
   final int totalCount;
+  @override
+  final int longestStreak;
+  @override
+  final int currentStreak;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HabitItemDto(uniqueId: $uniqueId, name: $name, category: $category, done: $done, currentCount: $currentCount, totalCount: $totalCount)';
+    return 'HabitItemDto(uniqueId: $uniqueId, name: $name, category: $category, done: $done, currentCount: $currentCount, totalCount: $totalCount, longestStreak: $longestStreak, currentStreak: $currentStreak)';
   }
 
   @override
@@ -182,7 +216,9 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('category', category))
       ..add(DiagnosticsProperty('done', done))
       ..add(DiagnosticsProperty('currentCount', currentCount))
-      ..add(DiagnosticsProperty('totalCount', totalCount));
+      ..add(DiagnosticsProperty('totalCount', totalCount))
+      ..add(DiagnosticsProperty('longestStreak', longestStreak))
+      ..add(DiagnosticsProperty('currentStreak', currentStreak));
   }
 
   @override
@@ -204,7 +240,13 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
                     .equals(other.currentCount, currentCount)) &&
             (identical(other.totalCount, totalCount) ||
                 const DeepCollectionEquality()
-                    .equals(other.totalCount, totalCount)));
+                    .equals(other.totalCount, totalCount)) &&
+            (identical(other.longestStreak, longestStreak) ||
+                const DeepCollectionEquality()
+                    .equals(other.longestStreak, longestStreak)) &&
+            (identical(other.currentStreak, currentStreak) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentStreak, currentStreak)));
   }
 
   @override
@@ -215,7 +257,9 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(done) ^
       const DeepCollectionEquality().hash(currentCount) ^
-      const DeepCollectionEquality().hash(totalCount);
+      const DeepCollectionEquality().hash(totalCount) ^
+      const DeepCollectionEquality().hash(longestStreak) ^
+      const DeepCollectionEquality().hash(currentStreak);
 
   @override
   _$HabitItemDtoCopyWith<_HabitItemDto> get copyWith =>
@@ -235,7 +279,9 @@ abstract class _HabitItemDto extends HabitItemDto {
       @required String category,
       @required bool done,
       @required int currentCount,
-      @required int totalCount}) = _$_HabitItemDto;
+      @required int totalCount,
+      @required int longestStreak,
+      @required int currentStreak}) = _$_HabitItemDto;
 
   factory _HabitItemDto.fromJson(Map<String, dynamic> json) =
       _$_HabitItemDto.fromJson;
@@ -252,6 +298,10 @@ abstract class _HabitItemDto extends HabitItemDto {
   int get currentCount;
   @override
   int get totalCount;
+  @override
+  int get longestStreak;
+  @override
+  int get currentStreak;
   @override
   _$HabitItemDtoCopyWith<_HabitItemDto> get copyWith;
 }
