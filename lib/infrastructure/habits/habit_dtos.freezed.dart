@@ -23,7 +23,8 @@ class _$HabitItemDtoTearOff {
       @required int currentCount,
       @required int totalCount,
       @required int longestStreak,
-      @required int currentStreak}) {
+      @required int currentStreak,
+      @required Map<int, bool> weeklyStats}) {
     return _HabitItemDto(
       uniqueId: uniqueId,
       name: name,
@@ -33,6 +34,7 @@ class _$HabitItemDtoTearOff {
       totalCount: totalCount,
       longestStreak: longestStreak,
       currentStreak: currentStreak,
+      weeklyStats: weeklyStats,
     );
   }
 }
@@ -49,6 +51,7 @@ mixin _$HabitItemDto {
   int get totalCount;
   int get longestStreak;
   int get currentStreak;
+  Map<int, bool> get weeklyStats;
 
   Map<String, dynamic> toJson();
   $HabitItemDtoCopyWith<HabitItemDto> get copyWith;
@@ -66,7 +69,8 @@ abstract class $HabitItemDtoCopyWith<$Res> {
       int currentCount,
       int totalCount,
       int longestStreak,
-      int currentStreak});
+      int currentStreak,
+      Map<int, bool> weeklyStats});
 }
 
 class _$HabitItemDtoCopyWithImpl<$Res> implements $HabitItemDtoCopyWith<$Res> {
@@ -86,6 +90,7 @@ class _$HabitItemDtoCopyWithImpl<$Res> implements $HabitItemDtoCopyWith<$Res> {
     Object totalCount = freezed,
     Object longestStreak = freezed,
     Object currentStreak = freezed,
+    Object weeklyStats = freezed,
   }) {
     return _then(_value.copyWith(
       uniqueId: uniqueId == freezed ? _value.uniqueId : uniqueId as String,
@@ -101,6 +106,9 @@ class _$HabitItemDtoCopyWithImpl<$Res> implements $HabitItemDtoCopyWith<$Res> {
       currentStreak: currentStreak == freezed
           ? _value.currentStreak
           : currentStreak as int,
+      weeklyStats: weeklyStats == freezed
+          ? _value.weeklyStats
+          : weeklyStats as Map<int, bool>,
     ));
   }
 }
@@ -119,7 +127,8 @@ abstract class _$HabitItemDtoCopyWith<$Res>
       int currentCount,
       int totalCount,
       int longestStreak,
-      int currentStreak});
+      int currentStreak,
+      Map<int, bool> weeklyStats});
 }
 
 class __$HabitItemDtoCopyWithImpl<$Res> extends _$HabitItemDtoCopyWithImpl<$Res>
@@ -141,6 +150,7 @@ class __$HabitItemDtoCopyWithImpl<$Res> extends _$HabitItemDtoCopyWithImpl<$Res>
     Object totalCount = freezed,
     Object longestStreak = freezed,
     Object currentStreak = freezed,
+    Object weeklyStats = freezed,
   }) {
     return _then(_HabitItemDto(
       uniqueId: uniqueId == freezed ? _value.uniqueId : uniqueId as String,
@@ -156,6 +166,9 @@ class __$HabitItemDtoCopyWithImpl<$Res> extends _$HabitItemDtoCopyWithImpl<$Res>
       currentStreak: currentStreak == freezed
           ? _value.currentStreak
           : currentStreak as int,
+      weeklyStats: weeklyStats == freezed
+          ? _value.weeklyStats
+          : weeklyStats as Map<int, bool>,
     ));
   }
 }
@@ -170,7 +183,8 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
       @required this.currentCount,
       @required this.totalCount,
       @required this.longestStreak,
-      @required this.currentStreak})
+      @required this.currentStreak,
+      @required this.weeklyStats})
       : assert(uniqueId != null),
         assert(name != null),
         assert(category != null),
@@ -179,6 +193,7 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
         assert(totalCount != null),
         assert(longestStreak != null),
         assert(currentStreak != null),
+        assert(weeklyStats != null),
         super._();
 
   factory _$_HabitItemDto.fromJson(Map<String, dynamic> json) =>
@@ -200,10 +215,12 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
   final int longestStreak;
   @override
   final int currentStreak;
+  @override
+  final Map<int, bool> weeklyStats;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HabitItemDto(uniqueId: $uniqueId, name: $name, category: $category, done: $done, currentCount: $currentCount, totalCount: $totalCount, longestStreak: $longestStreak, currentStreak: $currentStreak)';
+    return 'HabitItemDto(uniqueId: $uniqueId, name: $name, category: $category, done: $done, currentCount: $currentCount, totalCount: $totalCount, longestStreak: $longestStreak, currentStreak: $currentStreak, weeklyStats: $weeklyStats)';
   }
 
   @override
@@ -218,7 +235,8 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('currentCount', currentCount))
       ..add(DiagnosticsProperty('totalCount', totalCount))
       ..add(DiagnosticsProperty('longestStreak', longestStreak))
-      ..add(DiagnosticsProperty('currentStreak', currentStreak));
+      ..add(DiagnosticsProperty('currentStreak', currentStreak))
+      ..add(DiagnosticsProperty('weeklyStats', weeklyStats));
   }
 
   @override
@@ -246,7 +264,10 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
                     .equals(other.longestStreak, longestStreak)) &&
             (identical(other.currentStreak, currentStreak) ||
                 const DeepCollectionEquality()
-                    .equals(other.currentStreak, currentStreak)));
+                    .equals(other.currentStreak, currentStreak)) &&
+            (identical(other.weeklyStats, weeklyStats) ||
+                const DeepCollectionEquality()
+                    .equals(other.weeklyStats, weeklyStats)));
   }
 
   @override
@@ -259,7 +280,8 @@ class _$_HabitItemDto extends _HabitItemDto with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(currentCount) ^
       const DeepCollectionEquality().hash(totalCount) ^
       const DeepCollectionEquality().hash(longestStreak) ^
-      const DeepCollectionEquality().hash(currentStreak);
+      const DeepCollectionEquality().hash(currentStreak) ^
+      const DeepCollectionEquality().hash(weeklyStats);
 
   @override
   _$HabitItemDtoCopyWith<_HabitItemDto> get copyWith =>
@@ -281,7 +303,8 @@ abstract class _HabitItemDto extends HabitItemDto {
       @required int currentCount,
       @required int totalCount,
       @required int longestStreak,
-      @required int currentStreak}) = _$_HabitItemDto;
+      @required int currentStreak,
+      @required Map<int, bool> weeklyStats}) = _$_HabitItemDto;
 
   factory _HabitItemDto.fromJson(Map<String, dynamic> json) =
       _$_HabitItemDto.fromJson;
@@ -302,6 +325,8 @@ abstract class _HabitItemDto extends HabitItemDto {
   int get longestStreak;
   @override
   int get currentStreak;
+  @override
+  Map<int, bool> get weeklyStats;
   @override
   _$HabitItemDtoCopyWith<_HabitItemDto> get copyWith;
 }

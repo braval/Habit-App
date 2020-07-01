@@ -13,8 +13,6 @@ import 'package:intl/intl.dart';
 @LazySingleton(as: IHabitsRepository)
 class HabitsRepository implements IHabitsRepository {
   final Firestore _firestore;
-  String _currentDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
-
   HabitsRepository(this._firestore);
 
   @override
@@ -23,6 +21,12 @@ class HabitsRepository implements IHabitsRepository {
       final HabitItemDto habitItemDto = HabitItemDto.fromDomain(habitItem);
       final userDoc = await _firestore.userDocument();
       final dailyHabitCollection = userDoc.dailyHabitsCollection;
+
+      final date = await _firestore.date();
+      if (date == "null") {
+        await userDoc.updateData(
+            {"date": DateFormat("yyyy-MM-dd").format(DateTime.now())});
+      }
 
       final newHabitDocumentRef =
           dailyHabitCollection.document(habitItemDto.name);
@@ -77,28 +81,41 @@ class HabitsRepository implements IHabitsRepository {
     final dailyHabitCollection = userDoc.dailyHabitsCollection.orderBy("done");
 
     final today = DateFormat("yyyy-MM-dd").format(DateTime.now());
-    if (_currentDate != today) {
+    final currentDate = await _firestore.date();
+
+    if (currentDate != today) {
       dailyHabitCollection.getDocuments().then(
         (snapshot) {
-          snapshot.documents.forEach((doc) {
-            final newCurrentStreak =
-                doc.data["done"] == true ? doc.data["currentStreak"] + 1 : 0;
-            final newLongestStreak =
-                (newCurrentStreak as int) >= (doc.data["longestStreak"] as int)
-                    ? newCurrentStreak
-                    : doc.data["longestStreak"];
-            doc.reference.updateData(
-              {
-                "currentStreak": newCurrentStreak,
-                "longestStreak": newLongestStreak,
-                "currentCount": 0,
-                "done": false,
-              },
-            );
-          });
+          snapshot.documents.forEach(
+            (doc) {
+              final newCurrentStreak =
+                  doc.data["done"] == true ? doc.data["currentStreak"] + 1 : 0;
+              final newLongestStreak = (newCurrentStreak as int) >=
+                      (doc.data["longestStreak"] as int)
+                  ? newCurrentStreak
+                  : doc.data["longestStreak"];
+              doc.reference.updateData(
+                {
+                  "currentStreak": newCurrentStreak,
+                  "longestStreak": newLongestStreak,
+                  "currentCount": 0,
+                  "done": false,
+                },
+              );
+              doc.reference.setData(
+                {
+                  "weeklyStats": {
+                    DateTime.parse(currentDate).weekday.toString():
+                        doc.data["done"],
+                  },
+                },
+                merge: true,
+              );
+            },
+          );
         },
       );
-      _currentDate = today;
+      await userDoc.updateData({"date": today});
     }
 
     yield* dailyHabitCollection.snapshots().map(

@@ -20,7 +20,8 @@ class _$HabitItemTearOff {
       @required int totalCount,
       @required int currentCount,
       @required int longestStreak,
-      @required int currentStreak}) {
+      @required int currentStreak,
+      @required Map<int, bool> weeklyStats}) {
     return _HabitItem(
       id: id,
       name: name,
@@ -30,6 +31,7 @@ class _$HabitItemTearOff {
       currentCount: currentCount,
       longestStreak: longestStreak,
       currentStreak: currentStreak,
+      weeklyStats: weeklyStats,
     );
   }
 }
@@ -46,6 +48,7 @@ mixin _$HabitItem {
   int get currentCount;
   int get longestStreak;
   int get currentStreak;
+  Map<int, bool> get weeklyStats;
 
   $HabitItemCopyWith<HabitItem> get copyWith;
 }
@@ -61,7 +64,8 @@ abstract class $HabitItemCopyWith<$Res> {
       int totalCount,
       int currentCount,
       int longestStreak,
-      int currentStreak});
+      int currentStreak,
+      Map<int, bool> weeklyStats});
 }
 
 class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
@@ -81,6 +85,7 @@ class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
     Object currentCount = freezed,
     Object longestStreak = freezed,
     Object currentStreak = freezed,
+    Object weeklyStats = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
@@ -97,6 +102,9 @@ class _$HabitItemCopyWithImpl<$Res> implements $HabitItemCopyWith<$Res> {
       currentStreak: currentStreak == freezed
           ? _value.currentStreak
           : currentStreak as int,
+      weeklyStats: weeklyStats == freezed
+          ? _value.weeklyStats
+          : weeklyStats as Map<int, bool>,
     ));
   }
 }
@@ -114,7 +122,8 @@ abstract class _$HabitItemCopyWith<$Res> implements $HabitItemCopyWith<$Res> {
       int totalCount,
       int currentCount,
       int longestStreak,
-      int currentStreak});
+      int currentStreak,
+      Map<int, bool> weeklyStats});
 }
 
 class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
@@ -135,6 +144,7 @@ class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
     Object currentCount = freezed,
     Object longestStreak = freezed,
     Object currentStreak = freezed,
+    Object weeklyStats = freezed,
   }) {
     return _then(_HabitItem(
       id: id == freezed ? _value.id : id as UniqueId,
@@ -151,6 +161,9 @@ class __$HabitItemCopyWithImpl<$Res> extends _$HabitItemCopyWithImpl<$Res>
       currentStreak: currentStreak == freezed
           ? _value.currentStreak
           : currentStreak as int,
+      weeklyStats: weeklyStats == freezed
+          ? _value.weeklyStats
+          : weeklyStats as Map<int, bool>,
     ));
   }
 }
@@ -164,7 +177,8 @@ class _$_HabitItem extends _HabitItem {
       @required this.totalCount,
       @required this.currentCount,
       @required this.longestStreak,
-      @required this.currentStreak})
+      @required this.currentStreak,
+      @required this.weeklyStats})
       : assert(id != null),
         assert(name != null),
         assert(category != null),
@@ -173,6 +187,7 @@ class _$_HabitItem extends _HabitItem {
         assert(currentCount != null),
         assert(longestStreak != null),
         assert(currentStreak != null),
+        assert(weeklyStats != null),
         super._();
 
   @override
@@ -191,10 +206,12 @@ class _$_HabitItem extends _HabitItem {
   final int longestStreak;
   @override
   final int currentStreak;
+  @override
+  final Map<int, bool> weeklyStats;
 
   @override
   String toString() {
-    return 'HabitItem(id: $id, name: $name, category: $category, done: $done, totalCount: $totalCount, currentCount: $currentCount, longestStreak: $longestStreak, currentStreak: $currentStreak)';
+    return 'HabitItem(id: $id, name: $name, category: $category, done: $done, totalCount: $totalCount, currentCount: $currentCount, longestStreak: $longestStreak, currentStreak: $currentStreak, weeklyStats: $weeklyStats)';
   }
 
   @override
@@ -221,7 +238,10 @@ class _$_HabitItem extends _HabitItem {
                     .equals(other.longestStreak, longestStreak)) &&
             (identical(other.currentStreak, currentStreak) ||
                 const DeepCollectionEquality()
-                    .equals(other.currentStreak, currentStreak)));
+                    .equals(other.currentStreak, currentStreak)) &&
+            (identical(other.weeklyStats, weeklyStats) ||
+                const DeepCollectionEquality()
+                    .equals(other.weeklyStats, weeklyStats)));
   }
 
   @override
@@ -234,7 +254,8 @@ class _$_HabitItem extends _HabitItem {
       const DeepCollectionEquality().hash(totalCount) ^
       const DeepCollectionEquality().hash(currentCount) ^
       const DeepCollectionEquality().hash(longestStreak) ^
-      const DeepCollectionEquality().hash(currentStreak);
+      const DeepCollectionEquality().hash(currentStreak) ^
+      const DeepCollectionEquality().hash(weeklyStats);
 
   @override
   _$HabitItemCopyWith<_HabitItem> get copyWith =>
@@ -251,7 +272,8 @@ abstract class _HabitItem extends HabitItem {
       @required int totalCount,
       @required int currentCount,
       @required int longestStreak,
-      @required int currentStreak}) = _$_HabitItem;
+      @required int currentStreak,
+      @required Map<int, bool> weeklyStats}) = _$_HabitItem;
 
   @override
   UniqueId get id;
@@ -269,6 +291,8 @@ abstract class _HabitItem extends HabitItem {
   int get longestStreak;
   @override
   int get currentStreak;
+  @override
+  Map<int, bool> get weeklyStats;
   @override
   _$HabitItemCopyWith<_HabitItem> get copyWith;
 }

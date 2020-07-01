@@ -11,6 +11,12 @@ extension FirestoreX on Firestore {
         .collection('users')
         .document(user.id.getOrCrash());
   }
+
+  Future<String> date() async {
+    final userDoc = await Firestore.instance.userDocument();
+    final userData = await userDoc.get().then((value) => value.data);
+    return userData["date"].toString();
+  }
 }
 
 extension DocumentReferenceX on DocumentReference {

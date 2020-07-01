@@ -188,7 +188,19 @@ class _HabitCardState extends State<HabitCard> {
                     ),
                     expanded: Column(
                       children: [
-                        getDaysOfWeekRow(getDaysOfWeek()),
+                        Text(
+                          "Current Streak : ${widget.habit.currentStreak}",
+                          style: kHabitSubtitleTextStyle,
+                        ),
+                        Text(
+                          "Longest Streak : ${widget.habit.longestStreak}",
+                          style: kHabitSubtitleTextStyle,
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        getDaysOfWeekRow(
+                            getDaysOfWeek(), widget.habit.weeklyStats),
                       ],
                     ),
                   ),
@@ -242,26 +254,25 @@ List<String> getDaysOfWeek([String locale]) {
       .toList();
 }
 
-Widget getDaysOfWeekRow(List<String> strings) {
+Widget getDaysOfWeekRow(List<String> strings, Map<int, bool> weeklyStats) {
   return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: strings
-          .map(
-            (item) => Column(
-              children: [
-                Text(
-                  item,
-                  style: kHabitSubtitleTextStyle,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.check,
-                    size: 15.0,
-                  ),
-                ),
-              ],
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: strings.asMap().entries.map((item) {
+      return Column(
+        children: [
+          Text(
+            item.value,
+            style: kHabitSubtitleTextStyle,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              weeklyStats[item.key + 1] ? Icons.check : Icons.cancel,
+              size: 15.0,
             ),
-          )
-          .toList());
+          ),
+        ],
+      );
+    }).toList(),
+  );
 }

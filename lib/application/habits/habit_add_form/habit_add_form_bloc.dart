@@ -64,6 +64,15 @@ class HabitAddFormBloc extends Bloc<HabitAddFormEvent, HabitAddFormState> {
               currentCount: 0,
               currentStreak: 0,
               longestStreak: 0,
+              weeklyStats: {
+                1: false,
+                2: false,
+                3: false,
+                4: false,
+                5: false,
+                6: false,
+                7: false,
+              },
             ),
           );
         } else {

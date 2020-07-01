@@ -19,6 +19,7 @@ abstract class HabitItem implements _$HabitItem {
     @required int currentCount,
     @required int longestStreak,
     @required int currentStreak,
+    @required Map<int, bool> weeklyStats,
   }) = _HabitItem;
 
   factory HabitItem.empty() => HabitItem(
@@ -30,6 +31,7 @@ abstract class HabitItem implements _$HabitItem {
         currentCount: 0,
         longestStreak: 0,
         currentStreak: 0,
+        weeklyStats: {},
       );
 
   Option<ValueFailure<dynamic>> get failureOption {

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "424533163757",
+    "firebase_url": "https://habits-12e0c.firebaseio.com",
+    "project_id": "habits-12e0c",
+    "storage_bucket": "habits-12e0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424533163757:android:19f726a733b18a001dd6e4",
+        "android_client_info": {
+          "package_name": "com.brijenraval.habits"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424533163757-8sh8hamgi8dsohto3b1v4a9k94s2b6k7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIICZPasyIcNpFPdin8xZ4emttu7G0QnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424533163757-8sh8hamgi8dsohto3b1v4a9k94s2b6k7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "424533163757-heof5bg28f3a5kut5ccsfai4b4d6a0h4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.habits"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
