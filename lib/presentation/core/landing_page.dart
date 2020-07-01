@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/habits_page.dart';
 
@@ -32,19 +33,24 @@ class _LandingPageState extends State<LandingPage>
       Container(),
     ];
 
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 0.0,
-        selectedItemColor: kDarkPurple,
-        currentIndex: _tabIndex,
-        items: myTabs,
-        onTap: (value) {
-          _handleTabSelection(value);
-        },
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
       ),
-      body: IndexedStack(
-        index: _tabIndex,
-        children: _tabs,
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          elevation: 0.0,
+          selectedItemColor: kDarkPurple,
+          currentIndex: _tabIndex,
+          items: myTabs,
+          onTap: (value) {
+            _handleTabSelection(value);
+          },
+        ),
+        body: IndexedStack(
+          index: _tabIndex,
+          children: _tabs,
+        ),
       ),
     );
   }
