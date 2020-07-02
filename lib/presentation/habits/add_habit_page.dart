@@ -28,7 +28,6 @@ class _BuildAddTaskScreenState extends State<BuildAddTaskScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: constants.kBackground,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(40.0),
           topRight: Radius.circular(40.0),
@@ -48,7 +47,7 @@ class _BuildAddTaskScreenState extends State<BuildAddTaskScreen> {
               height: 65.0,
               child: const Center(
                 child: Text(
-                  'Create New Daily Routine',
+                  'Create New Routine',
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.white,

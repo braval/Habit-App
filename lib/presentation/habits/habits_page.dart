@@ -42,10 +42,9 @@ class _HabitsPageState extends State<HabitsPage> {
       builder: (context, state) {
         return Scaffold(
           resizeToAvoidBottomPadding: false,
-          backgroundColor: kBackground,
+          backgroundColor: Colors.transparent,
           floatingActionButton: FloatingActionButton(
-            backgroundColor: kYellow,
-            mini: true,
+            backgroundColor: kBlue,
             onPressed: () {
               showModalBottomSheet(
                 isScrollControlled: true,

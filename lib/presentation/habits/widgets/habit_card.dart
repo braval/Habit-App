@@ -44,7 +44,7 @@ class _HabitCardState extends State<HabitCard> {
                   const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 65.0,
+                height: kHabitCardHeight,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -123,7 +123,9 @@ class _HabitCardState extends State<HabitCard> {
                         blurRadius: 1,
                       ),
                     ],
-                    color: widget.habit.done ? Colors.grey[200] : Colors.white,
+                    color: widget.habit.done
+                        ? kHabitCardDoneColor
+                        : kHabitCardColor,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: ExpandablePanel(
@@ -139,11 +141,13 @@ class _HabitCardState extends State<HabitCard> {
                               Row(
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: kYellow.withAlpha(5000),
+                                    radius: 30.0,
+                                    backgroundColor: Colors.transparent,
                                     child: Icon(
                                       _icons[
                                           widget.habit.category.getOrCrash()],
                                       color: Colors.white,
+                                      size: 40.0,
                                     ),
                                   ),
                                   Padding(
@@ -154,12 +158,16 @@ class _HabitCardState extends State<HabitCard> {
                                       children: [
                                         Text(
                                           widget.habit.name.getOrCrash(),
-                                          style: kHabitNameTextStyle,
+                                          style: widget.habit.done
+                                              ? kDoneHabitNameTextStyle
+                                              : kIncompleteHabitNameTextStyle,
                                         ),
                                         Text(
                                           widget.habit.category.getOrCrash(),
                                           textAlign: TextAlign.start,
-                                          style: kHabitSubtitleTextStyle,
+                                          style: widget.habit.done
+                                              ? kDoneHabitSubtitleTextStyle
+                                              : kIcompleteHabitSubtitleTextStyle,
                                         ),
                                       ],
                                     ),
@@ -177,7 +185,9 @@ class _HabitCardState extends State<HabitCard> {
                                   ),
                                   Text(
                                     '${widget.habit.currentCount}/${widget.habit.totalCount}',
-                                    style: kHabitSubtitleTextStyle,
+                                    style: widget.habit.done
+                                        ? kDoneHabitSubtitleTextStyle
+                                        : kIcompleteHabitSubtitleTextStyle,
                                   ),
                                 ],
                               ),
@@ -190,17 +200,21 @@ class _HabitCardState extends State<HabitCard> {
                       children: [
                         Text(
                           "Current Streak : ${widget.habit.currentStreak}",
-                          style: kHabitSubtitleTextStyle,
+                          style: widget.habit.done
+                              ? kDoneHabitSubtitleTextStyle
+                              : kIcompleteHabitSubtitleTextStyle,
                         ),
                         Text(
                           "Longest Streak : ${widget.habit.longestStreak}",
-                          style: kHabitSubtitleTextStyle,
+                          style: widget.habit.done
+                              ? kDoneHabitSubtitleTextStyle
+                              : kIcompleteHabitSubtitleTextStyle,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
-                        getDaysOfWeekRow(
-                            getDaysOfWeek(), widget.habit.weeklyStats),
+                        getDaysOfWeekRow(getDaysOfWeek(),
+                            widget.habit.weeklyStats, widget.habit.done),
                       ],
                     ),
                   ),
@@ -229,9 +243,11 @@ class _HabitCardState extends State<HabitCard> {
         animationDuration: 0,
         animateFromLastPercent: true,
         arcType: ArcType.FULL,
-        arcBackgroundColor: Colors.black12,
+        arcBackgroundColor: Colors.white,
         backgroundColor: Colors.transparent,
-        progressColor: progress == 1.0 ? Colors.lightGreen[400] : kYellow,
+        progressColor: progress == 1.0
+            ? kCompleteProgressBarColor
+            : kIncompleteProgressBarColor,
         percent: progress,
         animation: true,
         radius: 30.0,
@@ -254,7 +270,8 @@ List<String> getDaysOfWeek([String locale]) {
       .toList();
 }
 
-Widget getDaysOfWeekRow(List<String> strings, Map<int, bool> weeklyStats) {
+Widget getDaysOfWeekRow(
+    List<String> strings, Map<int, bool> weeklyStats, bool done) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: strings.asMap().entries.map((item) {
@@ -262,7 +279,9 @@ Widget getDaysOfWeekRow(List<String> strings, Map<int, bool> weeklyStats) {
         children: [
           Text(
             item.value,
-            style: kHabitSubtitleTextStyle,
+            style: done
+                ? kDoneHabitSubtitleTextStyle
+                : kIcompleteHabitSubtitleTextStyle,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

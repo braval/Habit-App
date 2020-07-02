@@ -17,13 +17,12 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 85,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            height: 50.0,
-            width: 50.0,
+            height: 60.0,
+            width: 60.0,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -38,8 +37,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
             child: Column(
               children: [
                 Container(
-                  height: 20.0,
-                  width: 50.0,
+                  height: 25.0,
                   decoration: const BoxDecoration(
                     color: kYellow,
                     borderRadius: BorderRadius.only(
@@ -51,9 +49,9 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
                       DateFormat("MMM").format(DateTime.now()),
                       style: const TextStyle(
                         fontFamily: 'Montserrat',
-                        color: Colors.white,
+                        color: Colors.black54,
                         fontWeight: FontWeight.w700,
-                        fontSize: 10.0,
+                        fontSize: 15.0,
                       ),
                     ),
                   ),
@@ -67,7 +65,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
                         fontFamily: 'Montserrat',
                         color: Colors.grey,
                         fontWeight: FontWeight.w700,
-                        fontSize: 15.0,
+                        fontSize: 20.0,
                       ),
                     ),
                   ),
@@ -94,7 +92,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
         Text(
           '${(percent * 100).toInt()} % ',
           style: const TextStyle(
-            fontSize: 25.0,
+            fontSize: 35.0,
             fontFamily: 'Montserrat',
             color: Colors.black54,
           ),
@@ -102,7 +100,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
         const Text(
           'Completion',
           style: TextStyle(
-            fontSize: 10.0,
+            fontSize: 15.0,
             fontFamily: 'Montserrat',
             color: Colors.black54,
           ),

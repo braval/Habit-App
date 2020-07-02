@@ -34,13 +34,17 @@ class _LandingPageState extends State<LandingPage>
     ];
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
+      value: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
+        statusBarColor: kBackground,
       ),
       child: Scaffold(
+        backgroundColor: kBackground,
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: kBackground,
           elevation: 0.0,
-          selectedItemColor: kDarkPurple,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
           currentIndex: _tabIndex,
           items: myTabs,
           onTap: (value) {
