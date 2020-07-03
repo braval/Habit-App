@@ -1,9 +1,11 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:habits/presentation/constants.dart';
 import 'package:habits/presentation/habits/add_habit_page.dart';
 import 'package:habits/presentation/habits/habits_page.dart';
+import 'package:unicorndial/unicorndial.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -12,43 +14,45 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage>
     with TickerProviderStateMixin {
-  final List<BottomNavigationBarItem> myTabs = [
-    const BottomNavigationBarItem(
-        title: Text(""), icon: Icon(FontAwesomeIcons.calendarAlt)),
-    const BottomNavigationBarItem(
-        title: Text(""), icon: Icon(FontAwesomeIcons.dumbbell)),
-    const BottomNavigationBarItem(
-        title: Text(""), icon: Icon(FontAwesomeIcons.user)),
+  final List<Widget> myTabs = [
+    const Icon(FontAwesomeIcons.calendarAlt, size: 25),
+    const Icon(FontAwesomeIcons.listAlt, size: 25),
+    const Icon(FontAwesomeIcons.user, size: 25),
+  ];
+
+  final List<Widget> _tabs = [
+    Container(),
+    HabitsPage(),
+    Container(),
   ];
 
   int _tabIndex = 1;
 
-  void _handleTabSelection(int value) {
-    setState(() {
-      _tabIndex = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _tabs = [
-      Container(),
-      HabitsPage(),
-      Container(),
-    ];
+    var childButtons = <UnicornButton>[];
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: kBackground,
+    childButtons.add(
+      UnicornButton(
+        hasLabel: true,
+        labelText: "Task",
+        currentButton: FloatingActionButton(
+          heroTag: "Task",
+          backgroundColor: Colors.orangeAccent,
+          mini: true,
+          onPressed: () {},
+          child: const Icon(FontAwesomeIcons.tasks),
+        ),
       ),
-      child: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        backgroundColor: kBackground,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: kYellow,
-          elevation: 4.5,
+    );
+    childButtons.add(
+      UnicornButton(
+        hasLabel: true,
+        labelText: "Daily Routine",
+        currentButton: FloatingActionButton(
+          heroTag: "Daily Routine",
+          backgroundColor: Colors.redAccent,
+          mini: true,
           onPressed: () {
             showModalBottomSheet(
               isScrollControlled: true,
@@ -66,17 +70,69 @@ class _LandingPageState extends State<LandingPage>
               backgroundColor: Colors.white,
             );
           },
-          child: const Icon(Icons.add),
+          child: const Icon(FontAwesomeIcons.sun),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: kBackground,
-          elevation: 0.0,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey,
-          currentIndex: _tabIndex,
+      ),
+    );
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: kBackground,
+      ),
+      child: Scaffold(
+        resizeToAvoidBottomPadding: false,
+        backgroundColor: kBackground,
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        // floatingActionButton: FloatingActionButton(
+        //   backgroundColor: Colors.white10,
+        //   elevation: 0.0,
+        //   onPressed: () {
+        //     showModalBottomSheet(
+        //       isScrollControlled: true,
+        //       shape: RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.circular(40.0),
+        //       ),
+        //       context: context,
+        //       builder: (BuildContext context) => SingleChildScrollView(
+        //         child: Container(
+        //           padding: EdgeInsets.only(
+        //               bottom: MediaQuery.of(context).viewInsets.bottom),
+        //           child: AddTaskScreen(),
+        //         ),
+        //       ),
+        //       backgroundColor: Colors.white,
+        //     );
+        //   },
+        //   child: const Icon(
+        //     Icons.add,
+        //     color: Colors.black54,
+        //     size: 45.0,
+        //   ),
+        // ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {},
+        //   child: const Icon(Icons.add),
+        // ),
+        floatingActionButton: UnicornDialer(
+            backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+            parentButtonBackground: Colors.blueAccent[100],
+            orientation: UnicornOrientation.VERTICAL,
+            parentButton: Icon(Icons.add),
+            childButtons: childButtons),
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.white,
+          color: Colors.blueAccent[100],
+          buttonBackgroundColor: Colors.transparent,
           items: myTabs,
-          onTap: (value) {
-            _handleTabSelection(value);
+          index: _tabIndex,
+          onTap: (index) {
+            setState(
+              () {
+                _tabIndex = index;
+              },
+            );
           },
         ),
         body: IndexedStack(

@@ -32,7 +32,7 @@ const TextStyle kFormButtonUnderlinedTextStyle = TextStyle(
 
 ShapeBorder kLoginButtonShape = RoundedRectangleBorder(
   side: const BorderSide(
-    color: constants.kPink,
+    color: Colors.transparent,
   ),
   borderRadius: BorderRadius.circular(50),
 );

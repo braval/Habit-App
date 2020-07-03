@@ -26,4 +26,4 @@ const TextStyle kIncompleteHabitNameTextStyle = TextStyle(
   fontSize: 25.0,
 );
 
-const double kHabitCardHeight = 68.0;
+const double kHabitCardHeight = 75.0;

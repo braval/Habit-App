@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habits/domain/habits/habit.dart';
 import 'package:habits/presentation/constants.dart';
+import 'package:habits/presentation/habits/constants.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class CustomProgressIndicator extends StatefulWidget {
@@ -42,19 +43,15 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
           ),
           const Text(
             'Completion',
-            style: TextStyle(
-              fontSize: 15.0,
-              fontFamily: 'Montserrat',
-              color: Colors.black54,
+            style: kIcompleteHabitSubtitleTextStyle,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: LinearPercentIndicator(
+              lineHeight: 8.0,
+              percent: percent,
+              progressColor: kCompleteProgressBarColor,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          LinearPercentIndicator(
-            lineHeight: 8.0,
-            percent: percent,
-            progressColor: kCompleteProgressBarColor,
           ),
         ],
       ),

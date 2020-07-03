@@ -38,7 +38,7 @@ class _BuildAddTaskScreenState extends State<BuildAddTaskScreen> {
           children: [
             Container(
               decoration: const BoxDecoration(
-                color: constants.kDarkPurple,
+                color: Colors.blueAccent,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
@@ -154,7 +154,7 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
                         '${_value.toInt()}',
                         style: const TextStyle(
                           fontFamily: 'Montserrat',
-                          color: constants.kDarkPurple,
+                          color: Colors.blueAccent,
                           fontSize: 25.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -166,8 +166,8 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
                   padding: const EdgeInsets.all(12.0),
                   child: SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      activeTrackColor: constants.kDarkPurple,
-                      inactiveTrackColor: constants.kDarkPurple.withAlpha(32),
+                      activeTrackColor: Colors.blueAccent,
+                      inactiveTrackColor: Colors.blueAccent.withAlpha(32),
                       trackShape: const RoundedRectSliderTrackShape(),
                       trackHeight: 4.0,
                       thumbShape:
@@ -215,7 +215,7 @@ class _BuildHabitFormState extends State<BuildHabitForm> {
                 ),
                 Center(
                   child: FlatButton(
-                    color: constants.kDarkPurple,
+                    color: Colors.blueAccent,
                     shape: kLoginButtonShape,
                     onPressed: () {
                       context

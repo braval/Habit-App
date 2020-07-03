@@ -56,7 +56,7 @@ class _HabitCardState extends State<HabitCard> {
                   padding:
                       const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                   child: Container(
-                    width: MediaQuery.of(context).size.width - 90,
+                    width: MediaQuery.of(context).size.width - 100,
                     height: kHabitCardHeight,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -129,7 +129,7 @@ class _HabitCardState extends State<HabitCard> {
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, top: 10.0),
                     child: Container(
-                      width: MediaQuery.of(context).size.width - 90,
+                      width: MediaQuery.of(context).size.width - 100,
                       // width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -269,7 +269,7 @@ class _HabitCardState extends State<HabitCard> {
         progressColor: _info[widget.habit.category.getOrCrash()].color,
         percent: progress,
         animation: true,
-        radius: 35.0,
+        radius: 40.0,
         lineWidth: 7.0,
         circularStrokeCap: CircularStrokeCap.round,
       ),
