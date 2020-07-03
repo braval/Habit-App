@@ -16,67 +16,67 @@ class CustomProgressIndicator extends StatefulWidget {
 class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            height: 60.0,
-            width: 60.0,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.4),
-                  blurRadius: 1,
-                  offset: const Offset(1, 4), // changes position of shadow
+    return widget.habits.isEmpty
+        ? Container()
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                height: 60.0,
+                width: 60.0,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      blurRadius: 1,
+                      offset: const Offset(1, 4), // changes position of shadow
+                    ),
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-              ],
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Column(
-              children: [
-                Container(
-                  height: 25.0,
-                  decoration: const BoxDecoration(
-                    color: kYellow,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10.0),
-                        topRight: Radius.circular(10.0)),
-                  ),
-                  child: Center(
-                    child: Text(
-                      DateFormat("MMM").format(DateTime.now()),
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 15.0,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 25.0,
+                      decoration: const BoxDecoration(
+                        color: kYellow,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          DateFormat("MMM").format(DateTime.now()),
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15.0,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 6.0),
-                  child: Center(
-                    child: Text(
-                      DateFormat("d").format(DateTime.now()),
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 6.0),
+                      child: Center(
+                        child: Text(
+                          DateFormat("d").format(DateTime.now()),
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20.0,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          _buildProgressIndicator(widget.habits),
-        ],
-      ),
-    );
+              ),
+              _buildProgressIndicator(widget.habits),
+            ],
+          );
   }
 
   Widget _buildProgressIndicator(List<HabitItem> habits) {
@@ -112,7 +112,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
           width: 200.0,
           lineHeight: 8.0,
           percent: percent,
-          progressColor: kYellow,
+          progressColor: kCompleteProgressBarColor,
         ),
       ],
     );
