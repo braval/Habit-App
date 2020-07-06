@@ -53,10 +53,9 @@ class _HabitCardState extends State<HabitCard> {
             Stack(
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                  padding: const EdgeInsets.only(left: 20.0, top: 10.0),
                   child: Container(
-                    width: MediaQuery.of(context).size.width - 100,
+                    width: MediaQuery.of(context).size.width * 0.7,
                     height: kHabitCardHeight,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -127,10 +126,9 @@ class _HabitCardState extends State<HabitCard> {
                   ],
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 10.0),
+                        left: 20.0, right: 30.0, top: 10.0),
                     child: Container(
-                      width: MediaQuery.of(context).size.width - 100,
-                      // width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width * 0.7,
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -230,7 +228,7 @@ class _HabitCardState extends State<HabitCard> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 15.0, top: 25.0),
+              padding: const EdgeInsets.only(top: 15.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

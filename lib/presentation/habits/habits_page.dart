@@ -38,53 +38,56 @@ class _HabitsPageState extends State<HabitsPage> {
     return BlocConsumer<HabitWatcherBloc, HabitWatcherState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: state.maybeMap(
-                loadSuccess: (habits) {
-                  return CustomProgressIndicator(
-                    habits: habits.habits,
-                  );
-                },
-                orElse: () => const CustomProgressIndicator(
-                  habits: [],
-                ),
-              ),
-            ),
-            Theme(
-              data: ThemeData(
-                canvasColor: Colors.transparent,
-                cardColor: Colors.transparent,
-              ),
-              child: Container(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: state.when(
-                  initial: () {
-                    context
-                        .bloc<HabitWatcherBloc>()
-                        .add(HabitWatcherEvent.watchAll(currentSelectedDate));
-                    return Container();
-                  },
-                  loadInProgress: () {
-                    return CircularProgressBar();
-                  },
+        return SafeArea(
+          child: ListView(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                child: state.maybeMap(
                   loadSuccess: (habits) {
-                    return _buildHabitCards(habits, currentSelectedDate);
-                  },
-                  loadFailure: (f) {
-                    return f.map(
-                      unexpected: (_) => Container(),
-                      habitAlreadyExists: (_) => Container(),
-                      noHabitsFound: (_) => Container(),
-                      noCategorySelected: (_) => CircularProgressBar(),
+                    return CustomProgressIndicator(
+                      habits: habits.habits,
                     );
                   },
+                  orElse: () => const CustomProgressIndicator(
+                    habits: [],
+                  ),
                 ),
               ),
-            ),
-          ],
+              Theme(
+                data: ThemeData(
+                  canvasColor: Colors.transparent,
+                  cardColor: Colors.transparent,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: state.when(
+                    initial: () {
+                      context
+                          .bloc<HabitWatcherBloc>()
+                          .add(HabitWatcherEvent.watchAll(currentSelectedDate));
+                      return Container();
+                    },
+                    loadInProgress: () {
+                      return CircularProgressBar();
+                    },
+                    loadSuccess: (habits) {
+                      return _buildHabitCards(habits, currentSelectedDate);
+                    },
+                    loadFailure: (f) {
+                      return f.map(
+                        unexpected: (_) => Container(),
+                        habitAlreadyExists: (_) => Container(),
+                        noHabitsFound: (_) => Container(),
+                        noCategorySelected: (_) => CircularProgressBar(),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

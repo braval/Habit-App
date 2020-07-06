@@ -83,46 +83,14 @@ class _LandingPageState extends State<LandingPage>
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: kBackground,
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        // floatingActionButton: FloatingActionButton(
-        //   backgroundColor: Colors.white10,
-        //   elevation: 0.0,
-        //   onPressed: () {
-        //     showModalBottomSheet(
-        //       isScrollControlled: true,
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(40.0),
-        //       ),
-        //       context: context,
-        //       builder: (BuildContext context) => SingleChildScrollView(
-        //         child: Container(
-        //           padding: EdgeInsets.only(
-        //               bottom: MediaQuery.of(context).viewInsets.bottom),
-        //           child: AddTaskScreen(),
-        //         ),
-        //       ),
-        //       backgroundColor: Colors.white,
-        //     );
-        //   },
-        //   child: const Icon(
-        //     Icons.add,
-        //     color: Colors.black54,
-        //     size: 45.0,
-        //   ),
-        // ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {},
-        //   child: const Icon(Icons.add),
-        // ),
         floatingActionButton: UnicornDialer(
-            backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+            backgroundColor: const Color.fromRGBO(255, 255, 255, 0.6),
             parentButtonBackground: Colors.blueAccent[100],
-            orientation: UnicornOrientation.VERTICAL,
-            parentButton: Icon(Icons.add),
+            parentButton: const Icon(FontAwesomeIcons.plus, size: 20.0),
             childButtons: childButtons),
         bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Colors.white,
+          height: 65.0,
+          backgroundColor: Colors.transparent,
           color: Colors.blueAccent[100],
           buttonBackgroundColor: Colors.transparent,
           items: myTabs,
