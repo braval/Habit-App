@@ -217,8 +217,8 @@ class _HabitCardState extends State<HabitCard> {
                             const SizedBox(
                               height: 10.0,
                             ),
-                            getDaysOfWeekRow(getDaysOfWeek(),
-                                widget.habit.weeklyStats, widget.habit.done),
+                            getDaysOfWeekRow(
+                                getDaysOfWeek(), widget.habit.done),
                           ],
                         ),
                       ),
@@ -288,8 +288,7 @@ List<String> getDaysOfWeek([String locale]) {
       .toList();
 }
 
-Widget getDaysOfWeekRow(
-    List<String> strings, Map<int, bool> weeklyStats, bool done) {
+Widget getDaysOfWeekRow(List<String> strings, bool done) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: strings.asMap().entries.map((item) {
@@ -304,7 +303,7 @@ Widget getDaysOfWeekRow(
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(
-              weeklyStats[item.key + 1] ? Icons.check : FontAwesomeIcons.circle,
+              Icons.check,
               size: 15.0,
             ),
           ),

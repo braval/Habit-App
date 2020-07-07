@@ -83,11 +83,22 @@ class HabitsRepository implements IHabitsRepository {
     final today = DateFormat("yyyy-MM-dd").format(DateTime.now());
     final currentDate = await _firestore.date();
 
+    // final temp = userDoc.habitStatsCollection
+    //     .document("21d3d180-bfe4-11ea-cd3a-b5256b484bdd")
+    //     .statsCollection
+    //     .where('date', isGreaterThanOrEqualTo: DateTime.parse("2020-07-07"))
+    //     .where('date', isLessThanOrEqualTo: DateTime.parse("2020-07-08"));
+
+    // final tempdoc = await temp.getDocuments();
+    // print(tempdoc.documents.length);
+
     if (currentDate != today) {
       dailyHabitCollection.getDocuments().then(
         (snapshot) {
           snapshot.documents.forEach(
             (doc) {
+              // Update current & longest streak data.
+              // Reset all values for new day.
               final newCurrentStreak =
                   doc.data["done"] == true ? doc.data["currentStreak"] + 1 : 0;
               final newLongestStreak = (newCurrentStreak as int) >=
@@ -102,12 +113,16 @@ class HabitsRepository implements IHabitsRepository {
                   "done": false,
                 },
               );
-              doc.reference.setData(
+
+              // Put information in stats collection.
+              final statCollection = userDoc.habitStatsCollection
+                  .document(doc.data["uniqueId"].toString())
+                  .statsCollection;
+
+              statCollection.document(currentDate).setData(
                 {
-                  "weeklyStats": {
-                    DateTime.parse(currentDate).weekday.toString():
-                        doc.data["done"],
-                  },
+                  "date": DateTime.parse(currentDate),
+                  "status": doc.data["done"],
                 },
                 merge: true,
               );

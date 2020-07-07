@@ -20,7 +20,6 @@ abstract class HabitItemDto implements _$HabitItemDto {
     @required int totalCount,
     @required int longestStreak,
     @required int currentStreak,
-    @required Map<int, bool> weeklyStats,
   }) = _HabitItemDto;
 
   factory HabitItemDto.fromDomain(HabitItem habitItem) {
@@ -33,7 +32,6 @@ abstract class HabitItemDto implements _$HabitItemDto {
       done: habitItem.done,
       longestStreak: habitItem.longestStreak,
       currentStreak: habitItem.currentStreak,
-      weeklyStats: habitItem.weeklyStats,
     );
   }
 
@@ -47,7 +45,6 @@ abstract class HabitItemDto implements _$HabitItemDto {
       name: HabitName(name),
       longestStreak: longestStreak,
       currentStreak: currentStreak,
-      weeklyStats: weeklyStats,
     );
   }
 

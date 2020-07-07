@@ -21,5 +21,6 @@ extension FirestoreX on Firestore {
 
 extension DocumentReferenceX on DocumentReference {
   CollectionReference get dailyHabitsCollection => collection('dailyHabits');
-  CollectionReference get habitsCollection => collection('habits');
+  CollectionReference get habitStatsCollection => collection('habitStats');
+  CollectionReference get statsCollection => collection('stats');
 }
